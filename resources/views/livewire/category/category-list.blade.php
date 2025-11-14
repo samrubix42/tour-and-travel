@@ -71,7 +71,7 @@
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label class="form-label">Name</label>
-                                <input wire:model.defer="name" type="text" class="form-control @error('name') is-invalid @enderror">
+                                <input wire:model.live="name" type="text" class="form-control @error('name') is-invalid @enderror">
                                 @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
 

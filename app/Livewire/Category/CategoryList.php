@@ -8,6 +8,7 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CategoryList extends Component
 {
@@ -41,6 +42,10 @@ class CategoryList extends Component
             'category_image' => 'nullable|string|max:255',
             'imageFile' => 'nullable|image|max:2048',
         ];
+    }
+    public function updatedName()
+    {
+        $this->slug = Str::slug($this->name);
     }
 
     #[Layout('components.layouts.admin')]
@@ -112,10 +117,10 @@ class CategoryList extends Component
             }
 
             $category->update($data);
-            session()->flash('message', 'Category updated successfully.');
+           $this->dispatch('success', 'Category updated successfully.');
         } else {
             Category::create($data);
-            session()->flash('message', 'Category created successfully.');
+           $this->dispatch('success', 'Category created successfully.');
         }
 
         $this->imageFile = null;
@@ -134,10 +139,21 @@ class CategoryList extends Component
     {
         if ($this->categoryId) {
             Category::destroy($this->categoryId);
-            session()->flash('message', 'Category deleted.');
+           $this->dispatch('success', 'Category deleted.');
         }
 
         $this->showDeleteModal = false;
+        $this->resetPage();
+    }
+
+    public function toggleActive(int $id): void
+    {
+        $category = Category::findOrFail($id);
+        $category->is_active = ! (bool) $category->is_active;
+        $category->save();
+
+       $this->dispatch('success', 'Category status updated.');
+        // refresh current listing
         $this->resetPage();
     }
 
