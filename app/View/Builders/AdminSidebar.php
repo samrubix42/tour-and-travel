@@ -24,7 +24,14 @@ class AdminSidebar
             (object)[
                 'title' => 'Category',
                 'icon' => 'ti ti-layout-dashboard',
-                'url' => '#',
+                'url' => route('admin.category.list'),
+                'hasSubmenu' => false,
+                'submenu' => [],
+            ],
+            (object)[
+                'title' => 'Destinations',
+                'icon' => 'ti ti-layout-dashboard',
+                'url' => route('admin.destination.list'),
                 'hasSubmenu' => false,
                 'submenu' => [],
             ],

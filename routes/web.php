@@ -13,6 +13,7 @@ Route::get('/', function () {
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
    Route::get('/',Dashboard::class)->name('dashboard');
    Route::get('/category',CategoryList::class)->name('category.list');
+   Route::get('/destination',App\Livewire\Destination\DestinationList::class)->name('destination.list');
 });
 
 Route::get('/login',AdminLogin::class)->name('login');
