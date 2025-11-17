@@ -85,7 +85,7 @@
 
             {{-- Modal for create/edit --}}
             @if($showModal)
-                <div class="modal fade show d-block" tabindex="-1" role="dialog" style="display:block; background: rgba(0,0,0,0.45);">
+                <div wire:ignore.self class="modal fade show d-block" tabindex="-1" role="dialog" style="display:block; background: rgba(0,0,0,0.45);">
                     <div class="modal-dialog modal-lg" role="document" style="z-index:1060; margin-top:5vh;">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -112,6 +112,23 @@
                                     </div>
 
                                     <div class="mb-3">
+                                        <label class="form-label">Categories <span class="text-danger">*</span></label>
+                                        <div class="@error('categoryIds') is-invalid @enderror">
+                                            <div class="row g-2">
+                                                @foreach($categories as $cat)
+                                                    <div class="col-6 col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="cat{{ $cat->id }}" value="{{ $cat->id }}" wire:model.defer="categoryIds">
+                                                            <label class="form-check-label" for="cat{{ $cat->id }}">{{ $cat->name }}</label>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                        @error('categoryIds') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
+                                    </div>
+
+                                    <div class="mb-3">
                                         <label class="form-label">Image (optional)</label>
                                         <input wire:model="imageFile" type="file" class="form-control @error('imageFile') is-invalid @enderror">
                                         @error('imageFile') <div class="invalid-feedback">{{ $message }}</div> @enderror
@@ -122,7 +139,10 @@
                                             </div>
                                         @elseif ($image)
                                             <div class="mt-2">
-                                                <img src="{{ asset('storage/' . $image) }}" alt="Current" style="max-height:150px;">
+                                                @php
+                                                    $img = $image;
+                                                @endphp
+                                                <img src="{{ (\Illuminate\Support\Str::startsWith($img, ['http', '//']) ? $img : asset('storage/' . $img)) }}" alt="Current" style="max-height:150px;">
                                             </div>
                                         @endif
                                     </div>
@@ -144,7 +164,7 @@
 
             {{-- Delete confirmation --}}
             @if($showDeleteModal)
-                <div class="modal fade show d-block" tabindex="-1" role="dialog" style="display:block; background: rgba(0,0,0,0.45);">
+                <div wire:ignore.self class="modal fade show d-block" tabindex="-1" role="dialog" style="display:block; background: rgba(0,0,0,0.45);">
                     <div class="modal-dialog" role="document" style="z-index:1060; margin-top:20vh;">
                         <div class="modal-content">
                             <div class="modal-header">

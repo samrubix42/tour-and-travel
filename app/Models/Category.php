@@ -30,4 +30,12 @@ class Category extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    /**
+     * Destinations attached to this category.
+     */
+    public function destinations()
+    {
+        return $this->belongsToMany(\App\Models\Destination::class, 'destination_categories');
+    }
 }
