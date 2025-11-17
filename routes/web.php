@@ -6,12 +6,12 @@ use App\Livewire\Dashboard\Dashboard;
 use App\Livewire\Destination\DestinationList;
 use App\Livewire\Hotel\Category\HotelCategoryList;
 use App\Livewire\Hotel\Hotel\HotelList;
+use App\Livewire\Public\Home\Home;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', Home::class)->name('home');
 
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
    Route::get('/',Dashboard::class)->name('dashboard');
