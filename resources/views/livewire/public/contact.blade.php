@@ -13,7 +13,7 @@
     <!-- end page title -->
     <!-- start section -->
     <section class="bg-very-light-gray position-relative">
-        <div class="h-110px position-absolute w-100 h-100 left-0px right-0px top-minus-70px" style="background-image:url('images/demo-travel-agency-home-bg-02.png')"></div>
+        <div class="h-110px position-absolute w-100 h-100 left-0px right-0px top-minus-70px" style="background-image:url('asset/images/demo-travel-agency-home-bg-02.png')"></div>
         <div class="container">
             <div class="row align-items-center mt-2">
                 <div class="col-lg-3 d-md-flex d-lg-inline-block md-mb-50px" data-anime='{ "el": "childs", "translateY": [30, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>

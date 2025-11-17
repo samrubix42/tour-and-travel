@@ -12,8 +12,8 @@
     </section>
     <!-- end page title -->
     <!-- start section -->
-    <section class="background-position-center-bottom background-no-repeat background-size-contain position-relative" style="background-image:url('images/demo-travel-agency-home-bg-02.png');">
-        <div class="h-110px position-absolute w-100 h-100 left-0px right-0px top-minus-70px" style="background-image:url('images/demo-travel-agency-about-bg-02.png')"></div>
+    <section class="background-position-center-bottom background-no-repeat background-size-contain position-relative" style="background-image:url({{ asset('asset/images/demo-travel-agency-home-bg-02.png') }});">
+        <div class="h-110px position-absolute w-100 h-100 left-0px right-0px top-minus-70px" style="background-image:url({{ asset('asset/images/demo-travel-agency-about-bg-02.png') }})"></div>
         <div class="container">
             <div class="row align-items-center mb-5 md-mb-50px overflow-hidden">
                 <div class="col-xl-6 col-lg-6 md-mb-30px position-relative">
@@ -26,7 +26,7 @@
                             </div>
                         </div>
                     </div>
-                    <img class="position-absolute right-minus-20px md-right-70px bottom-100px xs-w-190px z-index-9" src="images/demo-travel-agency-home-02.png" alt="" data-bottom-top="transform: translateY(50px)" data-top-bottom="transform: translateY(-50px)">
+                    <img class="position-absolute right-minus-20px md-right-70px bottom-100px xs-w-190px z-index-9" src="{{ asset('asset/images/demo-travel-agency-home-02.png') }}" alt="" data-bottom-top="transform: translateY(50px)" data-top-bottom="transform: translateY(-50px)">
                 </div>
                 <div class="col-xl-5 offset-xl-1 col-lg-6 text-center text-lg-start">
                     <h1 class="alt-font fw-600 text-dark-gray ls-minus-2px" data-anime='{ "el": "lines", "translateY": [30, 0], "opacity": [0,1], "delay":0, "staggervalue": 100, "easing": "easeOutQuad" }'>Discover the world's leading travel agency.</h1>
@@ -46,7 +46,7 @@
                 <div class="col md-mb-30px">
                     <div class="border border-color-extra-medium-gray border-radius-6px text-center box-shadow-quadruple-large">
                         <div class="pt-10 pb-10">
-                            <img src="images/demo-hotel-and-resort-client-01.svg" class="h-60px" alt="" />
+                            <img src="{{ asset('asset/images/demo-hotel-and-resort-client-01.svg') }}" class="h-60px" alt="" />
                         </div>
                         <div class="border-top border-1 border-color-extra-medium-gray p-15px last-paragraph-no-margin">
                             <p class="text-dark-gray fw-500">2019 - Best of the best</p>
@@ -56,7 +56,7 @@
                 <div class="col md-mb-30px">
                     <div class="border border-color-extra-medium-gray border-radius-6px text-center box-shadow-quadruple-large">
                         <div class="pt-10 pb-10">
-                            <img src="images/demo-hotel-and-resort-client-02.svg" class="h-60px" alt="" />
+                            <img src="{{ asset('asset/images/demo-hotel-and-resort-client-02.svg') }}" class="h-60px" alt="" />
                         </div>
                         <div class="border-top border-1 border-color-extra-medium-gray p-15px last-paragraph-no-margin">
                             <p class="text-dark-gray fw-500">2020 - Travel of excellence</p>
@@ -66,7 +66,7 @@
                 <div class="col">
                     <div class="border border-color-extra-medium-gray border-radius-6px text-center box-shadow-quadruple-large">
                         <div class="pt-10 pb-10">
-                            <img src="images/demo-hotel-and-resort-client-03.svg" class="h-60px" alt="" />
+                            <img src="{{ asset('asset/images/demo-hotel-and-resort-client-03.svg') }}" class="h-60px" alt="" />
                         </div>
                         <div class="border-top border-1 border-color-extra-medium-gray p-15px last-paragraph-no-margin">
                             <p class="text-dark-gray fw-500">2021 - Responsible tourism</p>
@@ -86,7 +86,7 @@
     </section>
     <!-- end section -->
     <!-- start section -->
-    <section class="bg-very-light-gray background-position-center-bottom background-size-contain background-no-repeat pt-2" style="background-image:url('images/demo-travel-agency-home-bg-05.png');">
+    <section class="bg-very-light-gray background-position-center-bottom background-size-contain background-no-repeat pt-2" style="background-image:url('asset/images/demo-travel-agency-home-bg-05.png');">
         <div class="container">
             <div class="row justify-content-center mb-3">
                 <div class="col-lg-7 text-center" data-anime='{ "el": "childs", "translateY": [30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
@@ -215,8 +215,6 @@
                         </figcaption>
                     </figure>
                 </div>
-                <!-- end team member item -->
-                <!-- start team member item -->
                 <div class="col text-center team-style-01 mb-3 md-mb-30px xs-mb-0">
                     <figure class="mb-0 hover-box box-hover position-relative">
                         <img src="https://placehold.co/600x736" alt="" class="border-radius-6px" />
@@ -235,7 +233,6 @@
                         </figcaption>
                     </figure>
                 </div>
-                <!-- end team member item -->
             </div>
         </div>
     </section>

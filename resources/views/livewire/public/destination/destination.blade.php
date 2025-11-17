@@ -13,7 +13,7 @@
         <!-- end page title -->
         <!-- start section -->
         <section class="position-relative">
-            <div class="h-110px position-absolute w-100 h-100 left-0px right-0px top-minus-70px" style="background-image:url('images/demo-travel-agency-about-bg-02.png')"></div>
+            <div class="h-110px position-absolute w-100 h-100 left-0px right-0px top-minus-70px" style="background-image:url('asset/images/demo-travel-agency-about-bg-02.png')"></div>
             <div class="container">
                 <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 justify-content-center mb-7 lg-mb-5 md-mb-10 sm-mb-0" data-anime='{ "el": "childs", "scale":[0.9,1], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
                     <!-- start interactive banners item -->

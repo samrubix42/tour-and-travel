@@ -13,7 +13,7 @@
     <!-- end page title -->
     <!-- start section -->
     <section class="bg-very-light-gray position-relative">
-        <div class="h-110px position-absolute w-100 h-100 left-0px right-0px top-minus-70px" style="background-image:url('images/demo-travel-agency-home-bg-02.png')"></div>
+        <div class="h-110px position-absolute w-100 h-100 left-0px right-0px top-minus-70px" style="background-image:url('asset/images/demo-travel-agency-home-bg-02.png')"></div>
         <div class="container">
             <div class="row">
                 <div class="mb-2 md-mb-7 sm-mb-0">
