@@ -28,7 +28,7 @@ class DestinationList extends Component
     public $name;
     public $slug;
     public $description;
-    public $status = 1;
+    public $status = true;
     public $is_featured = false;
 
     public $image;            // ImageKit or local URL
@@ -53,6 +53,10 @@ class DestinationList extends Component
             'categoryIds.*' => 'integer|exists:categories,id',
             'imageFile' => 'nullable|image|max:4096',
         ];
+    }
+    public function updatedName()
+    {
+        $this->slug = Str::slug($this->name);
     }
 
     #[Layout('components.layouts.admin')]

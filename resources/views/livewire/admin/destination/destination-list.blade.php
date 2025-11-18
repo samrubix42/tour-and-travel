@@ -1,58 +1,51 @@
 <div>
-    <div class="container mt-3">
+    <div class="container mt-4">
         <div class="destination-panel mx-auto">
-            <div class="d-flex justify-content-between align-items-center mb-3">
+
+            {{-- Header --}}
+            <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
-                    <h3 class="h1 mb-0">Destinations</h3>
-                    <p class="text-muted mb-0 small">Manage destinations — add, edit, upload images and toggle status.</p>
+                    <h3 class="h1 mb-1">Destinations</h3>
+                    <p class="text-muted mb-0 small">
+                        Manage destinations — add, edit, upload images and toggle status.
+                    </p>
                 </div>
-                <div class="text-end">
+                <div>
                     <button wire:click="create" wire:loading.attr="disabled" class="btn btn-primary btn-sm">
-                        <span wire:loading wire:target="create">
-                            <span class="spinner-border spinner-border-sm"></span>
-                        </span>
-                        <span wire:loading.remove wire:target="create">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="16" height="16"
-                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <line x1="12" y1="5" x2="12" y2="19" />
-                                <line x1="5" y1="12" x2="19" y2="12" />
-                            </svg>
-                            &nbsp;New Destination
-                        </span>
+                        <span wire:loading wire:target="create" class="spinner-border spinner-border-sm me-1"></span>
+                        New Destination
                     </button>
                 </div>
             </div>
 
+            {{-- Search and Per Page --}}
             <div class="row mb-3 align-items-center">
-                <div class="col-md-6 d-flex">
-                    <div class="d-flex col-8 gap-1">
-                        <input wire:model.debounce.300ms="search" type="text" class="form-control"
-                            placeholder="Search destinations...">
-                        <select wire:model="perPage" class="form-select" style="width:70px;">
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                        </select>
-                    </div>
+                <div class="col-md-6 d-flex gap-2">
+                    <input wire:model.debounce.300ms="search" type="text" class="form-control" placeholder="Search destinations...">
+                    <select wire:model="perPage" class="form-select" style="width:80px;">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                    </select>
                 </div>
             </div>
 
+            {{-- Flash message --}}
             @if (session()->has('message'))
             <div class="alert alert-success">{{ session('message') }}</div>
             @endif
 
+            {{-- Table --}}
             <div class="card">
                 <div class="table-responsive">
-                    <table class="table card-table table-vcenter text-nowrap">
+                    <table class="table table-striped table-hover align-middle">
                         <thead>
                             <tr>
-                                <th style="width:70px">Image</th>
+                                <th style="width:80px;">Image</th>
                                 <th>Name</th>
                                 <th>Slug</th>
-                                <th class="text-center" style="width:120px">Status</th>
-                                <th class="text-end" style="width:150px">Actions</th>
+                                <th class="text-center" style="width:120px;">Status</th>
+                                <th class="text-end" style="width:150px;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -62,36 +55,28 @@
                                     @php
                                     $img = $d->image ?: $d->storage_path;
                                     @endphp
-
                                     @if($img)
                                     <img src="{{ Str::startsWith($img, ['http', '//']) ? $img : asset('storage/' . $img) }}"
-                                        class="thumb" alt="thumb">
+                                        class="rounded thumb" style="height:50px; width:50px; object-fit:cover;" alt="thumb">
                                     @else
-                                    <div class="thumb placeholder bg-secondary"></div>
+                                    <div class="thumb rounded bg-secondary" style="height:50px; width:50px;"></div>
                                     @endif
                                 </td>
-                                <td class="align-middle">{{ $d->name }}</td>
-                                <td class="align-middle">{{ $d->slug }}</td>
-                                <td class="text-center align-middle">
-                                    <label class="form-check form-switch d-inline-block" for="statusSwitch{{ $d->id }}">
-                                        <input class="form-check-input" type="checkbox" id="statusSwitch{{ $d->id }}"
+                                <td>{{ $d->name }}</td>
+                                <td>{{ $d->slug }}</td>
+                                <td class="text-center">
+                                    <div class="form-check form-switch d-inline-block">
+                                        <input class="form-check-input" type="checkbox"
                                             wire:click="toggleStatus({{ $d->id }})"
                                             wire:loading.attr="disabled"
                                             @if($d->status) checked @endif>
-                                    </label>
+                                    </div>
                                 </td>
-                                <td class="text-end align-middle">
-                                    <button wire:click="edit({{ $d->id }})"
-                                        wire:loading.attr="disabled"
-                                        class="btn btn-sm btn-outline-primary me-1">
-                                        Edit
-                                    </button>
-
-                                    <button wire:click="confirmDelete({{ $d->id }})"
-                                        wire:loading.attr="disabled"
-                                        class="btn btn-sm btn-outline-danger">
-                                        Delete
-                                    </button>
+                                <td class="text-end">
+                                    <button wire:click="edit({{ $d->id }})" wire:loading.attr="disabled"
+                                        class="btn btn-sm btn-outline-primary me-1">Edit</button>
+                                    <button wire:click="confirmDelete({{ $d->id }})" wire:loading.attr="disabled"
+                                        class="btn btn-sm btn-outline-danger">Delete</button>
                                 </td>
                             </tr>
                             @empty
@@ -103,30 +88,24 @@
                     </table>
                 </div>
 
-                <div class="card-footer d-flex align-items-center">
-                    <p class="m-0 text-muted">
-                        Showing {{ $destinations->firstItem() ?? 0 }} to {{ $destinations->lastItem() ?? 0 }}
-                        of {{ $destinations->total() }} entries
-                    </p>
-                    <div class="ms-auto">
-                        {{ $destinations->links() }}
-                    </div>
+                {{-- Pagination --}}
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <small class="text-muted">
+                        Showing {{ $destinations->firstItem() ?? 0 }} to {{ $destinations->lastItem() ?? 0 }} of {{ $destinations->total() }} entries
+                    </small>
+                    {{ $destinations->links() }}
                 </div>
             </div>
 
-            {{-- Modal for create/edit --}}
+            {{-- Create/Edit Modal --}}
             @if($showModal)
-            <div wire:ignore.self class="modal fade show d-block" tabindex="-1"
-                style="display:block; background: rgba(0,0,0,0.45);">
-                <div class="modal-dialog modal-lg" style="z-index:1060; margin-top:5vh;">
+            <div wire:ignore.self class="modal fade show d-block" tabindex="-1" style="background: rgba(0,0,0,0.45);">
+                <div class="modal-dialog modal-lg" style="margin-top:5vh;">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">
-                                {{ $destinationId ? 'Edit Destination' : 'New Destination' }}
-                            </h5>
+                            <h5 class="modal-title">{{ $destinationId ? 'Edit Destination' : 'New Destination' }}</h5>
                             <button type="button" class="btn-close" wire:click="closeModal"></button>
                         </div>
-
                         <form wire:submit.prevent="save">
                             <div class="modal-body">
 
@@ -172,9 +151,7 @@
                                             @endforeach
                                         </div>
                                     </div>
-                                    @error('categoryIds')
-                                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                                    @enderror
+                                    @error('categoryIds') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                                 </div>
 
                                 {{-- Image Upload --}}
@@ -186,22 +163,22 @@
 
                                     {{-- Upload Loader --}}
                                     <div wire:loading wire:target="imageFile" class="mt-2">
-                                        <span class="spinner-border spinner-border-sm"></span>
-                                        Uploading...
+                                        <span class="spinner-border spinner-border-sm me-1"></span>
+                                        Uploading image...
                                     </div>
 
-                                    {{-- Preview Uploaded Image --}}
+                                    {{-- Preview --}}
                                     @if ($imageFile)
                                     <div class="mt-2">
-                                        <img src="{{ $imageFile->temporaryUrl() }}" style="max-height:150px;">
+                                        <img src="{{ $imageFile->temporaryUrl() }}" style="max-height:150px;" class="rounded">
                                     </div>
                                     @elseif ($storage_path)
                                     <div class="mt-2">
-                                        <img src="{{ asset('storage/' . $storage_path) }}" style="max-height:150px;">
+                                        <img src="{{ asset('storage/' . $storage_path) }}" style="max-height:150px;" class="rounded">
                                     </div>
                                     @elseif ($image)
                                     <div class="mt-2">
-                                        <img src="{{ $image }}" style="max-height:150px;">
+                                        <img src="{{ $image }}" style="max-height:150px;" class="rounded">
                                     </div>
                                     @endif
                                 </div>
@@ -209,14 +186,14 @@
                                 {{-- Status --}}
                                 <div class="form-check mb-3">
                                     <input wire:model.defer="status" type="checkbox" class="form-check-input"
-                                        id="statusCheckbox">
+                                        id="statusCheckbox" @if($status) checked @endif>
                                     <label for="statusCheckbox" class="form-check-label">Active</label>
                                 </div>
 
                                 {{-- Featured --}}
                                 <div class="form-check mb-3">
                                     <input wire:model.defer="is_featured" type="checkbox" class="form-check-input"
-                                        id="isFeaturedCheckbox">
+                                        id="isFeaturedCheckbox" @if($is_featured) checked @endif>
                                     <label for="isFeaturedCheckbox" class="form-check-label">Featured</label>
                                 </div>
 
@@ -224,10 +201,8 @@
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-link" wire:click="closeModal">Cancel</button>
-
                                 <button type="submit" class="btn btn-primary" wire:loading.attr="disabled">
-                                    <span wire:loading wire:target="save"
-                                        class="spinner-border spinner-border-sm"></span>
+                                    <span wire:loading wire:target="save" class="spinner-border spinner-border-sm me-1"></span>
                                     Save
                                 </button>
                             </div>
@@ -240,8 +215,8 @@
             {{-- Delete Modal --}}
             @if($showDeleteModal)
             <div wire:ignore.self class="modal fade show d-block" tabindex="-1"
-                style="display:block; background: rgba(0,0,0,0.45);">
-                <div class="modal-dialog" style="z-index:1060; margin-top:20vh;">
+                style="background: rgba(0,0,0,0.45);">
+                <div class="modal-dialog" style="margin-top:20vh;">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Confirm Deletion</h5>
@@ -254,10 +229,7 @@
 
                         <div class="modal-footer">
                             <button class="btn btn-link" wire:click="cancelDelete">Cancel</button>
-
                             <button class="btn btn-danger" wire:click="delete" wire:loading.attr="disabled">
-                                <span wire:loading wire:target="delete"
-                                    class="spinner-border spinner-border-sm"></span>
                                 Delete
                             </button>
                         </div>
