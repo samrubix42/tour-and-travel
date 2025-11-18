@@ -12,6 +12,7 @@ use App\Livewire\Admin\Hotel\Hotel\AddHotel;
 use App\Livewire\Admin\Hotel\Hotel\UpdateHotel;
 use App\Livewire\Public\About;
 use App\Livewire\Public\Blog\Blog;
+use App\Livewire\Public\Blog\BlogView;
 use App\Livewire\Public\Contact;
 use App\Livewire\Public\Destination\Destination;
 use App\Livewire\Public\Home\Home;
@@ -26,7 +27,7 @@ Route::get('/contact', Contact::class)->name('contact');
 Route::get('/tour', TourView::class)->name('tour');
 Route::get('/tour-view', TourView::class)->name('tour.view');
 Route::get('/blog', Blog::class)->name('blog');
-Route::get('/blog-view', Blog::class)->name('blog.view');
+Route::get('/blog-view', BlogView::class)->name('blog.view');
 Route::get('destination', Destination::class)->name('destination');
 
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {

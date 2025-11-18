@@ -18,10 +18,14 @@ return new class extends Migration
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->string('meta_keywords')->nullable();
+            $table->string('featured_image')->nullable();
+            $table->string('thumbnail_image')->nullable();
+            $table->string('featured_image_kit_file_id')->nullable();
+            $table->string('thumbnail_image_kit_file_id')->nullable();
             $table->string('title');
             $table->string('slug')->unique();
             $table->json('main_content');
-            $table->json('tags');
+            $table->text('tags');
 
             $table->timestamps();
         });
