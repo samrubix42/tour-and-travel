@@ -17,11 +17,29 @@ class ImageKitService
         );
     }
 
-    public function upload($filePath, $fileName)
+    /**
+     * Upload file to ImageKit with folder support
+     */
+    public function uploadToFolder($filePath, $fileName, $folder = '/uploads')
     {
-        return $this->imageKit->upload([
+        $payload = [
             'file' => base64_encode(file_get_contents($filePath)),
-            'fileName' => $fileName
-        ]);
+            'fileName' => $fileName,
+            'folder' => $folder
+        ];
+
+        return $this->imageKit->upload($payload);
+    }
+
+    /**
+     * Delete file from ImageKit using fileId
+     */
+    public function deleteFile($fileId)
+    {
+        if (!$fileId) {
+            return false;
+        }
+
+        return $this->imageKit->deleteFile($fileId);
     }
 }

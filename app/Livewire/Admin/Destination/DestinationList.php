@@ -9,11 +9,11 @@ use App\Models\Destination;
 use App\Models\Category;
 use App\Services\ImageKitService;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 
 class DestinationList extends Component
 {
-    
     use WithPagination, WithFileUploads;
 
     protected $paginationTheme = 'bootstrap';
@@ -29,19 +29,26 @@ class DestinationList extends Component
     public $slug;
     public $description;
     public $status = 1;
-    public $image;
-    public $imageFile;
+    public $is_featured = false;
+
+    public $image;            // ImageKit or local URL
+    public $storage_path;     // Local storage path
+    public $imagekit_file_id; // ImageKit fileId
+    public $imageFile;        // Livewire temporary upload
     public $categoryIds = [];
 
     protected function rules()
     {
-        $uniqueRule = $this->destinationId ? "unique:destinations,slug,{$this->destinationId}" : 'unique:destinations,slug';
+        $uniqueRule = $this->destinationId 
+            ? "unique:destinations,slug,{$this->destinationId}" 
+            : 'unique:destinations,slug';
 
         return [
             'name' => 'required|string|max:255',
-            'slug' => ['required','string','max:255', $uniqueRule],
+            'slug' => ['required','string','max:255',$uniqueRule],
             'description' => 'nullable|string',
             'status' => 'boolean',
+            'is_featured' => 'boolean',
             'categoryIds' => 'required|array|min:1',
             'categoryIds.*' => 'integer|exists:categories,id',
             'imageFile' => 'nullable|image|max:4096',
@@ -58,9 +65,7 @@ class DestinationList extends Component
                   ->orWhere('slug', 'like', "%{$this->search}%");
         }
 
-        $destinations = $query->orderBy('created_at', 'desc')
-            ->paginate($this->perPage);
-
+        $destinations = $query->orderBy('created_at', 'desc')->paginate($this->perPage);
         $categories = Category::where('is_active', 1)->orderBy('name')->get();
 
         return view('livewire.admin.destination.destination-list', [
@@ -83,13 +88,16 @@ class DestinationList extends Component
     public function edit($id)
     {
         $d = Destination::findOrFail($id);
+
         $this->destinationId = $d->id;
         $this->name = $d->name;
         $this->slug = $d->slug;
         $this->description = $d->description;
         $this->status = $d->status;
+        $this->is_featured = $d->is_featured;
         $this->image = $d->image;
-        // Use fully-qualified column name to avoid ambiguity with pivot `id`
+        $this->storage_path = $d->storage_path;
+        $this->imagekit_file_id = $d->imagekit_file_id;
         $this->categoryIds = $d->categories()->pluck('categories.id')->toArray();
 
         $this->showModal = true;
@@ -98,52 +106,72 @@ class DestinationList extends Component
     public function save()
     {
         $this->validate();
-
-        // ensure status is boolean/int
         $this->status = $this->status ? 1 : 0;
 
         $data = [
             'name' => $this->name,
             'slug' => $this->slug,
             'description' => $this->description,
-            'status' => $this->status ?? 0,
+            'status' => $this->status,
+            'is_featured' => $this->is_featured,
         ];
 
         if ($this->imageFile) {
-            // Try uploading to ImageKit if service exists; fallback to local storage
             $uploaded = null;
+            $fileId = null;
+
+            // Try ImageKit upload
             try {
                 $ik = app(ImageKitService::class);
-                $res = $ik->upload($this->imageFile->getRealPath(), $this->imageFile->getClientOriginalName());
-                // Extract URL from common response shapes
+                $res = $ik->uploadToFolder(
+                    $this->imageFile->getRealPath(),
+                    $this->imageFile->getClientOriginalName(),
+                    '/destinations'
+                );
+
                 if (is_object($res)) {
-                    $uploaded = $res->result->url ?? $res->response->url ?? $res->url ?? null;
+                    $uploaded = $res->result->url ?? null;
+                    $fileId = $res->result->fileId ?? null;
                 } elseif (is_array($res)) {
-                    $uploaded = $res['result']['url'] ?? $res['response']['url'] ?? ($res['url'] ?? null);
+                    $uploaded = $res['result']['url'] ?? null;
+                    $fileId = $res['result']['fileId'] ?? null;
                 }
             } catch (\Throwable $e) {
-                // ignore and fallback
                 $uploaded = null;
+                $fileId = null;
             }
 
             if ($uploaded) {
                 $data['image'] = $uploaded;
+                $data['imagekit_file_id'] = $fileId;
+                $data['storage_path'] = null;
             } else {
                 $path = $this->imageFile->store('destinations', 'public');
-                $data['image'] = $path;
+                $data['storage_path'] = $path;
+                $data['image'] = null;
+                $data['imagekit_file_id'] = null;
+            }
+
+            // Delete old files only on update
+            if ($this->destinationId) {
+                $dest = Destination::findOrFail($this->destinationId);
+
+                // Delete old local file
+                if ($dest->storage_path) {
+                    try { Storage::disk('public')->delete($dest->storage_path); } catch (\Throwable $e) {}
+                }
+
+                // Delete old ImageKit file
+                if ($dest->imagekit_file_id) {
+                    try { app(ImageKitService::class)->deleteFile($dest->imagekit_file_id); } catch (\Throwable $e) {}
+                }
             }
         }
 
         if ($this->destinationId) {
             $dest = Destination::findOrFail($this->destinationId);
-            // delete old image if replaced
-            if ($this->imageFile && $dest->image) {
-                try { Storage::disk('public')->delete($dest->image); } catch (\Throwable $e) {}
-            }
             $dest->update($data);
-            // sync categories
             try { $dest->categories()->sync($this->categoryIds); } catch (\Throwable $e) {}
-
             session()->flash('message', 'Destination updated successfully.');
         } else {
             $dest = Destination::create($data);
@@ -163,12 +191,10 @@ class DestinationList extends Component
 
     public function delete()
     {
+        // Only delete database record, not images
         if ($this->destinationId) {
             $d = Destination::find($this->destinationId);
             if ($d) {
-                if ($d->image) {
-                    try { Storage::disk('public')->delete($d->image); } catch (\Throwable $e) {}
-                }
                 $d->delete();
                 session()->flash('message', 'Destination deleted.');
             }
@@ -205,10 +231,12 @@ class DestinationList extends Component
         $this->slug = null;
         $this->description = null;
         $this->status = 1;
+        $this->is_featured = false;
         $this->image = null;
+        $this->storage_path = null;
+        $this->imagekit_file_id = null;
         $this->imageFile = null;
         $this->categoryIds = [];
         $this->resetValidation();
     }
 }
-

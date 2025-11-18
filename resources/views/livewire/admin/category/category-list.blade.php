@@ -114,23 +114,40 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Image (optional)</label>
-                                <input wire:model="imageFile" type="file" class="form-control @error('imageFile') is-invalid @enderror">
+                                <input wire:model="imageFile" type="file" class="form-control @error('imageFile') is-invalid @enderror"
+                                       wire:loading.attr="disabled" wire:target="imageFile">
                                 @error('imageFile') <div class="invalid-feedback">{{ $message }}</div> @enderror
 
-                                @if ($imageFile)
                                 <div class="mt-2">
-                                    <img src="{{ $imageFile->temporaryUrl() }}" alt="Preview" style="max-height:150px;">
+                                    <div wire:loading wire:target="imageFile" class="small text-muted">
+                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        &nbsp;Uploading image...
+                                    </div>
+
+                                    @if ($imageFile)
+                                        <div class="mt-2">
+                                            <img src="{{ $imageFile->temporaryUrl() }}" alt="Preview" style="max-height:150px;">
+                                        </div>
+                                    @elseif ($category_image)
+                                        <div class="mt-2">
+                                            @if(\Illuminate\Support\Str::startsWith($category_image, ['http://', 'https://']))
+                                                <img src="{{ $category_image }}" alt="Current" style="max-height:150px;">
+                                            @else
+                                                <img src="{{ asset('storage/' . $category_image) }}" alt="Current" style="max-height:150px;">
+                                            @endif
+                                        </div>
+                                    @endif
                                 </div>
-                                @elseif ($category_image)
-                                <div class="mt-2">
-                                    <img src="{{ asset('storage/' . $category_image) }}" alt="Current" style="max-height:150px;">
-                                </div>
-                                @endif
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-link link-secondary" wire:click="closeModal">Cancel</button>
-                            <button type="submit" class="btn btn-primary" wire:loading.attr="disabled">Save</button>
+                            <button type="submit" class="btn btn-primary" wire:loading.attr="disabled">
+                                <span wire:loading.remove wire:target="save">Save</span>
+                                <span wire:loading wire:target="save"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    &nbsp;Saving...
+                                </span>
+                            </button>
                         </div>
                     </form>
                 </div>

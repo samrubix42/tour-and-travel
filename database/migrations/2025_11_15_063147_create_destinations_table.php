@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('destinations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');                      
-            $table->string('slug')->unique();           
-            $table->longText('description')->nullable(); 
-            $table->string('image')->nullable();        
-            $table->tinyInteger('status')->default(1);  
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->longText('description')->nullable();
+            $table->string('imagekit_file_id')->nullable();
+            $table->string('storage_path')->nullable();
+            $table->boolean('is_featured')->default(false);
+            $table->string('image')->nullable();
+            $table->softDeletes();
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

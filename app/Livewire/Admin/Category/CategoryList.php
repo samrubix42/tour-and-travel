@@ -9,6 +9,8 @@ use Livewire\WithFileUploads;
 use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Services\ImageKitService;
+
 
 class CategoryList extends Component
 {
@@ -90,7 +92,7 @@ class CategoryList extends Component
         $this->showModal = true;
     }
 
-    public function save(): void
+    public function save(ImageKitService $imageKit): void
     {
         $this->validate();
 
@@ -99,27 +101,48 @@ class CategoryList extends Component
             'description' => $this->description,
             'slug' => $this->slug,
             'is_active' => $this->is_active,
-            'category_image' => $this->category_image,
         ];
 
-        // handle file upload
+        // Upload to ImageKit (store in '/categories' folder). Fallback to local storage.
         if ($this->imageFile) {
-            // store in public disk under categories
-            $path = $this->imageFile->store('categories', 'public');
-            $data['category_image'] = $path;
-        }
+            $tempPath = $this->imageFile->getRealPath();
+            $fileName = time() . '-' . Str::slug($this->name) . '.' . $this->imageFile->extension();
 
-        if ($this->categoryId) {
-            $category = Category::findOrFail($this->categoryId);
-            // if replacing an existing image, optionally delete old file
-            if ($this->imageFile && $category->category_image) {
-                try {
-                    Storage::disk('public')->delete($category->category_image);
-                } catch (\Throwable $e) {
+            $uploadResult = null;
+            try {
+                $uploadResult = $imageKit->uploadToFolder($tempPath, $fileName, '/categories');
+            } catch (\Throwable $e) {
+                $uploadResult = null;
+            }
+
+            $uploadedUrl = null;
+            if ($uploadResult) {
+                if (is_object($uploadResult)) {
+                    $uploadedUrl = $uploadResult->result->url ?? $uploadResult->url ?? $uploadResult->response->url ?? null;
+                } elseif (is_array($uploadResult)) {
+                    $uploadedUrl = $uploadResult['result']['url'] ?? $uploadResult['url'] ?? ($uploadResult['response']['url'] ?? null);
                 }
             }
 
-            $category->update($data);
+            if ($uploadedUrl) {
+                $data['category_image'] = $uploadedUrl;
+            } else {
+                // fallback to storing locally
+                $path = $this->imageFile->store('categories', 'public');
+                $data['category_image'] = $path;
+            }
+
+            // If replacing an existing local image, delete it. Do not attempt to delete remote ImageKit URLs here.
+            if ($this->categoryId) {
+                $existing = Category::findOrFail($this->categoryId);
+                if ($existing->category_image && !Str::startsWith($existing->category_image, ['http://', 'https://', '//'])) {
+                    try { Storage::disk('public')->delete($existing->category_image); } catch (\Throwable $e) {}
+                }
+            }
+        }
+
+        if ($this->categoryId) {
+            Category::findOrFail($this->categoryId)->update($data);
             $this->dispatch('success', 'Category updated successfully.');
         } else {
             Category::create($data);
@@ -131,6 +154,7 @@ class CategoryList extends Component
         $this->closeModal();
         $this->resetPage();
     }
+
 
     public function confirmDelete(int $id): void
     {
@@ -156,7 +180,6 @@ class CategoryList extends Component
         $category->save();
 
         $this->dispatch('success', 'Category status updated.');
-        // refresh current listing
         $this->resetPage();
     }
 
