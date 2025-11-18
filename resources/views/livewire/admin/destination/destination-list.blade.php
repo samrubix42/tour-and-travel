@@ -21,8 +21,8 @@
             {{-- Search and Per Page --}}
             <div class="row mb-3 align-items-center">
                 <div class="col-md-6 d-flex gap-2">
-                    <input wire:model.debounce.300ms="search" type="text" class="form-control" placeholder="Search destinations...">
-                    <select wire:model="perPage" class="form-select" style="width:80px;">
+                    <input wire:model.debounce.live.300ms="search" type="text" class="form-control" placeholder="Search destinations...">
+                    <select wire:model.live="perPage" class="form-select" style="width:80px;">
                         <option value="5">5</option>
                         <option value="10">10</option>
                         <option value="25">25</option>
@@ -112,7 +112,7 @@
                                 {{-- Name --}}
                                 <div class="mb-3">
                                     <label class="form-label">Name</label>
-                                    <input wire:model.defer="name" type="text"
+                                    <input wire:model.live="name" type="text"
                                         class="form-control @error('name') is-invalid @enderror">
                                     @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                 </div>
@@ -120,7 +120,7 @@
                                 {{-- Slug --}}
                                 <div class="mb-3">
                                     <label class="form-label">Slug</label>
-                                    <input wire:model.defer="slug" type="text"
+                                    <input wire:model.live="slug" type="text"
                                         class="form-control @error('slug') is-invalid @enderror">
                                     @error('slug') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                 </div>
