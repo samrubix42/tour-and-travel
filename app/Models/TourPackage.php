@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Experience;
 
 class TourPackage extends Model
 {
@@ -36,5 +37,10 @@ class TourPackage extends Model
     public function galleries()
     {
         return $this->hasMany(TourPackageGallery::class);
+    }
+
+    public function experiences()
+    {
+        return $this->belongsToMany(Experience::class, 'tour_package_experiences');
     }
 }

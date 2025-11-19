@@ -21,32 +21,85 @@
 
     <div class="card">
         <div class="table-responsive">
-            <table class="table card-table table-vcenter text-nowrap">
+            <table class="table table-hover align-middle">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th style="width:90px">Image</th>
                         <th>Title</th>
                         <th>Slug</th>
-                        <th>Price</th>
-                        <th>Actions</th>
+                        <th>Categories</th>
+                        <th>Destinations</th>
+                        <th>Experiences</th>
+                        <th class="text-end">Price</th>
+                        <th>Status</th>
+                        <th class="text-end">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($packages as $p)
-                        <tr>
-                            <td>{{ $p->id }}</td>
-                            <td>{{ $p->title }}</td>
-                            <td>{{ $p->slug }}</td>
-                            <td>{{ $p->price }}</td>
-                            <td>
-                                <a href="{{ route('admin.tour.package.edit', $p->id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
-                                <button wire:click="delete({{ $p->id }})" class="btn btn-sm btn-outline-danger ms-2">Delete</button>
-                            </td>
-                        </tr>
+                    @forelse($packages as $p)
+                    <tr>
+                        <td>
+                            <div style="width:84px;height:56px;overflow:hidden;border-radius:6px;background:#f8f9fa;display:flex;align-items:center;justify-content:center">
+                                @if(!empty($p->featured_image))
+                                    <img src="{{ $p->featured_image }}" alt="thumb" style="width:100%;height:100%;object-fit:cover;">
+                                @else
+                                    <span class="text-muted small">No image</span>
+                                @endif
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="fw-bold">{{ $p->title }}</div>
+                            <div class="small text-muted">ID: {{ $p->id }} • {{ $p->created_at ? $p->created_at->format('Y-m-d') : '' }}</div>
+                        </td>
+
+                        <td class="small text-muted">{{ $p->slug }}</td>
+
+                        <td style="min-width:150px">
+                            @if($p->categories && $p->categories->count())
+                                @foreach($p->categories as $c)
+                                    <span class="badge bg-light text-dark me-1">{{ $c->name }}</span>
+                                @endforeach
+                            @else
+                                <span class="text-muted small">—</span>
+                            @endif
+                        </td>
+
+                        <td style="min-width:150px">
+                            @if($p->destinations && $p->destinations->count())
+                                @foreach($p->destinations as $d)
+                                    <span class="badge bg-light text-dark me-1">{{ $d->name }}</span>
+                                @endforeach
+                            @else
+                                <span class="text-muted small">—</span>
+                            @endif
+                        </td>
+
+                        <td class="text-end fw-semibold">{{ $p->price ? '$' . number_format($p->price,2) : '—' }}</td>
+
+                        <td style="min-width:150px">
+                            @if($p->experiences && $p->experiences->count())
+                                @foreach($p->experiences as $e)
+                                    <span class="badge bg-light text-dark me-1">{{ $e->name ?? $e->title ?? 'Experience' }}</span>
+                                @endforeach
+                            @else
+                                <span class="text-muted small">—</span>
+                            @endif
+                        </td>
+
+                        <td>
+                            <span class="badge bg-{{ $p->status ? 'success' : 'secondary' }}">{{ $p->status ? 'Active' : 'Hidden' }}</span>
+                        </td>
+
+                        <td class="text-end">
+                            <a href="{{ route('admin.tour.package.edit', $p->id) }}" class="btn btn-sm btn-primary me-2">Edit</a>
+                            <button wire:click="delete({{ $p->id }})" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this package?')">Delete</button>
+                        </td>
+                    </tr>
                     @empty
-                        <tr>
-                            <td colspan="5" class="text-center">No packages found.</td>
-                        </tr>
+                    <tr>
+                        <td colspan="8" class="text-center text-muted">No packages found.</td>
+                    </tr>
                     @endforelse
                 </tbody>
             </table>

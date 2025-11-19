@@ -8,6 +8,7 @@ use App\Models\TourPackage;
 use App\Models\Category;
 use App\Models\Destination;
 use App\Models\TourPackageGallery;
+use App\Models\Experience;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Services\ImageKitService;
@@ -32,12 +33,15 @@ class UpdateTourPackage extends Component
 
     public $category_ids = [];
     public $destination_ids = [];
+    public $experience_ids = [];
 
     /** @var \Livewire\TemporaryUploadedFile[] */
     public $images = []; // newly selected uploads
     public $galleries = []; // existing gallery models
 
     public $itineraryDays = [];
+    public $includes = [];
+    public $optional = [];
 
     protected function rules()
     {
@@ -52,9 +56,15 @@ class UpdateTourPackage extends Component
             'category_ids.*' => 'exists:categories,id',
             'destination_ids' => 'nullable|array',
             'destination_ids.*' => 'exists:destinations,id',
+            'experience_ids' => 'nullable|array',
+            'experience_ids.*' => 'exists:experiences,id',
             'images' => 'nullable|array',
             'images.*' => 'image|max:5120', // 5MB
             'featuredImage' => 'nullable|image|max:5120',
+            'includes' => 'nullable|array',
+            'includes.*' => 'nullable|string|max:255',
+            'optional' => 'nullable|array',
+            'optional.*' => 'nullable|string|max:255',
         ];
     }
 
@@ -71,6 +81,7 @@ class UpdateTourPackage extends Component
 
         $this->category_ids = $package->categories()->pluck('categories.id')->toArray();
         $this->destination_ids = $package->destinations()->pluck('destinations.id')->toArray();
+        $this->experience_ids = $package->experiences()->pluck('experiences.id')->toArray();
 
         // hydrate itineraryDays from stored JSON
         if ($package->itinerary) {
@@ -96,6 +107,21 @@ class UpdateTourPackage extends Component
         $this->currentFeaturedUrl = $package->featured_image;
         $this->currentFeaturedStoragePath = $package->storage_path;
         $this->currentFeaturedImagekitFileId = $package->imagekit_file_id;
+
+        // includes / optional
+        if ($package->includes) {
+            $decoded = @json_decode($package->includes, true);
+            $this->includes = is_array($decoded) ? $decoded : [$package->includes];
+        } else {
+            $this->includes = [''];
+        }
+
+        if ($package->optional) {
+            $decoded = @json_decode($package->optional, true);
+            $this->optional = is_array($decoded) ? $decoded : [$package->optional];
+        } else {
+            $this->optional = [''];
+        }
     }
 
     public function updatedTitle($value)
@@ -108,6 +134,28 @@ class UpdateTourPackage extends Component
     public function addItineraryDay()
     {
         $this->itineraryDays[] = ['title' => '', 'points_text' => ''];
+    }
+
+    public function addInclude()
+    {
+        $this->includes[] = '';
+    }
+
+    public function removeInclude($i)
+    {
+        if (isset($this->includes[$i])) array_splice($this->includes, $i, 1);
+        if (empty($this->includes)) $this->includes = [''];
+    }
+
+    public function addOptional()
+    {
+        $this->optional[] = '';
+    }
+
+    public function removeOptional($i)
+    {
+        if (isset($this->optional[$i])) array_splice($this->optional, $i, 1);
+        if (empty($this->optional)) $this->optional = [''];
     }
 
     public function removeItineraryDay($index)
@@ -217,12 +265,15 @@ class UpdateTourPackage extends Component
             'itinerary' => $itineraryJson,
             'description' => $this->description,
             'price' => $this->price,
+            'includes' => empty($this->includes) ? null : json_encode(array_values(array_filter($this->includes, fn($v)=>trim($v) !== ''))),
+            'optional' => empty($this->optional) ? null : json_encode(array_values(array_filter($this->optional, fn($v)=>trim($v) !== ''))),
             'is_featured' => (bool)$this->is_featured,
         ]);
 
         // sync relations
         $package->categories()->sync($this->category_ids ?? []);
         $package->destinations()->sync($this->destination_ids ?? []);
+        $package->experiences()->sync($this->experience_ids ?? []);
 
         // Upload newly selected images (if any)
         if (!empty($this->images) && is_array($this->images)) {
@@ -340,6 +391,7 @@ class UpdateTourPackage extends Component
         return view('livewire.admin.tour.update-tour-package', [
             'allCategories' => Category::all(),
             'allDestinations' => Destination::all(),
+            'allExperiences' => Experience::all(),
         ]);
     }
 }

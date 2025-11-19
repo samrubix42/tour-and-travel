@@ -74,6 +74,24 @@
                 <hr>
 
                 <!-- =======================
+                       EXPERIENCES
+                ========================-->
+                <h3 class="card-title mt-4">Experiences</h3>
+                <div class="row">
+                    @foreach($allExperiences as $exp)
+                    <div class="col-md-3 mb-2">
+                        <label class="form-check">
+                            <input class="form-check-input" type="checkbox" wire:model="experience_ids" value="{{ $exp->id }}">
+                            <span class="form-check-label">{{ $exp->name ?? $exp->title ?? 'Experience' }}</span>
+                        </label>
+                    </div>
+                    @endforeach
+                </div>
+                @error('experience_ids') <small class="text-danger">{{ $message }}</small> @enderror
+
+                <hr>
+
+                <!-- =======================
                            ITINERARY
                 ========================-->
                 <h3 class="card-title mt-4">Itinerary</h3>
@@ -125,6 +143,41 @@
                     <textarea wire:model.defer="description" class="form-control" rows="6"
                               placeholder="Enter description"></textarea>
                     @error('description') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
+
+                <hr>
+
+                <!-- =======================
+                        INCLUDES / OPTIONAL
+                ========================-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="card-title">Includes</h3>
+                        <div class="mb-2">
+                            @foreach($includes as $i => $inc)
+                            <div class="d-flex mb-2" style="gap:8px">
+                                <input type="text" wire:model.defer="includes.{{ $i }}" class="form-control" placeholder="e.g. Breakfast">
+                                <button type="button" class="btn btn-outline-danger" wire:click.prevent="removeInclude({{ $i }})">Remove</button>
+                            </div>
+                            @endforeach
+                            <button type="button" class="btn btn-sm btn-outline-primary" wire:click.prevent="addInclude">+ Add Include</button>
+                            @error('includes') <div class="text-danger small">{{ $message }}</div> @enderror
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h3 class="card-title">Optional</h3>
+                        <div class="mb-2">
+                            @foreach($optional as $j => $opt)
+                            <div class="d-flex mb-2" style="gap:8px">
+                                <input type="text" wire:model.defer="optional.{{ $j }}" class="form-control" placeholder="e.g. Single supplement">
+                                <button type="button" class="btn btn-outline-danger" wire:click.prevent="removeOptional({{ $j }})">Remove</button>
+                            </div>
+                            @endforeach
+                            <button type="button" class="btn btn-sm btn-outline-primary" wire:click.prevent="addOptional">+ Add Optional</button>
+                            @error('optional') <div class="text-danger small">{{ $message }}</div> @enderror
+                        </div>
+                    </div>
                 </div>
 
                 <hr>

@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('storage_path')->nullable();
             $table->string('imagekit_file_id')->nullable();
             $table->boolean('is_featured')->default(false);
-            $table->string('itinerary')->nullable();
+            $table->json('includes')->nullable();
+            $table->json('optional')->nullable();
+            $table->json('itinerary')->nullable();
             $table->text('description')->nullable();
             $table->boolean('status')->default(true);
             $table->decimal('price', 10, 2)->nullable();

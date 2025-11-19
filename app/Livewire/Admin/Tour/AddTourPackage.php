@@ -8,6 +8,7 @@ use App\Models\TourPackage;
 use App\Models\Category;
 use App\Models\Destination;
 use App\Models\TourPackageGallery;
+use App\Models\Experience;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Services\ImageKitService; // optional, if you use ImageKit
@@ -27,11 +28,14 @@ class AddTourPackage extends Component
 
     public $category_ids = [];
     public $destination_ids = [];
+    public $experience_ids = [];
 
     /** @var \Livewire\TemporaryUploadedFile[] */
     public $images = [];
 
     public $itineraryDays = [];
+    public $includes = [];
+    public $optional = [];
 
     protected $rules = [
         'title' => 'required|string|max:255',
@@ -43,9 +47,15 @@ class AddTourPackage extends Component
         'category_ids.*' => 'exists:categories,id',
         'destination_ids' => 'nullable|array',
         'destination_ids.*' => 'exists:destinations,id',
+        'experience_ids' => 'nullable|array',
+        'experience_ids.*' => 'exists:experiences,id',
         'images' => 'nullable|array',
         'images.*' => 'image|max:5120', // 5MB each
         'featuredImage' => 'nullable|image|max:5120',
+        'includes' => 'nullable|array',
+        'includes.*' => 'nullable|string|max:255',
+        'optional' => 'nullable|array',
+        'optional.*' => 'nullable|string|max:255',
     ];
 
     public function mount()
@@ -54,9 +64,34 @@ class AddTourPackage extends Component
         if (empty($this->itineraryDays)) {
             $this->itineraryDays = [['title' => '', 'points_text' => '']];
         }
+
+        if (empty($this->includes)) $this->includes = [''];
+        if (empty($this->optional)) $this->optional = [''];
     }
 
-    public function UpdatedTitle($value)
+    public function addInclude()
+    {
+        $this->includes[] = '';
+    }
+
+    public function removeInclude($i)
+    {
+        if (isset($this->includes[$i])) array_splice($this->includes, $i, 1);
+        if (empty($this->includes)) $this->includes = [''];
+    }
+
+    public function addOptional()
+    {
+        $this->optional[] = '';
+    }
+
+    public function removeOptional($i)
+    {
+        if (isset($this->optional[$i])) array_splice($this->optional, $i, 1);
+        if (empty($this->optional)) $this->optional = [''];
+    }
+
+    public function updatedTitle($value)
     {
         if (empty($this->slug)) {
             $this->slug = Str::slug($value);
@@ -119,6 +154,8 @@ class AddTourPackage extends Component
             'itinerary' => $this->itinerary,
             'description' => $this->description,
             'price' => $this->price,
+            'includes' => empty($this->includes) ? null : json_encode(array_values(array_filter($this->includes, fn($v)=>trim($v) !== ''))),
+            'optional' => empty($this->optional) ? null : json_encode(array_values(array_filter($this->optional, fn($v)=>trim($v) !== ''))),
             'is_featured' => (bool)$this->is_featured,
         ]);
 
@@ -157,6 +194,9 @@ class AddTourPackage extends Component
             }
             if (!empty($this->destination_ids)) {
                 $package->destinations()->sync($this->destination_ids);
+            }
+            if (!empty($this->experience_ids)) {
+                $package->experiences()->sync($this->experience_ids);
             }
 
             // Handle images
@@ -224,6 +264,7 @@ class AddTourPackage extends Component
         $allCategories = Category::all();
         $allDestinations = Destination::all();
 
-        return view('livewire.admin.tour.add-tour-package', compact('allCategories', 'allDestinations'));
+        $allExperiences = Experience::all();
+        return view('livewire.admin.tour.add-tour-package', compact('allCategories', 'allDestinations', 'allExperiences'));
     }
 }
