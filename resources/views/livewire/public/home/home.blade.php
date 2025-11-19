@@ -16,81 +16,26 @@
         <section class="p-0 full-screen md-h-600px sm-h-650px">
             <div class="swiper h-100 magic-cursor swiper-light-pagination" data-slider-options='{ "slidesPerView": 1, "loop": true, "pagination": { "el": ".swiper-pagination-bullets", "clickable": true }, "navigation": { "nextEl": ".slider-one-slide-next-1", "prevEl": ".slider-one-slide-prev-1" }, "autoplay": { "delay": 4000, "disableOnInteraction": false },  "keyboard": { "enabled": true, "onlyInViewport": true }, "effect": "slide" }'>
                 <div class="swiper-wrapper">
-                    <!-- start slider item -->
-                    <div class="swiper-slide cover-background" style="background-image:url('{{asset('asset/images/demo-logistics-slider-01.jpg')}}');">
-                        <div class="container h-100">
-                            <div class="row align-items-center h-100 xl-ps-10 sm-ps-0">
-                                <div class="col-xxl-7 col-xl-10 text-white" style="margin-top: 80px;">
-                                    <h1 class="fw-600">Digital and very trusted transport logistic agency.</h1>
-                                    <div class="fs-20 opacity-6 mb-40px sm-mb-30px">Providing flexibile, improved service levels, and delivery.</div>
-                                    <div class="lg-mb-8 md-mb-0">
-                                        <a href="demo-logistics-about-us.html" class="btn btn-white btn-extra-large btn-round-edge fw-700 btn-box-shadow me-35px">Explore agency</a>
-                                        <a href="https://www.youtube.com/watch?v=cfXHhfNy7tU" class="text-center d-inline-flex sm-mt-20px rounded-circle video-icon-box video-icon-medium popup-vimeo">
-                                            <span class="video-icon bg-base-color me-10px">
-                                                <i class="fa-solid fa-play text-dark-gray"></i>
-                                                <span class="video-icon-sonar">
-                                                    <span class="video-icon-sonar-afr border border-2 border-color-base-color"></span>
-                                                </span>
-                                            </span>
-                                            <span class="text-white fs-20">How it work?</span>
-                                        </a>
+                    @foreach($banners as $banner)
+                        <div class="swiper-slide cover-background" style="background-image:url('{{ $banner->image_url ?? asset($banner->storage_path) }}');">
+                            <div class="container h-100">
+                                <div class="row align-items-center h-100 xl-ps-10 sm-ps-0">
+                                    <div class="col-xxl-7 col-xl-10 text-white" style="margin-top: 80px;">
+                                        <h1 class="fw-600">{{ $banner->title }}</h1>
+                                        @if($banner->subtitle)
+                                            <div class="fs-20 opacity-6 mb-40px sm-mb-30px">{{ $banner->subtitle }}</div>
+                                        @endif
+                                        @if($banner->button_text && $banner->button_url)
+                                            <div class="lg-mb-8 md-mb-0">
+                                                <a href="{{ $banner->button_url }}" class="btn btn-white btn-extra-large btn-round-edge fw-700 btn-box-shadow me-35px">{{ $banner->button_text }}</a>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- end slider item -->
-                    <!-- start slider item -->
-                    <div class="swiper-slide cover-background" style="background-image:url('{{asset('asset/images/demo-logistics-slider-02.jpg')}}');">
-                        <div class="container h-100">
-                            <div class="row align-items-center h-100 xl-ps-10 sm-ps-0">
-                                <div class="col-xxl-7 col-xl-10 text-white" style="margin-top: 80px;">
-                                    <h1 class="fw-600">Your airborne shipping trusted globally partner.</h1>
-                                    <div class="fs-20 opacity-6 mb-40px sm-mb-30px">Swift and reliable air freight solutions worldwide.</div>
-                                    <div class="lg-mb-8 md-mb-0">
-                                        <a href="demo-logistics-about-us.html" class="btn btn-white btn-extra-large btn-round-edge fw-700 btn-box-shadow me-35px">Explore agency</a>
-                                        <a href="https://www.youtube.com/watch?v=cfXHhfNy7tU" class="text-center d-inline-flex sm-mt-20px rounded-circle video-icon-box video-icon-medium popup-vimeo">
-                                            <span class="video-icon bg-base-color me-10px">
-                                                <i class="fa-solid fa-play text-dark-gray"></i>
-                                                <span class="video-icon-sonar">
-                                                    <span class="video-icon-sonar-afr border border-2 border-color-base-color"></span>
-                                                </span>
-                                            </span>
-                                            <span class="text-white fs-20">How it work?</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end slider item -->
-                    <!-- start slider item -->
-                    <div class="swiper-slide cover-background" style="background-image:url('{{asset('asset/images/demo-logistics-slider-03.jpg')}}');">
-                        <div class="container h-100">
-                            <div class="row align-items-center h-100 xl-ps-10 sm-ps-0">
-                                <div class="col-xxl-7 col-xl-10 text-white" style="margin-top: 80px;">
-                                    <h1 class="fw-600">Provided authentic train cargo solutions nationwide.</h1>
-                                    <div class="fs-20 opacity-6 mb-40px sm-mb-30px">Reliable train freight services for seamless transport.</div>
-                                    <div class="lg-mb-8 md-mb-0">
-                                        <a href="demo-logistics-about-us.html" class="btn btn-white btn-extra-large btn-round-edge fw-700 btn-box-shadow me-35px">Explore agency</a>
-                                        <a href="https://www.youtube.com/watch?v=cfXHhfNy7tU" class="text-center d-inline-flex sm-mt-20px rounded-circle video-icon-box video-icon-medium popup-vimeo">
-                                            <span class="video-icon bg-base-color me-10px">
-                                                <i class="fa-solid fa-play text-dark-gray"></i>
-                                                <span class="video-icon-sonar">
-                                                    <span class="video-icon-sonar-afr border border-2 border-color-base-color"></span>
-                                                </span>
-                                            </span>
-                                            <span class="text-white fs-20">How it work?</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end slider item -->
+                    @endforeach
                 </div>
-                <!-- start slider pagination -->
-                <!-- end slider pagination -->
                 <!-- start slider navigation -->
                 <div class="slider-one-slide-prev-1 icon-very-medium text-white swiper-button-prev slider-navigation-style-06 bg-black-transparent-medium h-60px w-60px d-none d-sm-flex border-radius-100"><i class="bi bi-arrow-left-short"></i></div>
                 <div class="slider-one-slide-next-1 icon-very-medium text-white swiper-button-next slider-navigation-style-06 bg-black-transparent-medium h-60px w-60px d-none d-sm-flex border-radius-100"><i class="bi bi-arrow-right-short"></i></div>
@@ -108,7 +53,7 @@
             <div class="position-absolute left-0px bottom-minus-50px d-none d-lg-inline-block" data-bottom-top="transform: translateY(-50px)" data-top-bottom="transform: translateY(50px)">
                 <img src="https://placehold.co/88x230" alt="" />
             </div>
-            <div class="container background-position-right background-no-repeat sm-mb-10 xs-mb-15" style="background-image:url('https://placehold.co/715x700');">
+            <div class="container background-position-right background-no-repeat sm-mb-10 xs-mb-15" style="background-image:url('https://placehold.co/715x700')">
                 <div class="row align-items-center position-relative mb-7">
                     <div class="position-absolute left-0px top-0px h-100 w-130px border-end border-color-extra-medium-gray d-none d-md-inline-block" data-anime='{ "translateX": [-30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
                         <div class="vertical-title-center align-items-center justify-content-center">
