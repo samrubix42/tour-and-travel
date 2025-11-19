@@ -51,7 +51,7 @@ class DestinationList extends Component
             'is_featured' => 'boolean',
             'categoryIds' => 'required|array|min:1',
             'categoryIds.*' => 'integer|exists:categories,id',
-            'imageFile' => 'nullable|image|dimensions:width=600,height=600|max:1024',
+            'imageFile' => 'nullable|image|max:1024',
         ];
     }
     public function updatedName()

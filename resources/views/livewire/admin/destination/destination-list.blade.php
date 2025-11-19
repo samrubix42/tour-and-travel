@@ -160,9 +160,7 @@
                                     <input wire:model="imageFile" type="file"
                                         class="form-control @error('imageFile') is-invalid @enderror">
                                     @error('imageFile') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                                    <small class="text-muted d-block mt-1">
-                                        Image must be exactly <strong>600 × 600 pixels</strong>.
-                                    </small>
+                                 
                                     {{-- Upload Loader --}}
                                     <div wire:loading wire:target="imageFile" class="mt-2">
                                         <span class="spinner-border spinner-border-sm me-1"></span>
