@@ -26,21 +26,25 @@
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Title</label>
                         <input type="text" wire:model.defer="title" class="form-control" placeholder="Banner title">
+                        @error('title') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Subtitle</label>
                         <input type="text" wire:model.defer="subtitle" class="form-control" placeholder="Banner subtitle">
+                        @error('subtitle') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Button Text</label>
                         <input type="text" wire:model.defer="button_text" class="form-control" placeholder="Example: Learn More">
+                        @error('button_text') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Button URL</label>
                         <input type="text" wire:model.defer="button_url" class="form-control" placeholder="https://example.com">
+                        @error('button_url') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="col-md-6 mb-3">
@@ -49,11 +53,13 @@
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
                         </select>
+                        @error('status') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">Image (600x600 recommended)</label>
+                        <label class="form-label">Image</label>
                         <input type="file" wire:model="image" class="form-control">
+                        @error('image') <span class="text-danger">{{ $message }}</span> @enderror
                         <div wire:loading wire:target="image" class="mt-2">
                             <span class="spinner-border spinner-border-sm text-primary"></span> Uploading image...
                         </div>

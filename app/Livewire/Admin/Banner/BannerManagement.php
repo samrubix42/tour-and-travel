@@ -21,10 +21,10 @@ class BannerManagement extends Component
     public $image_url, $storage_path, $imagekit_file_id;
 
     protected $rules = [
-        'title' => 'nullable|string|max:255',
+        'title' => 'required|string|max:255',
         'subtitle' => 'nullable|string|max:255',
-        'image' => 'nullable|image|max:2048',
-        'button_text' => 'nullable|string|max:255',
+        'image' => 'required|image|max:2048',
+        'button_text' => 'required|string|max:255',
         'button_url' => 'nullable|string|max:255',
         'status' => 'boolean',
     ];
