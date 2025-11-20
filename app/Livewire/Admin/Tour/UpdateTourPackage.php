@@ -21,12 +21,13 @@ class UpdateTourPackage extends Component
     public $packageId;
     public $title;
     public $slug;
+    public $meta_title;
+    public $meta_description;
+    public $meta_keywords;
     public $description;
     public $price;
     public $is_featured = false;
-    public $featuredImage; // single featured image upload (replacement)
-
-    // current featured image info
+    public $featuredImage; 
     public $currentFeaturedUrl;
     public $currentFeaturedStoragePath;
     public $currentFeaturedImagekitFileId;
@@ -36,8 +37,8 @@ class UpdateTourPackage extends Component
     public $experience_ids = [];
 
     /** @var \Livewire\TemporaryUploadedFile[] */
-    public $images = []; // newly selected uploads
-    public $galleries = []; // existing gallery models
+    public $images = []; 
+    public $galleries = []; 
 
     public $itineraryDays = [];
     public $includes = [];
@@ -47,7 +48,9 @@ class UpdateTourPackage extends Component
     {
         return [
             'title' => 'required|string|max:255',
-            // unique except current package
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:255',
+            'meta_keywords' => 'nullable|string|max:255',
             'slug' => 'nullable|string|max:255|unique:tour_packages,slug,' . ($this->packageId ?? 'NULL'),
             'description' => 'nullable|string',
             'price' => 'nullable|numeric',
@@ -75,6 +78,9 @@ class UpdateTourPackage extends Component
         $this->packageId = $package->id;
         $this->title = $package->title;
         $this->slug = $package->slug;
+        $this->meta_title = $package->meta_title;
+        $this->meta_description = $package->meta_description;
+        $this->meta_keywords = $package->meta_keywords;
         $this->description = $package->description;
         $this->price = $package->price;
         $this->is_featured = (bool) $package->is_featured;
@@ -103,12 +109,10 @@ class UpdateTourPackage extends Component
 
         $this->galleries = $package->galleries()->get();
 
-        // current featured image info
         $this->currentFeaturedUrl = $package->featured_image;
         $this->currentFeaturedStoragePath = $package->storage_path;
         $this->currentFeaturedImagekitFileId = $package->imagekit_file_id;
 
-        // includes / optional
         if ($package->includes) {
             $decoded = @json_decode($package->includes, true);
             $this->includes = is_array($decoded) ? $decoded : [$package->includes];
@@ -262,6 +266,9 @@ class UpdateTourPackage extends Component
         $package->update([
             'title' => $this->title,
             'slug' => $this->slug ?? Str::slug($this->title),
+            'meta_title' => $this->meta_title,
+            'meta_description' => $this->meta_description,
+            'meta_keywords' => $this->meta_keywords,
             'itinerary' => $itineraryJson,
             'description' => $this->description,
             'price' => $this->price,
@@ -328,7 +335,6 @@ class UpdateTourPackage extends Component
                     $ik = new ImageKitService();
                     $ik->deleteFile($this->currentFeaturedImagekitFileId);
                 } catch (\Exception $e) {
-                    // ignore
                 }
             }
 

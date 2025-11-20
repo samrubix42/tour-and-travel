@@ -16,7 +16,7 @@
     @endif
 
     <div class="mb-3">
-        <input type="text" wire:model.debounce.300ms="search" placeholder="Search..." class="form-control" />
+        <input type="text" wire:model.debounce.live.300ms="search" placeholder="Search..." class="form-control" />
     </div>
 
     <div class="card">

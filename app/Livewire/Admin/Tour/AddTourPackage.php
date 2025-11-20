@@ -11,7 +11,7 @@ use App\Models\TourPackageGallery;
 use App\Models\Experience;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-use App\Services\ImageKitService; // optional, if you use ImageKit
+use App\Services\ImageKitService;
 use Livewire\Attributes\Layout;
 
 class AddTourPackage extends Component
@@ -21,10 +21,13 @@ class AddTourPackage extends Component
     public $title;
     public $slug;
     public $itinerary;
+    public $meta_title;
+    public $meta_description;
+    public $meta_keywords;
     public $description;
     public $price;
     public $is_featured = false;
-    public $featuredImage; 
+    public $featuredImage;
 
     public $category_ids = [];
     public $destination_ids = [];
@@ -39,6 +42,9 @@ class AddTourPackage extends Component
 
     protected $rules = [
         'title' => 'required|string|max:255',
+        'meta_title' => 'nullable|string|max:255',
+        'meta_description' => 'nullable|string|max:255',
+        'meta_keywords' => 'nullable|string|max:255',
         'slug' => 'nullable|string|max:255|unique:tour_packages,slug',
         'description' => 'nullable|string',
         'price' => 'nullable|numeric',
@@ -91,11 +97,9 @@ class AddTourPackage extends Component
         if (empty($this->optional)) $this->optional = [''];
     }
 
-    public function updatedTitle($value)
+    public function UpdatedTitle($value)
     {
-        if (empty($this->slug)) {
-            $this->slug = Str::slug($value);
-        }
+        $this->slug = Str::slug($value);
     }
 
     public function addItineraryDay()
@@ -151,11 +155,14 @@ class AddTourPackage extends Component
         $package = TourPackage::create([
             'title' => $this->title,
             'slug' => $slug,
+            'meta_title' => $this->meta_title,
+            'meta_description' => $this->meta_description,
+            'meta_keywords' => $this->meta_keywords,
             'itinerary' => $this->itinerary,
             'description' => $this->description,
             'price' => $this->price,
-            'includes' => empty($this->includes) ? null : json_encode(array_values(array_filter($this->includes, fn($v)=>trim($v) !== ''))),
-            'optional' => empty($this->optional) ? null : json_encode(array_values(array_filter($this->optional, fn($v)=>trim($v) !== ''))),
+            'includes' => empty($this->includes) ? null : json_encode(array_values(array_filter($this->includes, fn($v) => trim($v) !== ''))),
+            'optional' => empty($this->optional) ? null : json_encode(array_values(array_filter($this->optional, fn($v) => trim($v) !== ''))),
             'is_featured' => (bool)$this->is_featured,
         ]);
 

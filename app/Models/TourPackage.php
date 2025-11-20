@@ -7,16 +7,20 @@ use App\Models\Experience;
 
 class TourPackage extends Model
 {
-    //
     use \Illuminate\Database\Eloquent\Factories\HasFactory;
 
     protected $fillable = [
         'title',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
         'slug',
         'featured_image',
         'storage_path',
         'imagekit_file_id',
         'is_featured',
+        'includes',
+        'optional',
         'itinerary',
         'description',
         'status',

@@ -27,6 +27,23 @@
                         <input type="text" wire:model.live="slug" class="form-control" placeholder="auto-generated or custom">
                         @error('slug') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
+                    <div class="col-12 mt-2">
+                        <label class="form-label">Meta Title</label>
+                        <input type="text" wire:model.defer="meta_title" class="form-control" placeholder="SEO meta title">
+                        @error('meta_title') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+
+                    <div class="col-12 mt-2">
+                        <label class="form-label">Meta Keywords</label>
+                        <input type="text" wire:model.defer="meta_keywords" class="form-control" placeholder="comma separated keywords">
+                        @error('meta_keywords') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+
+                    <div class="col-12 mt-2">
+                        <label class="form-label">Meta Description</label>
+                        <textarea wire:model.defer="meta_description" class="form-control" rows="3" placeholder="Short meta description"></textarea>
+                        @error('meta_description') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
                 </div>
 
                 <hr>
