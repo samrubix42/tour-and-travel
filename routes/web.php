@@ -35,6 +35,7 @@ Route::get('/tour/{slug}', TourView::class)->name('tour.view');
 Route::get('/blog', Blog::class)->name('blog');
 Route::get('/blog-view', BlogView::class)->name('blog.view');
 Route::get('destination', Destination::class)->name('destination');
+Route::get('experience', \App\Livewire\Public\Experience\Experience::class)->name('experience');
 
 
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {

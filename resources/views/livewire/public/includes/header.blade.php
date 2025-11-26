@@ -47,7 +47,34 @@
                                    </div>
                                </div>
                            </li>
-                       
+                            <li class="nav-item dropdown submenu">
+                               <a href="{{ route('experience') }}" class="nav-link" style="color:white">Experiences</a>
+                               <i class="fa-solid fa-angle-down dropdown-toggle" id="navbarDropdownMenuLinkExp" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                               <div class="dropdown-menu submenu-content" aria-labelledby="navbarDropdownMenuLinkExp" style="position:absolute;left:50%;transform:translateX(-50%);width:920px;max-width:95vw;overflow:hidden;box-sizing:border-box;padding:12px 18px;">
+                                   <div class="d-lg-flex mega-menu m-auto flex-column">
+                                       <div class="row row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 mb-40px md-mb-25px xs-mb-15px">
+                                           @foreach($experiences->chunk(8) as $chunk)
+                                               @foreach($chunk as $exp)
+                                               <div class="col">
+                                                   <a href="{{ route('tour') }}?experience={{ $exp->slug }}" class="text-decoration-none text-dark d-block py-2">
+                                                       <div class="d-flex align-items-center justify-content-between">
+                                                           <div>
+                                                               <strong class="fs-14" style="font-size:14px;">{{ $exp->name }}</strong>
+                                                               <div class="text-muted small" style="font-size:12px;">View packages</div>
+                                                           </div>
+                                                           <i class="fa-solid fa-angle-right text-muted small"></i>
+                                                       </div>
+                                                   </a>
+                                               </div>
+                                               @endforeach
+                                           @endforeach
+                                       </div>
+                                   </div>
+                               </div>
+                           </li>
+                            <li class="nav-item">
+                                 <a href="{{ route('tour') }}" class="nav-link" style="color:white">Tours</a>
+                            </li>
                            <li class="nav-item">
                                <a href="{{ route('blog') }}" class="nav-link" style="color:white">Blog</a>
                            </li>
