@@ -60,6 +60,13 @@ class AdminSidebar
                 'submenu' => [],
             ],
             (object)[
+                'title' => 'Page Management',
+                'icon' => 'ti ti-page',
+                'url' => route('admin.page.management'),
+                'hasSubmenu' => false,
+                'submenu' => [],
+            ],
+            (object)[
                 'title' => 'Blog',
                 'icon' => 'ti ti-article',
                 'url' => '#',
