@@ -1,6 +1,6 @@
    <header>
        <!-- start navigation -->
-       <nav class="navbar navbar-expand-lg header-light bg-transparent disable-fixed border-radius-6px md-border-radius-0px">
+       <nav class="navbar navbar-expand-lg bg-transparent disable-fixed border-radius-6px md-border-radius-0px">
            <div class="container-fluid">
                <div class="col-auto col-lg-2 me-lg-0 me-auto">
                    <a class="navbar-brand" href="demo-clothing-store.html">
@@ -19,10 +19,10 @@
                    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                        <ul class="navbar-nav navbar-left justify-content-end">
                            <li class="nav-item">
-                               <a href="{{ route('home') }}" class="nav-link" style="color:white">Home</a>
+                               <a href="{{ route('home') }}" class="nav-link" >Home</a>
                            </li>
                            <li class="nav-item dropdown submenu">
-                               <a href="{{ route('destination') }}" class="nav-link" style="color:white">Destination</a>
+                               <a href="{{ route('destination') }}" class="nav-link" >Destination</a>
                                <i class="fa-solid fa-angle-down dropdown-toggle" id="navbarDropdownMenuLink1" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                                <div class="dropdown-menu submenu-content" aria-labelledby="navbarDropdownMenuLink1">
                                    <div class="d-lg-flex mega-menu m-auto flex-column">
@@ -48,7 +48,7 @@
                                </div>
                            </li>
                             <li class="nav-item dropdown submenu">
-                               <a href="{{ route('experience') }}" class="nav-link" style="color:white">Experiences</a>
+                               <a href="{{ route('experience') }}" class="nav-link" >Experiences</a>
                                <i class="fa-solid fa-angle-down dropdown-toggle" id="navbarDropdownMenuLinkExp" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                                <div class="dropdown-menu submenu-content" aria-labelledby="navbarDropdownMenuLinkExp" style="position:absolute;left:50%;transform:translateX(-50%);width:920px;max-width:95vw;overflow:hidden;box-sizing:border-box;padding:12px 18px;">
                                    <div class="d-lg-flex mega-menu m-auto flex-column">
@@ -73,13 +73,13 @@
                                </div>
                            </li>
                             <li class="nav-item">
-                                 <a href="{{ route('tour') }}" class="nav-link" style="color:white">Tours</a>
+                                 <a href="{{ route('tour') }}" class="nav-link" >Tours</a>
                             </li>
                            <li class="nav-item">
-                               <a href="{{ route('blog') }}" class="nav-link" style="color:white">Blog</a>
+                               <a href="{{ route('blog') }}" class="nav-link" >Blog</a>
                            </li>
                            <li class="nav-item">
-                               <a href="{{ route('contact') }}" class="nav-link" style="color:white">Contact</a>
+                               <a href="{{ route('contact') }}" class="nav-link" >Contact</a>
                            </li>
                        </ul>
                    </div>
@@ -88,7 +88,7 @@
                    <div class="col-auto col-lg-2 text-end d-none d-sm-flex">
                        <div class="header-icon">
                            <div class="header-search-icon icon">
-                               <a href="#" class="search-form-icon header-search-form"><i class="feather icon-feather-search" style="color:white"></i></a>
+                               <a href="#" class="search-form-icon header-search-form"><i class="feather icon-feather-search" ></i></a>
                                <div class="search-form-wrapper">
                                    <button title="Close" type="button" class="search-close alt-font" >×</button>
                                    <form id="search-form" role="search" method="get" class="search-form text-left" action="search-result.html">

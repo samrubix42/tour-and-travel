@@ -9,11 +9,18 @@ use Livewire\Attributes\Computed;
 
 class Header extends Component
 {
+    public $destinations;
+    public $experiences;
+    
     #[Computed]
+    public function mount()
+    {
+        $this->destinations = Destination::where('status', 1)->orderBy('name')->get();
+        $this->experiences = Experience::where('status', 1)->orderBy('name')->get();
+    }
     public function render()
     {
-        $destinations = Destination::where('status', 1)->orderBy('name')->get();
-        $experiences = Experience::where('status', 1)->orderBy('name')->get();
-        return view('livewire.public.includes.header', compact('destinations', 'experiences'));
+
+        return view('livewire.public.includes.header');
     }
 }
