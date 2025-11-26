@@ -19,19 +19,19 @@
                 <div class="col-lg-8 md-mb-50px sm-mb-35px">
                     <div class="row align-items-center mb-25px">
                         <div class="col-sm-9">
-                            <h3 class="alt-font text-dark-gray fw-600 mb-10px ls-minus-1px">Discover depth of beach</h3>
-                            <ul class="p-0 m-0 list-style-02 d-block d-sm-flex">
-                                <li class="text-dark-gray fw-500"><i class="bi bi-geo-alt icon-small me-5px"></i>Maldives, South Asia</li>
-                                <li class="ms-20px xs-ms-0">
-                                    <div class="review-star-icon fs-18 me-5px">
-                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                    </div>
-                                    <a href="#reviews" class="text-dark-gray text-dark-gray-hover fw-500 d-inline-block section-link">16 Reviews</a>
-                                </li>
-                            </ul>
+                                    <h2 class="alt-font text-dark-gray fw-600 mb-10px ls-minus-1px">{{ $package->title }}</h2>
+                                    <ul class="p-0 m-0 list-style-02 d-block d-sm-flex">
+                                        <li class="text-dark-gray fw-500"><i class="bi bi-geo-alt icon-small me-5px"></i>{{ optional($package->destinations->first())->name ?? '' }}</li>
+                                        <li class="ms-20px xs-ms-0">
+                                            <div class="review-star-icon fs-18 me-5px">
+                                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                            </div>
+                                            <a href="#reviews" class="text-dark-gray text-dark-gray-hover fw-500 d-inline-block section-link">{{ $package->reviews_count ?? 0 }} Reviews</a>
+                                        </li>
+                                    </ul>
                         </div>
                         <div class="col-sm-3 text-sm-end xs-mt-10px">
-                            <h4 class="text-dark-gray fw-600 mb-0">$1599</h4>
+                            <h4 class="text-dark-gray fw-600 mb-0">{{ !empty($package->price) ? '₹' . number_format($package->price,0) : '-' }}</h4>
                             <span class="d-block lh-22">Per person</span>
                         </div>
                     </div>
@@ -44,8 +44,10 @@
                                 <li class="me-30px"><i class="bi bi-clouds text-base-color icon-extra-medium me-10px"></i> <span class="text-dark-gray fw-500">Air rides</span></li>
                                 <li><i class="bi bi-sun text-base-color icon-extra-medium me-10px"></i><span class="text-dark-gray fw-500">City sightseeing</span></li>
                             </ul>
-                            <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. lorem ipsum has been the industry's standard dummy text ever since the, when an unknown rinter took galley of type and scrambled it to make a type specimen book. it has survived not only five centuries, but also the leap into electronic typesetting, emaining essentially unchanged.</p>
-                            <img src="https://placehold.co/784x450" alt="" />
+                            <p>{!! $package->description ?? '' !!}</p>
+                            @if(!empty($package->featured_image))
+                                <img src="{{ $package->featured_image }}" alt="" />
+                            @endif
                         </div>
                     </div>
                     <div class="row">
@@ -55,21 +57,33 @@
                     </div>
                     <div class="row row-cols-1 row-cols-md-2 mb-50px xs-mb-40px">
                         <div class="col">
+                            @php
+                                $includes = json_decode($package->includes ?? 'null', true);
+                                if (!is_array($includes)) {
+                                    $includes = array_filter(array_map('trim', explode("\n", strip_tags($package->includes ?? ''))));
+                                }
+                            @endphp
                             <ul class="p-0 m-0 list-style-02 text-dark-gray sm-mb-20px">
-                                <li class="border-bottom border-color-extra-medium-gray pb-10px mb-10px"><i class="bi bi-check-circle-fill fs-22 text-green me-10px"></i>Airport transfers</li>
-                                <li class="border-bottom border-color-extra-medium-gray pb-10px mb-10px"><i class="bi bi-check-circle-fill fs-22 text-green me-10px"></i>Buffet breakfast</li>
-                                <li class="border-bottom border-color-extra-medium-gray pb-10px mb-10px"><i class="bi bi-check-circle-fill fs-22 text-green me-10px"></i>Cruise dinner & music event</li>
-                                <li class="border-bottom border-color-extra-medium-gray pb-10px mb-10px"><i class="bi bi-check-circle-fill fs-22 text-green me-10px"></i>Driver allowances</li>
-                                <li><i class="bi bi-check-circle-fill fs-22 text-green me-10px"></i>Toll tax and state tax</li>
+                                @foreach($includes as $inc)
+                                    @if(trim($inc) !== '')
+                                        <li class="border-bottom border-color-extra-medium-gray pb-10px mb-10px"><i class="bi bi-check-circle-fill fs-22 text-green me-10px"></i>{{ $inc }}</li>
+                                    @endif
+                                @endforeach
                             </ul>
                         </div>
                         <div class="col">
+                            @php
+                                $optionals = json_decode($package->optional ?? 'null', true);
+                                if (!is_array($optionals)) {
+                                    $optionals = array_filter(array_map('trim', explode("\n", strip_tags($package->optional ?? ''))));
+                                }
+                            @endphp
                             <ul class="p-0 m-0 list-style-02 text-dark-gray">
-                                <li class="border-bottom border-color-extra-medium-gray pb-10px mb-10px"><i class="bi bi-x-circle-fill fs-22 text-red me-10px"></i>Superior accommodation</li>
-                                <li class="border-bottom border-color-extra-medium-gray pb-10px mb-10px"><i class="bi bi-x-circle-fill fs-22 text-red me-10px"></i>Travel insurance</li>
-                                <li class="border-bottom border-color-extra-medium-gray pb-10px mb-10px"><i class="bi bi-x-circle-fill fs-22 text-red me-10px"></i>Departure taxes</li>
-                                <li class="border-bottom border-color-extra-medium-gray pb-10px mb-10px"><i class="bi bi-x-circle-fill fs-22 text-red me-10px"></i>Additional services</li>
-                                <li><i class="bi bi-x-circle-fill fs-22 text-red me-10px"></i>Personal guide</li>
+                                @foreach($optionals as $opt)
+                                    @if(trim($opt) !== '')
+                                        <li class="border-bottom border-color-extra-medium-gray pb-10px mb-10px"><i class="bi bi-x-circle-fill fs-22 text-red me-10px"></i>{{ $opt }}</li>
+                                    @endif
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -82,12 +96,12 @@
                         <div class="col">
                             <ul class="image-gallery-style-01 gallery-wrapper grid grid-3col xxl-grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-medium" data-anime='{ "el": "childs", "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 200, "easing": "easeOutQuad" }'>
                                 <li class="grid-sizer"></li>
-                                <!-- start gallery item -->
+                                @foreach($package->galleries ?? collect() as $gallery)
                                 <li class="grid-item transition-inner-all">
                                     <div class="gallery-box">
-                                        <a href="https://placehold.co/800x630" data-group="lightbox-gallery" title="Lightbox gallery image title">
+                                        <a href="{{ $gallery->image_url ?? 'https://placehold.co/39x66' }}" data-group="lightbox-gallery" title="{{ $package->title }}">
                                             <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                                <img src="https://placehold.co/800x630" alt="" />
+                                                <img src="{{ $gallery->image_url ?? ($gallery->storage_path ? asset($gallery->storage_path) : '#') }}" alt="" />
                                                 <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
                                                     <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-white">
                                                         <i class="feather icon-feather-search text-dark-gray icon-small"></i>
@@ -97,87 +111,7 @@
                                         </a>
                                     </div>
                                 </li>
-                                <!-- end gallery item -->
-                                <!-- start gallery item -->
-                                <li class="grid-item transition-inner-all">
-                                    <div class="gallery-box">
-                                        <a href="https://placehold.co/800x630" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                            <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                                <img src="https://placehold.co/800x630" alt="" />
-                                                <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                    <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-white">
-                                                        <i class="feather icon-feather-search text-dark-gray icon-small"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <!-- end gallery item -->
-                                <!-- start gallery item -->
-                                <li class="grid-item transition-inner-all">
-                                    <div class="gallery-box">
-                                        <a href="https://placehold.co/800x630" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                            <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                                <img src="https://placehold.co/800x630" alt="" />
-                                                <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                    <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-white">
-                                                        <i class="feather icon-feather-search text-dark-gray icon-small"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <!-- end gallery item -->
-                                <!-- start gallery item -->
-                                <li class="grid-item transition-inner-all">
-                                    <div class="gallery-box">
-                                        <a href="https://placehold.co/800x630" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                            <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                                <img src="https://placehold.co/800x630" alt="" />
-                                                <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                    <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-white">
-                                                        <i class="feather icon-feather-search text-dark-gray icon-small"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <!-- end gallery item -->
-                                <!-- start gallery item -->
-                                <li class="grid-item transition-inner-all">
-                                    <div class="gallery-box">
-                                        <a href="https://placehold.co/800x630" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                            <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                                <img src="https://placehold.co/800x630" alt="" />
-                                                <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                    <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-white">
-                                                        <i class="feather icon-feather-search text-dark-gray icon-small"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <!-- end gallery item -->
-                                <!-- start gallery item -->
-                                <li class="grid-item transition-inner-all">
-                                    <div class="gallery-box">
-                                        <a href="https://placehold.co/800x630" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                            <div class="position-relative gallery-image bg-dark-gray overflow-hidden">
-                                                <img src="https://placehold.co/800x630" alt="" />
-                                                <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                    <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-white">
-                                                        <i class="feather icon-feather-search text-dark-gray icon-small"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <!-- end gallery item -->
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -186,92 +120,53 @@
                             <h5 class="alt-font text-dark-gray fw-600 sm-mb-15px">Itinerary</h5>
                         </div>
                         <div class="col-12">
+                            @php
+                                $itinerary = json_decode($package->itinerary ?? 'null', true);
+                            @endphp
                             <div class="accordion accordion-style-02" id="accordion-style-02" data-active-icon="icon-feather-chevron-down" data-inactive-icon="icon-feather-chevron-right">
-                                <!-- start accordion item -->
-                                <div class="accordion-item active-accordion">
-                                    <div class="accordion-header border-bottom border-color-extra-medium-gray">
-                                        <a href="" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-01" aria-expanded="true" data-bs-parent="#accordion-style-02">
+                                @if(is_array($itinerary) && count($itinerary))
+                                    @php $i = 0; @endphp
+                                    @foreach($itinerary as $dayKey => $day)
+                                        @php
+                                            $i++;
+                                            $itemId = 'accordion-style-02-'. $i;
+                                            $title = $day['title'] ?? ('Day ' . sprintf('%02d', $i));
+                                            $points = $day['points'] ?? [];
+                                        @endphp
+                                        <div class="accordion-item {{ $i === 1 ? 'active-accordion' : '' }}">
+                                            <div class="accordion-header border-bottom border-color-extra-medium-gray">
+                                                <a href="#" data-bs-toggle="collapse" data-bs-target="#{{ $itemId }}" aria-expanded="{{ $i === 1 ? 'true' : 'false' }}" data-bs-parent="#accordion-style-02">
+                                                    <div class="accordion-title d-flex align-items-center position-relative text-dark-gray mb-0">
+                                                        <div class="col-auto bg-base-color lh-28 fw-600 text-white text-uppercase border-radius-30px ps-15px pe-15px fs-12 me-15px d-inline-block align-middle">{{ 'Day ' . sprintf('%02d', $i) }}</div>
+                                                        <i class="feather {{ $i === 1 ? 'icon-feather-chevron-down' : 'icon-feather-chevron-right' }}"></i><span class="fw-600 lh-normal">{{ $title }}</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div id="{{ $itemId }}" class="accordion-collapse collapse {{ $i === 1 ? 'show' : '' }}" data-bs-parent="#accordion-style-02">
+                                                <div class="accordion-body last-paragraph-no-margin border-bottom border-color-light-medium-gray">
+                                                    @if(is_array($points) && count($points))
+                                                        <ul>
+                                                            @foreach($points as $p)
+                                                                <li>{{ $p }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @else
+                                                        <p>{{ $day['title'] ?? '' }}</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="accordion-item active-accordion">
+                                        <div class="accordion-header border-bottom border-color-extra-medium-gray">
                                             <div class="accordion-title d-flex align-items-center position-relative text-dark-gray mb-0">
                                                 <div class="col-auto bg-base-color lh-28 fw-600 text-white text-uppercase border-radius-30px ps-15px pe-15px fs-12 me-15px d-inline-block align-middle">Day 01</div>
-                                                <i class="feather icon-feather-chevron-down"></i><span class="fw-600 lh-normal">Welcome to maldives resort</span>
+                                                <i class="feather icon-feather-chevron-down"></i><span class="fw-600 lh-normal">{{ $package->itinerary ?? 'Itinerary not available' }}</span>
                                             </div>
-                                        </a>
-                                    </div>
-                                    <div id="accordion-style-02-01" class="accordion-collapse collapse show" data-bs-parent="#accordion-style-02">
-                                        <div class="accordion-body last-paragraph-no-margin border-bottom border-color-light-medium-gray">
-                                            <p>Lorem ipsum is simply dummy text of the printing typesetting industry. Industry's standard dummy text ever since the dummy. Lorem ipsum is simply dummy text of the printing.</p>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- end accordion item -->
-                                <!-- start accordion item -->
-                                <div class="accordion-item">
-                                    <div class="accordion-header border-bottom border-color-extra-medium-gray">
-                                        <a href="" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-02" aria-expanded="false" data-bs-parent="#accordion-style-02">
-                                            <div class="accordion-title d-flex align-items-center position-relative text-dark-gray mb-0">
-                                                <div class="col-auto bg-base-color lh-28 fw-600 text-white text-uppercase border-radius-30px ps-15px pe-15px fs-12 me-15px d-inline-block align-middle">Day 02</div>
-                                                <i class="feather icon-feather-chevron-right"></i><span class="fw-600 lh-normal">Exploring male island and water park</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div id="accordion-style-02-02" class="accordion-collapse collapse" data-bs-parent="#accordion-style-02">
-                                        <div class="accordion-body last-paragraph-no-margin border-bottom border-color-light-medium-gray">
-                                            <p>Lorem ipsum is simply dummy text of the printing typesetting industry. Industry's standard dummy text ever since the dummy. Lorem ipsum is simply dummy text of the printing.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end accordion item -->
-                                <!-- start accordion item -->
-                                <div class="accordion-item">
-                                    <div class="accordion-header border-bottom border-color-extra-medium-gray">
-                                        <a href="" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-03" aria-expanded="false" data-bs-parent="#accordion-style-02">
-                                            <div class="accordion-title d-flex align-items-center position-relative text-dark-gray mb-0">
-                                                <div class="col-auto bg-base-color lh-28 fw-600 text-white text-uppercase border-radius-30px ps-15px pe-15px fs-12 me-15px d-inline-block align-middle">Day 03</div>
-                                                <i class="feather icon-feather-chevron-right"></i><span class="fw-600 lh-normal">Visit baros island and rangali island</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div id="accordion-style-02-03" class="accordion-collapse collapse" data-bs-parent="#accordion-style-02">
-                                        <div class="accordion-body last-paragraph-no-margin border-bottom border-color-extra-medium-gray">
-                                            <p>Lorem ipsum is simply dummy text of the printing typesetting industry. Industry's standard dummy text ever since the dummy. Lorem ipsum is simply dummy text of the printing.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end accordion item -->
-                                <!-- start accordion item -->
-                                <div class="accordion-item">
-                                    <div class="accordion-header border-bottom border-color-extra-medium-gray">
-                                        <a href="" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-04" aria-expanded="false" data-bs-parent="#accordion-style-02">
-                                            <div class="accordion-title d-flex align-items-center position-relative text-dark-gray mb-0">
-                                                <div class="col-auto bg-base-color lh-28 fw-600 text-white text-uppercase border-radius-30px ps-15px pe-15px fs-12 me-15px d-inline-block align-middle">Day 04</div>
-                                                <i class="feather icon-feather-chevron-right"></i><span class="fw-600 lh-normal">Veligandu island and exploring five star resort</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div id="accordion-style-02-04" class="accordion-collapse collapse" data-bs-parent="#accordion-style-02">
-                                        <div class="accordion-body last-paragraph-no-margin border-bottom border-color-extra-medium-gray">
-                                            <p>Lorem ipsum is simply dummy text of the printing typesetting industry. Industry's standard dummy text ever since the dummy. Lorem ipsum is simply dummy text of the printing.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end accordion item -->
-                                <!-- start accordion item -->
-                                <div class="accordion-item">
-                                    <div class="accordion-header border-bottom border-color-transparent">
-                                        <a href="" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-05" aria-expanded="false" data-bs-parent="#accordion-style-02">
-                                            <div class="accordion-title d-flex align-items-center position-relative text-dark-gray mb-0">
-                                                <div class="col-auto bg-base-color lh-28 fw-600 text-white text-uppercase border-radius-30px ps-15px pe-15px fs-12 me-15px d-inline-block align-middle">Day 05</div>
-                                                <i class="feather icon-feather-chevron-right"></i><span class="fw-600 lh-normal">Huvahendhoo island tours and return</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div id="accordion-style-02-05" class="accordion-collapse collapse" data-bs-parent="#accordion-style-02">
-                                        <div class="accordion-body last-paragraph-no-margin border-bottom border-color-transparent">
-                                            <p>Lorem ipsum is simply dummy text of the printing typesetting industry. Industry's standard dummy text ever since the dummy. Lorem ipsum is simply dummy text of the printing.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end accordion item -->
+                                @endif
                             </div>
                         </div>
                     </div>

@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Tour\TourPackageList;
 use App\Livewire\Admin\Tour\AddTourPackage;
 use App\Livewire\Admin\Tour\UpdateTourPackage;
-
+use App\Livewire\Public\Experience\Experience;
 
 Route::get('/', Home::class)->name('home');
 Route::get('/about', About::class)->name('about');
@@ -35,7 +35,7 @@ Route::get('/tour/{slug}', TourView::class)->name('tour.view');
 Route::get('/blog', Blog::class)->name('blog');
 Route::get('/blog-view', BlogView::class)->name('blog.view');
 Route::get('destination', Destination::class)->name('destination');
-Route::get('experience', \App\Livewire\Public\Experience\Experience::class)->name('experience');
+Route::get('experience', Experience::class)->name('experience');
 
 
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
