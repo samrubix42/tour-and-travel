@@ -31,7 +31,7 @@ Route::get('/', Home::class)->name('home');
 Route::get('/about', About::class)->name('about');
 Route::get('/contact', Contact::class)->name('contact');
 Route::get('/tour', Tour::class)->name('tour');
-Route::get('/tour-view', TourView::class)->name('tour.view');
+Route::get('/tour/{slug}', TourView::class)->name('tour.view');
 Route::get('/blog', Blog::class)->name('blog');
 Route::get('/blog-view', BlogView::class)->name('blog.view');
 Route::get('destination', Destination::class)->name('destination');

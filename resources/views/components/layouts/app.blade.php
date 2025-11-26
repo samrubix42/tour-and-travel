@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="author" content="ThemeZaa">
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <meta name="description" content="Elevate your online presence with Crafto - a modern, versatile, multipurpose Bootstrap 5 responsive HTML5, SCSS template using highly creative 56+ ready demos.">
+    @yield('meta_tags')
     <link rel="shortcut icon" href="{{ asset('asset/images/favicon.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('asset/images/apple-touch-icon-57x57.png') }}">
     <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('asset/images/apple-touch-icon-72x72.png') }}">
@@ -43,7 +43,7 @@
     </div>
     <script type="text/javascript" src="{{ asset('asset/js/jquery.js') }}"></script>
     <script type="text/javascript" src="{{ asset('asset/js/vendors.min.js') }}"></script>
-    
+
     <!-- slider revolution core javaScript files -->
     <script type="text/javascript" src="{{ asset('asset/revolution/js/jquery.themepunch.tools.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('asset/revolution/js/jquery.themepunch.revolution.min.js') }}"></script>
@@ -163,7 +163,7 @@
                     disableFocusListener: false,
                 }
             });
-        }); 
+        });
     </script>
 
     <script type="text/javascript" src="{{ asset('asset/js/main.js') }}"></script>

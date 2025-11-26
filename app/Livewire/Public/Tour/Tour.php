@@ -3,11 +3,46 @@
 namespace App\Livewire\Public\Tour;
 
 use Livewire\Component;
+use Livewire\WithPagination;
+use App\Models\TourPackage;
+use App\Models\Destination;
 
 class Tour extends Component
 {
+    use WithPagination;
+
+    public $perPage = 9;
     public function render()
     {
-        return view('livewire.public.tour.tour');
+        $slug = request()->query('slug');
+
+        $query = TourPackage::query()
+            ->select('id', 'title', 'slug', 'description', 'price', 'featured_image')
+            ->where('status', 1);
+        $metaContent=null;
+        if (!empty($slug)) {
+
+            $destination = Destination::where('slug', $slug)->first();
+            $metaContent=$destination;
+
+            if ($destination) {
+
+                $query->whereHas('destinations', function ($q) use ($slug) {
+                    $q->where('slug', $slug);
+                });
+            }
+        }
+        else{
+            $metaContent=(object)[
+                'meta_title'=>'Explore Our Exciting Tour Packages',
+                'meta_description'=>'Discover a variety of tour packages tailored to your preferences. From adventure trips to relaxing getaways, find the perfect tour for you.',
+                'meta_keywords'=>'tour packages, travel tours, vacation packages, adventure tours, holiday trips'
+            ];
+        }
+
+
+        $tourPackages = $query->latest()->paginate($this->perPage);
+
+        return view('livewire.public.tour.tour', compact('tourPackages', 'metaContent'));
     }
 }

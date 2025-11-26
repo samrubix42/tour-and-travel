@@ -61,7 +61,7 @@ class AdminSidebar
             ],
             (object)[
                 'title' => 'Page Management',
-                'icon' => 'ti ti-page',
+                'icon' => 'ti ti-file-text',
                 'url' => route('admin.page.management'),
                 'hasSubmenu' => false,
                 'submenu' => [],
