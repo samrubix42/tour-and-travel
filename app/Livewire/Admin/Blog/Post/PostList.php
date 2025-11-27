@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 class PostList extends Component
 {
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
 
     public $search = '';
     public $perPage = 10;
