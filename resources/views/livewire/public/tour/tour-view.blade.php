@@ -19,70 +19,61 @@
                 <div class="col-lg-8 md-mb-50px sm-mb-35px">
                     <div class="row align-items-center mb-25px">
                         <div class="col-sm-9">
-                                    <h2 class="alt-font text-dark-gray fw-600 mb-10px ls-minus-1px">{{ $package->title }}</h2>
-                                    <ul class="p-0 m-0 list-style-02 d-block d-sm-flex">
-                                        <li class="text-dark-gray fw-500"><i class="bi bi-geo-alt icon-small me-5px"></i>{{ optional($package->destinations->first())->name ?? '' }}</li>
-                                        <li class="ms-20px xs-ms-0">
-                                            <div class="review-star-icon fs-18 me-5px">
-                                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                            </div>
-                                            <a href="#reviews" class="text-dark-gray text-dark-gray-hover fw-500 d-inline-block section-link">{{ $package->reviews_count ?? 0 }} Reviews</a>
-                                        </li>
-                                    </ul>
+                            <h2 class="alt-font text-dark-gray fw-600 mb-10px ls-minus-1px">{{ $package->title }}</h2>
+                            <ul class="p-0 m-0 list-style-02 d-block d-sm-flex-col">
+                                <li class="text-dark-gray fw-500"><i class="bi bi-geo-alt icon-small me-5px"></i>{{ $package->destinations->pluck('name')->implode(', ') ?: 'No Destination' }}</li>
+                                 <li class="text-dark-gray fw-500"><i class="bi bi-briefcase icon-small me-5px"></i>
+                                    {{ $package->experiences->pluck('name')->implode(', ') ?: 'No Destination' }}
+                                </li>
+                            </ul>
                         </div>
                         <div class="col-sm-3 text-sm-end xs-mt-10px">
                             <h4 class="text-dark-gray fw-600 mb-0">{{ !empty($package->price) ? '₹' . number_format($package->price,0) : '-' }}</h4>
-                            <span class="d-block lh-22">Per person</span>
+                            <span class="d-block lh-22">Starting At</span>
                         </div>
                     </div>
                     <div class="row mb-50px xs-mb-40px">
                         <div class="col-12">
-                            <ul class="p-0 list-style-02 d-flex flex-wrap border-top border-bottom border-color-extra-medium-gray pt-20px pb-20px mb-25px">
-                                <li class="me-30px"><i class="bi bi-calendar-check text-base-color icon-extra-medium me-10px"></i> <span class="text-dark-gray fw-500">15 Days</span></li>
-                                <li class="me-30px"><i class="bi bi-person-plus text-base-color icon-extra-medium me-10px"></i> <span class="text-dark-gray fw-500">12+ Age</span></li>
-                                <li class="me-30px"><i class="bi bi-water text-base-color icon-extra-medium me-10px"></i> <span class="text-dark-gray fw-500">Beaches</span></li>
-                                <li class="me-30px"><i class="bi bi-clouds text-base-color icon-extra-medium me-10px"></i> <span class="text-dark-gray fw-500">Air rides</span></li>
-                                <li><i class="bi bi-sun text-base-color icon-extra-medium me-10px"></i><span class="text-dark-gray fw-500">City sightseeing</span></li>
-                            </ul>
+                                <div class="p-0 list-style-02 d-flex flex-wrap border-top border-color-extra-medium-gray pt-20px"></div>
                             <p>{!! $package->description ?? '' !!}</p>
                             @if(!empty($package->featured_image))
-                                <img src="{{ $package->featured_image }}" alt="" />
+                            <img src="{{ $package->featured_image }}" alt="" />
                             @endif
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <h5 class="alt-font text-dark-gray fw-600">Included / exclude</h5>
+                            <h5 class="alt-font text-dark-gray fw-600">Included / Optional</h5>
                         </div>
                     </div>
                     <div class="row row-cols-1 row-cols-md-2 mb-50px xs-mb-40px">
                         <div class="col">
                             @php
-                                $includes = json_decode($package->includes ?? 'null', true);
-                                if (!is_array($includes)) {
-                                    $includes = array_filter(array_map('trim', explode("\n", strip_tags($package->includes ?? ''))));
-                                }
+                            $includes = json_decode($package->includes ?? 'null', true);
+                            if (!is_array($includes)) {
+                            $includes = array_filter(array_map('trim', explode("\n", strip_tags($package->includes ?? ''))));
+                            }
                             @endphp
                             <ul class="p-0 m-0 list-style-02 text-dark-gray sm-mb-20px">
                                 @foreach($includes as $inc)
-                                    @if(trim($inc) !== '')
-                                        <li class="border-bottom border-color-extra-medium-gray pb-10px mb-10px"><i class="bi bi-check-circle-fill fs-22 text-green me-10px"></i>{{ $inc }}</li>
-                                    @endif
+                                @if(trim($inc) !== '')
+                                <li class="border-bottom border-color-extra-medium-gray pb-10px mb-10px"><i class="bi bi-check-circle-fill fs-22 text-green me-10px"></i>{{ $inc }}</li>
+                                @endif
                                 @endforeach
                             </ul>
                         </div>
                         <div class="col">
                             @php
-                                $optionals = json_decode($package->optional ?? 'null', true);
-                                if (!is_array($optionals)) {
-                                    $optionals = array_filter(array_map('trim', explode("\n", strip_tags($package->optional ?? ''))));
-                                }
+                            $optionals = json_decode($package->optional ?? 'null', true);
+                            if (!is_array($optionals)) {
+                            $optionals = array_filter(array_map('trim', explode("\n", strip_tags($package->optional ?? ''))));
+                            }
                             @endphp
                             <ul class="p-0 m-0 list-style-02 text-dark-gray">
                                 @foreach($optionals as $opt)
-                                    @if(trim($opt) !== '')
-                                        <li class="border-bottom border-color-extra-medium-gray pb-10px mb-10px"><i class="bi bi-x-circle-fill fs-22 text-red me-10px"></i>{{ $opt }}</li>
-                                    @endif
+                                @if(trim($opt) !== '')
+                                <li class="border-bottom border-color-extra-medium-gray pb-10px mb-10px"><i class="bi bi-info-circle-fill fs-22 text-warning me-10px"></i>{{ $opt }}</li>
+                                @endif
                                 @endforeach
                             </ul>
                         </div>
@@ -121,51 +112,51 @@
                         </div>
                         <div class="col-12">
                             @php
-                                $itinerary = json_decode($package->itinerary ?? 'null', true);
+                            $itinerary = json_decode($package->itinerary ?? 'null', true);
                             @endphp
                             <div class="accordion accordion-style-02" id="accordion-style-02" data-active-icon="icon-feather-chevron-down" data-inactive-icon="icon-feather-chevron-right">
                                 @if(is_array($itinerary) && count($itinerary))
-                                    @php $i = 0; @endphp
-                                    @foreach($itinerary as $dayKey => $day)
-                                        @php
-                                            $i++;
-                                            $itemId = 'accordion-style-02-'. $i;
-                                            $title = $day['title'] ?? ('Day ' . sprintf('%02d', $i));
-                                            $points = $day['points'] ?? [];
-                                        @endphp
-                                        <div class="accordion-item {{ $i === 1 ? 'active-accordion' : '' }}">
-                                            <div class="accordion-header border-bottom border-color-extra-medium-gray">
-                                                <a href="#" data-bs-toggle="collapse" data-bs-target="#{{ $itemId }}" aria-expanded="{{ $i === 1 ? 'true' : 'false' }}" data-bs-parent="#accordion-style-02">
-                                                    <div class="accordion-title d-flex align-items-center position-relative text-dark-gray mb-0">
-                                                        <div class="col-auto bg-base-color lh-28 fw-600 text-white text-uppercase border-radius-30px ps-15px pe-15px fs-12 me-15px d-inline-block align-middle">{{ 'Day ' . sprintf('%02d', $i) }}</div>
-                                                        <i class="feather {{ $i === 1 ? 'icon-feather-chevron-down' : 'icon-feather-chevron-right' }}"></i><span class="fw-600 lh-normal">{{ $title }}</span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div id="{{ $itemId }}" class="accordion-collapse collapse {{ $i === 1 ? 'show' : '' }}" data-bs-parent="#accordion-style-02">
-                                                <div class="accordion-body last-paragraph-no-margin border-bottom border-color-light-medium-gray">
-                                                    @if(is_array($points) && count($points))
-                                                        <ul>
-                                                            @foreach($points as $p)
-                                                                <li>{{ $p }}</li>
-                                                            @endforeach
-                                                        </ul>
-                                                    @else
-                                                        <p>{{ $day['title'] ?? '' }}</p>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                @else
-                                    <div class="accordion-item active-accordion">
-                                        <div class="accordion-header border-bottom border-color-extra-medium-gray">
+                                @php $i = 0; @endphp
+                                @foreach($itinerary as $dayKey => $day)
+                                @php
+                                $i++;
+                                $itemId = 'accordion-style-02-'. $i;
+                                $title = $day['title'] ?? ('Day ' . sprintf('%02d', $i));
+                                $points = $day['points'] ?? [];
+                                @endphp
+                                <div class="accordion-item {{ $i === 1 ? 'active-accordion' : '' }}">
+                                    <div class="accordion-header border-bottom border-color-extra-medium-gray">
+                                        <a href="#" data-bs-toggle="collapse" data-bs-target="#{{ $itemId }}" aria-expanded="{{ $i === 1 ? 'true' : 'false' }}" data-bs-parent="#accordion-style-02">
                                             <div class="accordion-title d-flex align-items-center position-relative text-dark-gray mb-0">
-                                                <div class="col-auto bg-base-color lh-28 fw-600 text-white text-uppercase border-radius-30px ps-15px pe-15px fs-12 me-15px d-inline-block align-middle">Day 01</div>
-                                                <i class="feather icon-feather-chevron-down"></i><span class="fw-600 lh-normal">{{ $package->itinerary ?? 'Itinerary not available' }}</span>
+                                                <div class="col-auto bg-base-color lh-28 fw-600 text-white text-uppercase border-radius-30px ps-15px pe-15px fs-12 me-15px d-inline-block align-middle">{{ 'Day ' . sprintf('%02d', $i) }}</div>
+                                                <i class="feather {{ $i === 1 ? 'icon-feather-chevron-down' : 'icon-feather-chevron-right' }}"></i><span class="fw-600 lh-normal">{{ $title }}</span>
                                             </div>
+                                        </a>
+                                    </div>
+                                    <div id="{{ $itemId }}" class="accordion-collapse collapse {{ $i === 1 ? 'show' : '' }}" data-bs-parent="#accordion-style-02">
+                                        <div class="accordion-body last-paragraph-no-margin border-bottom border-color-light-medium-gray">
+                                            @if(is_array($points) && count($points))
+                                            <ul>
+                                                @foreach($points as $p)
+                                                <li>{{ $p }}</li>
+                                                @endforeach
+                                            </ul>
+                                            @else
+                                            <p>{{ $day['title'] ?? '' }}</p>
+                                            @endif
                                         </div>
                                     </div>
+                                </div>
+                                @endforeach
+                                @else
+                                <div class="accordion-item active-accordion">
+                                    <div class="accordion-header border-bottom border-color-extra-medium-gray">
+                                        <div class="accordion-title d-flex align-items-center position-relative text-dark-gray mb-0">
+                                            <div class="col-auto bg-base-color lh-28 fw-600 text-white text-uppercase border-radius-30px ps-15px pe-15px fs-12 me-15px d-inline-block align-middle">Day 01</div>
+                                            <i class="feather icon-feather-chevron-down"></i><span class="fw-600 lh-normal">{{ $package->itinerary ?? 'Itinerary not available' }}</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 @endif
                             </div>
                         </div>
@@ -292,7 +283,7 @@
                                     </div>
                                 </div>
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>

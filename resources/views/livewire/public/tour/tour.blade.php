@@ -52,23 +52,19 @@
                 @forelse($tourPackages as $package)
                 <div class="col mb-30px">
                     <div class="overflow-hidden border-radius-6px box-shadow-large">
-                        <div class="image">
+                        <div class="image" width="100%" height="250px" style="height: 250px; overflow: hidden;">
                             <a href="/tour/{{ $package->slug }}">
+
                                 @php
                                 $img = $package->featured_image;
-
-                                // Default fallback
                                 $placeholder = 'https://placehold.co/600x430';
 
                                 if ($img) {
-                                // If it is an ImageKit URL
                                 if (str_contains($img, 'ik.imagekit.io')) {
                                 $finalUrl = $img . '?tr=w-600,f-auto,q-65';
-                                }
-                                elseif (filter_var($img, FILTER_VALIDATE_URL)) {
+                                } elseif (filter_var($img, FILTER_VALIDATE_URL)) {
                                 $finalUrl = $img;
-                                }
-                                else {
+                                } else {
                                 $finalUrl = $img;
                                 }
                                 } else {
@@ -76,10 +72,12 @@
                                 }
                                 @endphp
 
-                                <img class="w-100" src="{{ $finalUrl }}" alt="{{ $package->title }}">
-
+                                <img src="{{ $finalUrl }}"
+                                    alt="{{ $package->title }}"
+                                    style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
                             </a>
                         </div>
+
                         <div class="bg-white p-40px md-p-30px position-relative">
                             <div class="bg-base-color ps-15px pe-15px fs-14 text-uppercase fw-500 d-inline-block text-white position-absolute right-0px top-0px">Customizable</div>
                             <div class="fs-24 fw-700 text-dark-gray"><span class="text-uppercase d-block fs-14 lh-18 fw-500 text-medium-gray">Starting At</span>₹{{ number_format($package->price ?? 0, 0) }}</div>
