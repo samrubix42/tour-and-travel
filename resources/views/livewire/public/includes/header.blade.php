@@ -3,10 +3,8 @@
        <nav class="navbar navbar-expand-lg bg-transparent disable-fixed border-radius-6px md-border-radius-0px">
            <div class="container-fluid">
                <div class="col-auto col-lg-2 me-lg-0 me-auto">
-                   <a class="navbar-brand" href="demo-clothing-store.html">
-                       <img src="images/demo-clothing-store-logo-black.png" data-at2x="images/demo-clothing-store-logo-black@2x.png" alt="" class="default-logo">
-                       <img src="images/demo-clothing-store-logo-black.png" data-at2x="images/demo-clothing-store-logo-black@2x.png" alt="" class="alt-logo">
-                       <img src="images/demo-clothing-store-logo-black.png" data-at2x="images/demo-clothing-store-logo-black@2x.png" alt="" class="mobile-logo">
+                   <a class="navbar-brand" href="{{ route('home') }}">
+                       <img src="{{asset('asset/images/logo-envato-white.svg')}}"  alt="">
                    </a>
                </div>
                <div class="col-auto col-xxl-6 col-lg-8 menu-order">
@@ -18,9 +16,7 @@
                    </button>
                    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                        <ul class="navbar-nav navbar-left justify-content-end">
-                           <li class="nav-item">
-                               <a href="{{ route('home') }}" class="nav-link" >Home</a>
-                           </li>
+                       
                            <li class="nav-item dropdown submenu">
                                <a href="{{ route('destination') }}" class="nav-link" >Destination</a>
                                <i class="fa-solid fa-angle-down dropdown-toggle" id="navbarDropdownMenuLink1" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
@@ -74,6 +70,9 @@
                            </li>
                             <li class="nav-item">
                                  <a href="{{ route('tour') }}" class="nav-link" >Tours</a>
+                            </li>
+                            <li class="nav-item">
+                                 <a href="{{ route('hotels') }}" class="nav-link" >Hotels</a>
                             </li>
                            <li class="nav-item">
                                <a href="{{ route('blog') }}" class="nav-link" >Blog</a>

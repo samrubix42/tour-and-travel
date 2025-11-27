@@ -3,11 +3,32 @@
 namespace App\Livewire\Public\Blog;
 
 use Livewire\Component;
+use App\Models\Post;
+
+use Illuminate\Support\Str;
 
 class BlogView extends Component
 {
+    public $post;
+    public $relatedPosts = [];
+
+    public function mount($slug)
+    {
+        $post = Post::with('category')->where('slug', $slug)->firstOrFail();
+        $this->post = $post;
+
+        $this->relatedPosts = Post::where('category_id', $post->category_id)
+            ->where('id', '<>', $post->id)
+            ->latest()
+            ->take(3)
+            ->get();
+    }
+
     public function render()
     {
-        return view('livewire.public.blog.blog-view');
+        return view('livewire.public.blog.blog-view', [
+            'post' => $this->post,
+            'relatedPosts' => $this->relatedPosts,
+        ]);
     }
 }

@@ -33,9 +33,11 @@ Route::get('/contact', Contact::class)->name('contact');
 Route::get('/tour', Tour::class)->name('tour');
 Route::get('/tour/{slug}', TourView::class)->name('tour.view');
 Route::get('/blog', Blog::class)->name('blog');
-Route::get('/blog-view', BlogView::class)->name('blog.view');
+Route::get('/blog/{slug}', BlogView::class)->name('blog.view');
 Route::get('destination', Destination::class)->name('destination');
 Route::get('experience', Experience::class)->name('experience');
+Route::get('hotels', \App\Livewire\Public\Hotel\Hotel::class)->name('hotels');
+Route::get('hotel/{slug}', \App\Livewire\Public\Hotel\HotelView::class)->name('hotel.view');
 
 
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {

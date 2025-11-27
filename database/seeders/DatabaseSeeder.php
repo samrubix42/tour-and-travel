@@ -24,8 +24,11 @@ class DatabaseSeeder extends Seeder
         $this->call(\Database\Seeders\AdminUserSeeder::class);
         $this->call(\Database\Seeders\DestinationSeeder::class);
         $this->call(\Database\Seeders\CategorySeeder::class);
+        $this->call(\Database\Seeders\HotelCategorySeeder::class);
+        $this->call(\Database\Seeders\HotelSeeder::class);
         $this->call(\Database\Seeders\BannerSeeder::class);
         $this->call(\Database\Seeders\BlogCategorySeeder::class);
+        $this->call(\Database\Seeders\PostSeeder::class);
         $this->call(\Database\Seeders\ExperienceSeeder::class);
         $this->call(\Database\Seeders\TourPackageSeeder::class);
     }
