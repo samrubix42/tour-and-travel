@@ -60,14 +60,20 @@
                                 $placeholder = 'https://placehold.co/600x430';
 
                                 if ($img) {
-                                if (str_contains($img, 'ik.imagekit.io')) {
+                                if (str_contains($img, 'ik.imagekit.io'))
+                                {
                                 $finalUrl = $img . '?tr=w-600,f-auto,q-65';
-                                } elseif (filter_var($img, FILTER_VALIDATE_URL)) {
-                                $finalUrl = $img;
-                                } else {
+                                }
+                                elseif (filter_var($img, FILTER_VALIDATE_URL))
+                                {
                                 $finalUrl = $img;
                                 }
-                                } else {
+                                else {
+                                $finalUrl = $img;
+                                }
+                                }
+                                else
+                                {
                                 $finalUrl = $placeholder;
                                 }
                                 @endphp
