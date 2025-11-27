@@ -50,7 +50,7 @@
                             <li class="nav-item dropdown submenu">
                                <a href="{{ route('experience') }}" class="nav-link" >Experiences</a>
                                <i class="fa-solid fa-angle-down dropdown-toggle" id="navbarDropdownMenuLinkExp" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
-                               <div class="dropdown-menu submenu-content" aria-labelledby="navbarDropdownMenuLinkExp" style="position:absolute;left:50%;transform:translateX(-50%);width:920px;max-width:95vw;overflow:hidden;box-sizing:border-box;padding:12px 18px;">
+                               <div class="dropdown-menu submenu-content" aria-labelledby="navbarDropdownMenuLinkExp">
                                    <div class="d-lg-flex mega-menu m-auto flex-column">
                                        <div class="row row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 mb-40px md-mb-25px xs-mb-15px">
                                            @foreach($experiences->chunk(8) as $chunk)

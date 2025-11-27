@@ -54,7 +54,30 @@
                     <div class="overflow-hidden border-radius-6px box-shadow-large">
                         <div class="image">
                             <a href="/tour/{{ $package->slug }}">
-                                <img class="w-100" src="{{ $package->featured_image ?? 'https://placehold.co/600x430' }}" alt="{{ $package->title }}">
+                                @php
+                                $img = $package->featured_image;
+
+                                // Default fallback
+                                $placeholder = 'https://placehold.co/600x430';
+
+                                if ($img) {
+                                // If it is an ImageKit URL
+                                if (str_contains($img, 'ik.imagekit.io')) {
+                                $finalUrl = $img . '?tr=w-600,f-auto,q-65';
+                                }
+                                elseif (filter_var($img, FILTER_VALIDATE_URL)) {
+                                $finalUrl = $img;
+                                }
+                                else {
+                                $finalUrl = $img;
+                                }
+                                } else {
+                                $finalUrl = $placeholder;
+                                }
+                                @endphp
+
+                                <img class="w-100" src="{{ $finalUrl }}" alt="{{ $package->title }}">
+
                             </a>
                         </div>
                         <div class="bg-white p-40px md-p-30px position-relative">
