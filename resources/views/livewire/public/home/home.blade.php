@@ -53,7 +53,7 @@
             <div class="position-absolute left-0px bottom-minus-50px d-none d-lg-inline-block" data-bottom-top="transform: translateY(-50px)" data-top-bottom="transform: translateY(50px)">
                 <img src="https://placehold.co/88x230" alt="" />
             </div>
-            <div class="container background-position-right background-no-repeat sm-mb-10 xs-mb-15" style="background-image:url('https://placehold.co/715x700')">
+            <div class="container background-position-right background-no-repeat sm-mb-10 xs-mb-15" style="background-image:url('{{ asset('asset/image/demo-travel-agency-home-bg.png') }}');">
                 <div class="row align-items-center position-relative mb-7">
                     <div class="position-absolute left-0px top-0px h-100 w-130px border-end border-color-extra-medium-gray d-none d-md-inline-block" data-anime='{ "translateX": [-30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
                         <div class="vertical-title-center align-items-center justify-content-center">
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-8 position-relative offset-lg-1 offset-md-4 ps-0 sm-ps-15px md-mt-50px" data-anime='{ "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
-                        <img src="https://placehold.co/405x560" class="border-radius-6px md-w-100" alt="">
+                        <img src="{{ asset('asset/image/demo-travel-agency-home-01.jpg') }}" class="border-radius-6px md-w-100" alt="">
                         <img class="position-absolute left-minus-120px top-80px sm-top-0px sm-w-160px sm-left-0px" src="{{ asset('asset/images/demo-travel-agency-home-02.png') }}" alt="" data-bottom-top="transform: translateY(50px)" data-top-bottom="transform: translateY(-50px)">
                     </div>
                 </div>

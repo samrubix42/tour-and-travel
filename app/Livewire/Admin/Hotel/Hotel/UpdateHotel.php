@@ -5,6 +5,9 @@ namespace App\Livewire\Admin\Hotel\Hotel;
 use App\Models\Hotel as HotelModel;
 use App\Models\Destination;
 use App\Models\HotelCategory;
+use App\Models\HotelGallery;
+use Illuminate\Support\Facades\Storage;
+use App\Services\ImageKitService;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -19,11 +22,25 @@ class UpdateHotel extends Component
     public $category_id;
     public $destination_id;
     public $address;
+    public $phone;
+    public $email;
     public $rating;
     public $description;
     public $image; 
-    public $existingImage; 
+    public $existingImageUrl;
+    public $existingImagePath;
+    public $existingImageKitId;
     public $status = true;
+    public $gallery = [];
+    public $existingGalleries = [];
+    public $amenities = [];
+    public $facilities = [];
+    public $meta_title;
+    public $meta_description;
+    public $meta_keywords;
+    public $long_description;
+    public $location;
+    public $map_embed;
 
     public $categories = [];
     public $destinations = [];
@@ -43,8 +60,19 @@ class UpdateHotel extends Component
             'category_id' => 'required|integer',
             'destination_id' => 'required|integer',
             'address' => 'nullable|string|max:1000',
+            'phone' => 'nullable|string|max:50',
+            'email' => 'nullable|email|max:255',
+            'amenities' => 'nullable|array',
+            'amenities.*' => 'nullable|string|max:255',
+            'facilities' => 'nullable|array',
+            'facilities.*' => 'nullable|string|max:255',
+            'gallery' => 'nullable|array',
+            'gallery.*' => 'nullable|image|max:2048',
             'rating' => 'nullable|numeric|min:0|max:5',
             'description' => 'nullable|string',
+            'long_description' => 'nullable|string',
+            'location' => 'nullable|string',
+            'map_embed' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
             'status' => 'boolean',
         ];
@@ -69,8 +97,38 @@ class UpdateHotel extends Component
         $this->address = $hotel->address;
         $this->rating = $hotel->rating;
         $this->description = $hotel->description;
-        $this->existingImage = $hotel->image;
+        $this->existingImageUrl = $hotel->image_url;
+        $this->existingImagePath = $hotel->storage_path;
+        $this->existingImageKitId = $hotel->imagekit_file_id;
         $this->status = (bool) $hotel->status;
+        $this->phone = $hotel->phone;
+        $this->email = $hotel->email;
+        // load amenities/facilities as comma-separated string for the input
+        // load amenities/facilities as arrays
+        if (!empty($hotel->amenities)) {
+            if (is_string($hotel->amenities)) {
+                $decoded = @json_decode($hotel->amenities, true);
+                $this->amenities = is_array($decoded) ? $decoded : [trim($hotel->amenities)];
+            } elseif (is_array($hotel->amenities)) {
+                $this->amenities = $hotel->amenities;
+            }
+        }
+        if (!empty($hotel->facilities)) {
+            if (is_string($hotel->facilities)) {
+                $decoded = @json_decode($hotel->facilities, true);
+                $this->facilities = is_array($decoded) ? $decoded : [trim($hotel->facilities)];
+            } elseif (is_array($hotel->facilities)) {
+                $this->facilities = $hotel->facilities;
+            }
+        }
+        $this->meta_title = $hotel->meta_title;
+        $this->meta_description = $hotel->meta_description;
+        $this->meta_keywords = $hotel->meta_keywords;
+        $this->long_description = $hotel->long_description;
+        $this->location = $hotel->location;
+        $this->map_embed = $hotel->map_embed;
+        // load existing galleries
+        $this->existingGalleries = HotelGallery::where('hotel_id', $hotel->id)->get()->toArray();
     }
 
     public function saveHotel()
@@ -81,20 +139,87 @@ class UpdateHotel extends Component
             $data['slug'] = Str::slug($this->name);
         }
 
+        // handle main image upload (ImageKit preferred)
         if ($this->image) {
-            $path = $this->image->store('hotels', 'public');
-            $data['image'] = $path;
-        } else {
-            if ($this->existingImage) {
-                $data['image'] = $this->existingImage;
+            $ik = null;
+            if (env('IMAGEKIT_PRIVATE_KEY')) {
+                $ik = new ImageKitService();
             }
+            try {
+                if ($ik) {
+                    $resp = $ik->uploadToFolder($this->image->getRealPath(), $this->image->getClientOriginalName(), '/hotels');
+                    $data['image_url'] = $resp->result->url ?? null;
+                    $data['imagekit_file_id'] = $resp->result->fileId ?? null;
+                    $data['storage_path'] = null;
+                } else {
+                    $path = $this->image->store('hotels', 'public');
+                    $data['storage_path'] = $path;
+                    $data['image_url'] = Storage::url($path);
+                    $data['imagekit_file_id'] = null;
+                }
+            } catch (\Exception $e) {
+                // ignore upload errors and preserve existing values
+            }
+        } else {
+            // keep existing values
+            $data['image_url'] = $this->existingImageUrl ?? null;
+            $data['storage_path'] = $this->existingImagePath ?? null;
+            $data['imagekit_file_id'] = $this->existingImageKitId ?? null;
         }
+
+        // process amenities & facilities (we store as JSON)
+        $data['amenities'] = !empty($this->amenities) ? json_encode(array_values(array_filter(array_map('trim', $this->amenities)))) : null;
+        $data['facilities'] = !empty($this->facilities) ? json_encode(array_values(array_filter(array_map('trim', $this->facilities)))) : null;
+
+        // phone, email and meta fields
+        $data['phone'] = $this->phone ?? null;
+        $data['email'] = $this->email ?? null;
+        $data['long_description'] = $this->long_description ?? null;
+        $data['location'] = $this->location ?? null;
+        $data['map_embed'] = $this->map_embed ?? null;
+        $data['meta_title'] = $this->meta_title ?? null;
+        $data['meta_description'] = $this->meta_description ?? null;
+        $data['meta_keywords'] = $this->meta_keywords ?? null;
 
         $data['status'] = isset($data['status']) ? (bool)$data['status'] : false;
 
         $hotel = HotelModel::find($this->hotelId);
         if ($hotel) {
             $hotel->update($data);
+            // handle new gallery uploads
+            if (!empty($this->gallery) && is_array($this->gallery)) {
+                $ik = null;
+                if (env('IMAGEKIT_PRIVATE_KEY')) {
+                    $ik = new ImageKitService();
+                }
+                foreach ($this->gallery as $file) {
+                    try {
+                        if ($ik) {
+                            $resp = $ik->uploadToFolder($file->getRealPath(), $file->getClientOriginalName(), '/hotels');
+                            $fileId = $resp->result->fileId ?? null;
+                            $url = $resp->result->url ?? null;
+                            HotelGallery::create([
+                                'hotel_id' => $hotel->id,
+                                'image_url' => $url,
+                                'imagekit_file_id' => $fileId,
+                                'storage_path' => null,
+                            ]);
+                        } else {
+                            $path = $file->store('hotels/galleries', 'public');
+                            HotelGallery::create([
+                                'hotel_id' => $hotel->id,
+                                'image_url' => Storage::url($path),
+                                'storage_path' => $path,
+                                'imagekit_file_id' => null,
+                            ]);
+                        }
+                    } catch (\Exception $e) {
+                        continue;
+                    }
+                }
+                // refresh list
+                $this->existingGalleries = HotelGallery::where('hotel_id', $hotel->id)->get()->toArray();
+            }
            $this->dispatch('success', 'Hotel updated successfully.');
         }
 
@@ -105,5 +230,33 @@ class UpdateHotel extends Component
     public function render()
     {
         return view('livewire.admin.hotel.hotel.update-hotel');
+    }
+
+    public function removeGallery($id)
+    {
+        $gallery = HotelGallery::find($id);
+        if (!$gallery) return;
+
+        // delete from ImageKit if present
+        try {
+            if (!empty($gallery->imagekit_file_id) && env('IMAGEKIT_PRIVATE_KEY')) {
+                $ik = new ImageKitService();
+                $ik->deleteFile($gallery->imagekit_file_id);
+            }
+        } catch (\Exception $e) {
+            // ignore
+        }
+
+        // delete local storage
+        try {
+            if (!empty($gallery->storage_path)) {
+                Storage::disk('public')->delete($gallery->storage_path);
+            }
+        } catch (\Exception $e) {
+            // ignore
+        }
+
+        $gallery->delete();
+        $this->existingGalleries = HotelGallery::where('hotel_id', $this->hotelId)->get()->toArray();
     }
 }

@@ -1,10 +1,10 @@
-   <header>
+   <header style="width: 100%;">
        <!-- start navigation -->
-       <nav class="navbar navbar-expand-lg bg-transparent disable-fixed border-radius-6px md-border-radius-0px">
+       <nav class="navbar navbar-expand-lg bg-transparent  border-radius-6px md-border-radius-0px">
            <div class="container-fluid">
                <div class="col-auto col-lg-2 me-lg-0 me-auto">
                    <a class="navbar-brand" href="{{ route('home') }}">
-                       <img src="{{asset('asset/images/logo-envato-white.svg')}}"  alt="">
+                       <img src="{{asset('asset/images/logo-envato-white.svg')}}" alt="">
                    </a>
                </div>
                <div class="col-auto col-xxl-6 col-lg-8 menu-order">
@@ -16,69 +16,69 @@
                    </button>
                    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                        <ul class="navbar-nav navbar-left justify-content-end">
-                       
+
                            <li class="nav-item dropdown submenu">
-                               <a href="{{ route('destination') }}" class="nav-link" >Destination</a>
+                               <a href="{{ route('destination') }}" class="nav-link">Destination</a>
                                <i class="fa-solid fa-angle-down dropdown-toggle" id="navbarDropdownMenuLink1" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                                <div class="dropdown-menu submenu-content" aria-labelledby="navbarDropdownMenuLink1">
                                    <div class="d-lg-flex mega-menu m-auto flex-column">
-                                    <div class="row row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 mb-40px md-mb-25px xs-mb-15px">
+                                       <div class="row row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 mb-40px md-mb-25px xs-mb-15px">
                                            @foreach($destinations->chunk(8) as $chunk)
-                                               @foreach($chunk as $dest)
-                                               <div class="col">
-                                                   <a href="{{ route('tour') }}?slug={{ $dest->slug }}" class="text-decoration-none text-dark d-block py-2">
-                                                       <div class="d-flex align-items-center justify-content-between">
-                                                           <div>
-                                                               <strong class="fs-14" style="font-size:14px;">{{ $dest->name }}</strong>
-                                                               <div class="text-muted small" style="font-size:12px;">View packages</div>
-                                                           </div>
-                                                           <i class="fa-solid fa-angle-right text-muted small"></i>
+                                           @foreach($chunk as $dest)
+                                           <div class="col">
+                                               <a href="{{ route('tour') }}?slug={{ $dest->slug }}" class="text-decoration-none text-dark d-block py-2">
+                                                   <div class="d-flex align-items-center justify-content-between">
+                                                       <div>
+                                                           <strong class="fs-14" style="font-size:14px;">{{ $dest->name }}</strong>
+                                                           <div class="text-muted small" style="font-size:12px;">View packages</div>
                                                        </div>
-                                                   </a>
-                                               </div>
-                                               @endforeach
+                                                       <i class="fa-solid fa-angle-right text-muted small"></i>
+                                                   </div>
+                                               </a>
+                                           </div>
+                                           @endforeach
                                            @endforeach
                                        </div>
-                                   
+
                                    </div>
                                </div>
                            </li>
-                            <li class="nav-item dropdown submenu">
-                               <a href="{{ route('experience') }}" class="nav-link" >Experiences</a>
+                           <li class="nav-item dropdown submenu">
+                               <a href="{{ route('experience') }}" class="nav-link">Experiences</a>
                                <i class="fa-solid fa-angle-down dropdown-toggle" id="navbarDropdownMenuLinkExp" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                                <div class="dropdown-menu submenu-content" aria-labelledby="navbarDropdownMenuLinkExp">
                                    <div class="d-lg-flex mega-menu m-auto flex-column">
                                        <div class="row row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 mb-40px md-mb-25px xs-mb-15px">
                                            @foreach($experiences->chunk(8) as $chunk)
-                                               @foreach($chunk as $exp)
-                                               <div class="col">
-                                                   <a href="{{ route('tour') }}?experience={{ $exp->slug }}" class="text-decoration-none text-dark d-block py-2">
-                                                       <div class="d-flex align-items-center justify-content-between">
-                                                           <div>
-                                                               <strong class="fs-14" style="font-size:14px;">{{ $exp->name }}</strong>
-                                                               <div class="text-muted small" style="font-size:12px;">View packages</div>
-                                                           </div>
-                                                           <i class="fa-solid fa-angle-right text-muted small"></i>
+                                           @foreach($chunk as $exp)
+                                           <div class="col">
+                                               <a href="{{ route('tour') }}?experience={{ $exp->slug }}" class="text-decoration-none text-dark d-block py-2">
+                                                   <div class="d-flex align-items-center justify-content-between">
+                                                       <div>
+                                                           <strong class="fs-14" style="font-size:14px;">{{ $exp->name }}</strong>
+                                                           <div class="text-muted small" style="font-size:12px;">View packages</div>
                                                        </div>
-                                                   </a>
-                                               </div>
-                                               @endforeach
+                                                       <i class="fa-solid fa-angle-right text-muted small"></i>
+                                                   </div>
+                                               </a>
+                                           </div>
+                                           @endforeach
                                            @endforeach
                                        </div>
                                    </div>
                                </div>
                            </li>
-                            <li class="nav-item">
-                                 <a href="{{ route('tour') }}" class="nav-link" >Tours</a>
-                            </li>
-                            <li class="nav-item">
-                                 <a href="{{ route('hotels') }}" class="nav-link" >Hotels</a>
-                            </li>
                            <li class="nav-item">
-                               <a href="{{ route('blog') }}" class="nav-link" >Blog</a>
+                               <a href="{{ route('about') }}" class="nav-link">About</a>
                            </li>
                            <li class="nav-item">
-                               <a href="{{ route('contact') }}" class="nav-link" >Contact</a>
+                               <a href="{{ route('hotels') }}" class="nav-link">Hotels</a>
+                           </li>
+                           <li class="nav-item">
+                               <a href="{{ route('blog') }}" class="nav-link">Blog</a>
+                           </li>
+                           <li class="nav-item">
+                               <a href="{{ route('contact') }}" class="nav-link">Contact</a>
                            </li>
                        </ul>
                    </div>
@@ -87,15 +87,15 @@
                    <div class="col-auto col-lg-2 text-end d-none d-sm-flex">
                        <div class="header-icon">
                            <div class="header-search-icon icon">
-                               <a href="#" class="search-form-icon header-search-form"><i class="feather icon-feather-search" ></i></a>
+                               <a href="#" class="search-form-icon header-search-form"><i class="feather icon-feather-search"></i></a>
                                <div class="search-form-wrapper">
-                                   <button title="Close" type="button" class="search-close alt-font" >×</button>
+                                   <button title="Close" type="button" class="search-close alt-font">×</button>
                                    <form id="search-form" role="search" method="get" class="search-form text-left" action="search-result.html">
                                        <div class="search-form-box">
                                            <h2 class="text-dark-gray text-center mb-5 ls-minus-2px fw-600">What are you looking for?</h2>
                                            <input class="search-input" id="search-form-input5e219ef164995" placeholder="Enter your keywords..." name="s" value="" type="text" autocomplete="off">
                                            <button type="submit" class="search-button">
-                                               <i class="feather icon-feather-search" aria-hidden="true" ></i>
+                                               <i class="feather icon-feather-search" aria-hidden="true"></i>
                                            </button>
                                        </div>
                                    </form>
