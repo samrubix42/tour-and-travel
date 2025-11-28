@@ -8,18 +8,17 @@
             {{-- Previous Button --}}
             @if ($paginator->onFirstPage())
                 <li class="page-item disabled">
-                    <a class="page-link" href="#">
+                    <a class="page-link">
                         <i class="feather icon-feather-arrow-left fs-18 text-dark-gray d-xs-none"></i>
                     </a>
                 </li>
             @else
                 <li class="page-item">
-                    <a class="page-link" href="{{ $paginator->previousPageUrl() }}">
+                    <a class="page-link" wire:click="previousPage" wire:loading.attr="disabled">
                         <i class="feather icon-feather-arrow-left fs-18 text-dark-gray d-xs-none"></i>
                     </a>
                 </li>
             @endif
-
 
             {{-- Page Numbers --}}
             @foreach ($elements as $element)
@@ -33,28 +32,31 @@
                     @foreach ($element as $page => $url)
                         @if ($page == $paginator->currentPage())
                             <li class="page-item active">
-                                <a class="page-link" href="#">{{ sprintf('%02d', $page) }}</a>
+                                <a class="page-link">{{ sprintf('%02d', $page) }}</a>
                             </li>
                         @else
                             <li class="page-item">
-                                <a class="page-link" href="{{ $url }}">{{ sprintf('%02d', $page) }}</a>
+                                <a class="page-link"
+                                   wire:click="gotoPage({{ $page }})"
+                                   wire:loading.attr="disabled">
+                                   {{ sprintf('%02d', $page) }}
+                                </a>
                             </li>
                         @endif
                     @endforeach
                 @endif
             @endforeach
 
-
             {{-- Next Button --}}
             @if ($paginator->hasMorePages())
                 <li class="page-item">
-                    <a class="page-link" href="{{ $paginator->nextPageUrl() }}">
+                    <a class="page-link" wire:click="nextPage" wire:loading.attr="disabled">
                         <i class="feather icon-feather-arrow-right fs-18 text-dark-gray d-xs-none"></i>
                     </a>
                 </li>
             @else
                 <li class="page-item disabled">
-                    <a class="page-link" href="#">
+                    <a class="page-link">
                         <i class="feather icon-feather-arrow-right fs-18 text-dark-gray d-xs-none"></i>
                     </a>
                 </li>

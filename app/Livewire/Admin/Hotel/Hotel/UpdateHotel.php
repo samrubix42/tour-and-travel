@@ -26,7 +26,7 @@ class UpdateHotel extends Component
     public $email;
     public $rating;
     public $description;
-    public $image; 
+    public $image;
     public $existingImageUrl;
     public $existingImagePath;
     public $existingImageKitId;
@@ -76,6 +76,11 @@ class UpdateHotel extends Component
             'image' => 'nullable|image|max:2048',
             'status' => 'boolean',
         ];
+    }
+    public function updatedName()
+    {
+
+        $this->slug = Str::slug($this->name);
     }
 
     public function loadLists()
@@ -229,7 +234,7 @@ class UpdateHotel extends Component
                 // refresh list
                 $this->existingGalleries = HotelGallery::where('hotel_id', $hotel->id)->get()->toArray();
             }
-              $this->dispatch('success', 'Hotel updated successfully.');
+            $this->dispatch('success', 'Hotel updated successfully.');
         }
 
         return redirect()->route('admin.hotel.list');

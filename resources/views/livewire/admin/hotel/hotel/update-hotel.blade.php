@@ -26,14 +26,14 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Name</label>
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror" wire:model.defer="name" placeholder="Hotel name">
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror" wire:model.live="name" placeholder="Hotel name">
                                         @error('name') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Slug (optional)</label>
-                                        <input type="text" class="form-control @error('slug') is-invalid @enderror" wire:model.defer="slug" placeholder="optional - auto generated if empty">
+                                        <label class="form-label">Slug</label>
+                                        <input type="text" class="form-control @error('slug') is-invalid @enderror" wire:model.defer="slug" placeholder="auto generated">
                                         @error('slug') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                                     </div>
                                 </div>

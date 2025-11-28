@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row mb-4">
                 <div class="col-md-8">
-                    <input wire:model.debounce.300ms="search" type="text" class="form-control" placeholder="Search hotels by name or address...">
+                    <input wire:model.debounce.live.300ms="search" type="text" class="form-control" placeholder="Search hotels by name or address...">
                 </div>
             </div>
 
@@ -23,15 +23,16 @@
                 @forelse($hotels as $hotel)
                 <div class="col">
                     <div class="card h-100 border-0 shadow-sm">
-                        <img src="{{ $hotel->image ?? 'https://placehold.co/600x400' }}" class="card-img-top" style="height:220px;object-fit:cover;" alt="{{ $hotel->name }}">
+                        <a href="{{route('hotel.view',$hotel->slug)}}"> <img src="{{ $hotel->image_url ?? 'https://placehold.co/600x480' }}" class="card-img-top" style="height:350px;object-fit:cover;" alt="{{ $hotel->name }}">
+                        </a>
                         <div class="card-body">
-                            <h5 class="card-title mb-1"><a href="{{ url('/hotel/'.$hotel->slug) }}" class="text-dark text-decoration-none">{{ $hotel->name }}</a></h5>
+                            <h5 class="card-title mb-1"><a href="{{ route('hotel.view', $hotel->slug) }}" class="text-dark text-decoration-none">{{ $hotel->name }}</a></h5>
                             <p class="text-muted mb-2 small">{{ $hotel->destination->name ?? '' }} &middot; {{ $hotel->category->name ?? '' }}</p>
                             <p class="card-text small text-muted">{{ \Illuminate\Support\Str::limit(strip_tags($hotel->description ?? ''), 100) }}</p>
                         </div>
                         <div class="card-footer bg-white border-0 d-flex align-items-center justify-content-between">
                             <span class="badge bg-base-color text-white">{{ $hotel->rating ?? 'N/A' }} <i class="bi bi-star-fill ms-1"></i></span>
-                            <a href="{{ url('/hotel/'.$hotel->slug) }}" class="btn btn-sm btn-outline-dark">View details</a>
+                            <a href="{{route('hotel.view',$hotel->slug)}}" class="btn btn-sm btn-outline-dark">View details</a>
                         </div>
                     </div>
                 </div>
