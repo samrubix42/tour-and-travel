@@ -8,6 +8,15 @@
         <div class="card">
             <div class="card-body">
                 <form wire:submit.prevent="saveHotel">
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach($errors->all() as $err)
+                                    <li>{{ $err }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
              
                     <!-- single form start -->
                         <div class="card mb-3">
@@ -19,15 +28,15 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Name</label>
-                                            <input type="text" class="form-control" wire:model.live="name" placeholder="Hotel name">
-                                            @error('name') <div class="text-danger">{{ $message }}</div> @enderror
+                                            <input type="text" class="form-control @error('name') is-invalid @enderror" wire:model.live="name" placeholder="Hotel name">
+                                            @error('name') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Slug</label>
-                                            <input type="text" class="form-control" wire:model.defer="slug" placeholder="auto generated">
-                                            @error('slug') <div class="text-danger">{{ $message }}</div> @enderror
+                                            <input type="text" class="form-control @error('slug') is-invalid @enderror" wire:model.defer="slug" placeholder="auto generated">
+                                            @error('slug') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -36,33 +45,33 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Category</label>
-                                            <select class="form-select" wire:model.defer="category_id">
+                                            <select class="form-select @error('category_id') is-invalid @enderror" wire:model.defer="category_id">
                                                 <option value="">-- Select Category --</option>
                                                 @foreach($categories as $cat)
                                                 <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                                                 @endforeach
                                             </select>
-                                            @error('category_id') <div class="text-danger">{{ $message }}</div> @enderror
+                                            @error('category_id') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Destination</label>
-                                            <select class="form-select" wire:model.defer="destination_id">
+                                            <select class="form-select @error('destination_id') is-invalid @enderror" wire:model.defer="destination_id">
                                                 <option value="">-- Select Destination --</option>
                                                 @foreach($destinations as $dest)
                                                 <option value="{{ $dest->id }}">{{ $dest->name }}</option>
                                                 @endforeach
                                             </select>
-                                            @error('destination_id') <div class="text-danger">{{ $message }}</div> @enderror
+                                            @error('destination_id') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="mb-3">
+                                    <div class="mb-3">
                                     <label class="form-label">Address</label>
-                                    <input type="text" class="form-control" wire:model.defer="address" placeholder="Street, city, country">
-                                    @error('address') <div class="text-danger">{{ $message }}</div> @enderror
+                                    <input type="text" class="form-control @error('address') is-invalid @enderror" wire:model.defer="address" placeholder="Street, city, country">
+                                    @error('address') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                                 </div>
                             </div>
                         </div>
@@ -76,23 +85,23 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Phone</label>
-                                                    <input type="text" class="form-control" wire:model.defer="phone" placeholder="e.g. +1 800 123 456">
-                                                    @error('phone') <div class="text-danger">{{ $message }}</div> @enderror
+                                                    <input type="text" class="form-control @error('phone') is-invalid @enderror" wire:model.defer="phone" placeholder="e.g. +1 800 123 456">
+                                                    @error('phone') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Email</label>
-                                                    <input type="email" class="form-control" wire:model.defer="email" placeholder="contact@hotel.com">
-                                                    @error('email') <div class="text-danger">{{ $message }}</div> @enderror
+                                                    <input type="email" class="form-control @error('email') is-invalid @enderror" wire:model.defer="email" placeholder="contact@hotel.com">
+                                                    @error('email') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="mb-3">
                                                 <label class="form-label">Featured Image</label>
-                                                <input type="file" class="form-control" wire:model="image">
-                                                @error('image') <div class="text-danger">{{ $message }}</div> @enderror
+                                                <input type="file" class="form-control @error('image') is-invalid @enderror" wire:model="image">
+                                                @error('image') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                                                 @if($image)
                                                 <div class="mt-2">
                                                     Photo Preview:
@@ -101,9 +110,9 @@
                                                 @endif
                                                 <hr />
                                                 <label class="form-label">Gallery images</label>
-                                                <input type="file" class="form-control" wire:model="gallery" multiple>
-                                                @error('gallery') <div class="text-danger">{{ $message }}</div> @enderror
-                                                @error('gallery.*') <div class="text-danger">{{ $message }}</div> @enderror
+                                                <input type="file" class="form-control @error('gallery') is-invalid @enderror" wire:model="gallery" multiple>
+                                                @error('gallery') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
+                                                @error('gallery.*') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                                                 @if(!empty($gallery))
                                                     <div class="mt-2 d-flex gap-2 flex-wrap">
                                                         @foreach($gallery as $g)
@@ -133,10 +142,10 @@
                                             @error('rating') <div class="text-danger">{{ $message }}</div> @enderror
                                         </div>
 
-                                        <div class="mb-3">
+                                            <div class="mb-3">
                                             <label class="form-label">Short Description</label>
-                                            <textarea class="form-control" rows="4" wire:model.defer="description"></textarea>
-                                            @error('description') <div class="text-danger">{{ $message }}</div> @enderror
+                                            <textarea class="form-control @error('description') is-invalid @enderror" rows="4" wire:model.defer="description"></textarea>
+                                            @error('description') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                                         </div>
 
                                         <div class="mb-3">
@@ -144,7 +153,7 @@
                                             <div wire:ignore>
                                                 <textarea id="long_description">{!! $long_description ?? '' !!}</textarea>
                                             </div>
-                                            @error('long_description') <div class="text-danger">{{ $message }}</div> @enderror
+                                            @error('long_description') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                                         </div>
 
                                         <div class="mb-3">
