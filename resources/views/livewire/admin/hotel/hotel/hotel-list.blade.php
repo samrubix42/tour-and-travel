@@ -32,6 +32,7 @@
                     <table class="table table-hover align-middle text-nowrap mb-0">
                         <thead class="table-light">
                             <tr>
+                                <th>Image</th>
                                 <th>Name</th>
                                 <th>Category</th>
                                 <th>Destination</th>
@@ -42,14 +43,14 @@
                         <tbody>
                             @forelse($hotels as $hotel)
                             <tr>
+                                <td><img src="{{ $hotel->image_url ?? 'http://via.placeholder.com/100x60' }}" alt="{{ $hotel->name }}" style="width: 100px; max-height: 60px; object-fit: cover;"></td>
                                 <td>{{ $hotel->name }}</td>
                                 <td>{{ $hotel->category?->name }}</td>
                                 <td>{{ $hotel->destination?->name }}</td>
                                 <td class="text-center">
-                                    <span class="badge bg-{{ $hotel->status ? 'success' : 'secondary' }}">{{ $hotel->status ? 'Active' : 'Inactive' }}</span>
+                                    <span class="badge bg-{{ $hotel->status ? 'success-lt' : 'secondary-lt' }}">{{ $hotel->status ? 'Active' : 'Inactive' }}</span>
                                 </td>
                                 <td class="text-end">
-                                    <button wire:click="openHotel({{ $hotel->id }})" class="btn btn-sm btn-outline-primary">View</button>
                                     <a href="{{ route('admin.hotel.edit', $hotel->id) }}" class="btn btn-sm btn-outline-secondary ms-1">Edit</a>
                                     <button wire:click="confirmDelete({{ $hotel->id }})" class="btn btn-sm btn-outline-danger ms-1">Delete</button>
                                 </td>
