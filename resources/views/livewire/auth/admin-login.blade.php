@@ -1,11 +1,14 @@
 
 <div class="auth-page">
     <div class="container d-flex align-items-center justify-content-center" style="min-height:90vh">
-        <div class="card shadow-lg border-0" style="max-width:400px; width:100%; border-radius:18px; background:rgba(255,255,255,0.98);">
+        <div class="card shadow-lg border-0" style="max-width:420px; width:100%; border-radius:12px;">
             <div class="card-body p-4">
                 <div class="text-center mb-4">
-                    <img src="" alt="Logo" style="height:56px; margin-bottom:10px;" onerror="this.style.display='none'">
-                    <h3 class="fw-bold mb-1" style="letter-spacing:1px;">Admin Login</h3>
+                    <div class="mx-auto mb-3" style="width:72px;height:72px;border-radius:12px;background:#f7f5f0;display:flex;align-items:center;justify-content:center;">
+                        <img src="" alt="Logo" style="height:40px;" onerror="this.style.display='none'">
+                        <span style="color:#c19052;font-weight:700;font-size:20px;">T</span>
+                    </div>
+                    <h3 class="fw-bold mb-1" style="letter-spacing:1px;color:#222;">Admin Login</h3>
                     <p class="text-muted mb-0 small">Sign in to your admin panel</p>
                 </div>
 
@@ -31,11 +34,11 @@
                             <input wire:model="remember" class="form-check-input" type="checkbox" id="remember">
                             <label class="form-check-label small" for="remember">Remember me</label>
                         </div>
-                        <a href="#" class="small text-primary">Forgot password?</a>
+                        <a href="#" class="small" style="color:#c19052;">Forgot password?</a>
                     </div>
 
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow-sm" style="font-weight:600; letter-spacing:1px;">Sign in</button>
+                        <button type="submit" class="btn  btn-lg rounded-pill shadow-sm" style="background-color:#c19052; color:#fff; font-weight:600; letter-spacing:1px;">Sign in</button>
                     </div>
                 </form>
             </div>
@@ -44,12 +47,17 @@
     </div>
 
     <style>
-        body{ background: linear-gradient(180deg,#f8fafc,#eef2ff); }
+        :root{ --accent: #c19052; }
+        body{ background: linear-gradient(180deg,#fbfbfb,#f2f2f2); }
         .auth-page{ min-height:100vh; }
-        .card{ border:0; }
-        .btn-primary{ background-image: linear-gradient(90deg,#4f46e5,#06b6d4); border:0; color:#fff; box-shadow:0 2px 8px rgba(79,70,229,0.08); }
-        .form-control:focus{ box-shadow:0 0 0 2px #4f46e522; border-color:#4f46e5; }
-        .form-control{ background:rgba(245,247,255,0.95); border-radius:18px; border:1px solid #e0e7ff; }
-        .card-footer{ font-size:13px; }
+        .card{ border:0; border-radius:12px; }
+        .card-body{ background: #fff; border-radius:12px; }
+        .btn-primary{ background: var(--accent); border:0; color:#fff; box-shadow:0 6px 18px rgba(193,144,82,0.12); }
+        .btn-primary:hover{ background: #b07f47; }
+        .form-control:focus{ box-shadow:0 0 0 4px rgba(193,144,82,0.08); border-color: var(--accent); }
+        .form-control{ background:#f7f7f6; border-radius:50px; border:1px solid #ecebea; height:44px; }
+        .invalid-feedback{ font-size:13px; }
+        .card-footer{ font-size:13px; color:#666; }
+        @media (max-width:576px){ .card{ margin:20px; } }
     </style>
 </div>
