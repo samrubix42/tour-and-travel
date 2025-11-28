@@ -160,7 +160,18 @@ class AddHotel extends Component
 
         $data['status'] = isset($data['status']) ? (bool)$data['status'] : false;
 
-        $hotel = HotelModel::create($data);
+        // remove uploaded file objects from data before inserting
+        if (isset($data['image'])) unset($data['image']);
+        if (isset($data['gallery'])) unset($data['gallery']);
+
+        try {
+            $hotel = HotelModel::create($data);
+        } catch (\Exception $e) {
+            // log and show friendly message
+            logger()->error('Hotel create failed: ' . $e->getMessage());
+            $this->dispatch('error', 'Failed to create hotel.');
+            return;
+        }
 
         // handle gallery uploads (local storage or ImageKit)
         if (!empty($this->gallery) && is_array($this->gallery)) {

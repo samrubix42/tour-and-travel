@@ -185,7 +185,16 @@ class UpdateHotel extends Component
 
         $hotel = HotelModel::find($this->hotelId);
         if ($hotel) {
-            $hotel->update($data);
+            // remove uploaded file objects from data before updating model
+            if (isset($data['image'])) unset($data['image']);
+            if (isset($data['gallery'])) unset($data['gallery']);
+            try {
+                $hotel->update($data);
+            } catch (\Exception $e) {
+                logger()->error('Hotel update failed: ' . $e->getMessage());
+                $this->dispatch('error', 'Failed to update hotel.');
+                return;
+            }
             // handle new gallery uploads
             if (!empty($this->gallery) && is_array($this->gallery)) {
                 $ik = null;
@@ -220,7 +229,7 @@ class UpdateHotel extends Component
                 // refresh list
                 $this->existingGalleries = HotelGallery::where('hotel_id', $hotel->id)->get()->toArray();
             }
-           $this->dispatch('success', 'Hotel updated successfully.');
+              $this->dispatch('success', 'Hotel updated successfully.');
         }
 
         return redirect()->route('admin.hotel.list');
