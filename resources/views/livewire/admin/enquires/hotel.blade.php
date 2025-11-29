@@ -49,11 +49,11 @@
                                 <td class="small-muted">{{ $c->created_at->diffForHumans() }}<div class="small-muted">{{ $c->created_at->toDayDateTimeString() }}</div></td>
                                 <td>
                                     @if(is_null($c->status) || $c->status === '' || $c->status === 'pending' || $c->status == 0)
-                                        <span class="badge bg-yellow">Pending</span>
+                                        <span class="badge bg-yellow-lt">Pending</span>
                                     @elseif($c->status === 'handled' || $c->status == 1)
-                                        <span class="badge bg-green">Handled</span>
+                                        <span class="badge bg-green-lt">Handled</span>
                                     @else
-                                        <span class="badge bg-secondary">{{ $c->status }}</span>
+                                        <span class="badge bg-secondary-lt">{{ $c->status }}</span>
                                     @endif
                                 </td>
                                 <td class="text-end">
