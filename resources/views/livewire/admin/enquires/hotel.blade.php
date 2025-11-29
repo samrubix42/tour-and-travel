@@ -109,11 +109,11 @@
                                 <span class="badge bg-info">{{ $selectedContact->destination_name }}</span>
                             @endif
                             @if(is_null($selectedContact->status) || $selectedContact->status === '' || $selectedContact->status === 'pending' || $selectedContact->status == 0)
-                                <span class="badge bg-yellow ms-2">Pending</span>
+                                <span class="badge bg-yellow-lt ms-2">Pending</span>
                             @elseif($selectedContact->status === 'handled' || $selectedContact->status == 1)
-                                <span class="badge bg-green ms-2">Handled</span>
+                                <span class="badge bg-green-lt ms-2">Handled</span>
                             @else
-                                <span class="badge bg-secondary ms-2">{{ $selectedContact->status }}</span>
+                                <span class="badge bg-secondary-lt ms-2">{{ $selectedContact->status }}</span>
                             @endif
                         </div>
                         <button type="button" class="btn-close" wire:click="closeModal"></button>
