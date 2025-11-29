@@ -7,6 +7,7 @@
         .enquire-bubble{ position:absolute; right:76px; bottom:6px; display:flex; align-items:center; gap:8px; }
         .enquire-bubble .pill{ background:#fff; color:#2b2b2b; padding:8px 14px; border-radius:999px; box-shadow:0 6px 18px rgba(0,0,0,0.08); }
         .contact-modal .modal-content{ border-radius:12px; overflow:hidden; }
+        .small-muted{ color:#6b6b6b; }
     </style>
 
     <div class="contact-sticky">
@@ -18,6 +19,7 @@
         </div>
     </div>
 
+    <!-- Form Modal -->
     @if($show)
         <div class="modal-backdrop fade show"></div>
         <div class="modal d-block contact-modal" tabindex="-1" role="dialog" style="display:block;">
@@ -28,29 +30,50 @@
                         <button type="button" class="btn-close" wire:click="close"></button>
                     </div>
                     <div class="modal-body">
+                        @if($errors->any())
+                            <div class="alert alert-danger small mb-3">Please fix the highlighted fields below.</div>
+                        @endif
                         <form wire:submit.prevent="promptConfirm">
                             <div class="mb-2">
-                                <input type="text" class="form-control" placeholder="Your name" wire:model.defer="name">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Your name" wire:model.defer="name">
+                                @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
                             <div class="mb-2">
-                                <select class="form-select" wire:model.defer="category_id">
+                                <select class="form-select @error('category_id') is-invalid @enderror" wire:model.defer="category_id">
                                     <option value="">Choose category (optional)</option>
                                     @foreach($categories as $cat)
                                         <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('category_id') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                             </div>
 
                             <div class="mb-2">
-                                <input type="number" min="1" class="form-control" placeholder="Number of guests" wire:model.defer="no_of_persons">
+                                <input type="number" min="1" class="form-control @error('no_of_persons') is-invalid @enderror" placeholder="Number of guests" wire:model.defer="no_of_persons">
+                                @error('no_of_persons') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
                             <div class="row g-2 mb-2">
-                                <div class="col-6"><input type="date" class="form-control" wire:model.defer="check_in"></div>
-                                <div class="col-6"><input type="date" class="form-control" wire:model.defer="check_out"></div>
+                                <div class="col-6">
+                                    <input type="date" class="form-control @error('check_in') is-invalid @enderror" wire:model.defer="check_in">
+                                    @error('check_in') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                </div>
+                                <div class="col-6">
+                                    <input type="date" class="form-control @error('check_out') is-invalid @enderror" wire:model.defer="check_out">
+                                    @error('check_out') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                </div>
                             </div>
-                            <div class="mb-2"><input type="email" class="form-control" placeholder="Email (optional)" wire:model.defer="email"></div>
-                            <div class="mb-2"><input type="text" class="form-control" placeholder="Phone (optional)" wire:model.defer="phone"></div>
-                            <div class="mb-2"><textarea class="form-control" rows="3" placeholder="Message" wire:model.defer="message"></textarea></div>
+                            <div class="mb-2">
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email (optional)" wire:model.defer="email">
+                                @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            </div>
+                            <div class="mb-2">
+                                <input type="text" class="form-control @error('phone') is-invalid @enderror" placeholder="Phone (optional)" wire:model.defer="phone">
+                                @error('phone') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            </div>
+                            <div class="mb-2">
+                                <textarea class="form-control @error('message') is-invalid @enderror" rows="3" placeholder="Message" wire:model.defer="message"></textarea>
+                                @error('message') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            </div>
 
                             <div class="d-flex justify-content-end">
                                 <button type="button" class="btn btn-outline-secondary me-2" wire:click="close">Cancel</button>
@@ -63,6 +86,7 @@
         </div>
     @endif
 
+    <!-- Confirmation Modal -->
     @if($confirming)
         <div class="modal-backdrop fade show"></div>
         <div class="modal d-block contact-modal" tabindex="-1" role="dialog" style="display:block; z-index:200001;">
@@ -115,22 +139,24 @@
             });
         })();
     </script>
-</div>
 
-@if($submitted)
-    <div class="modal-backdrop fade show"></div>
-    <div class="modal d-block contact-modal" tabindex="-1" role="dialog" style="display:block; z-index:200002;">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content rounded shadow-sm" style="max-width:480px;margin:auto;">
-                <div class="modal-body text-center p-4">
-                    <div style="font-size:36px; color:var(--accent);">✓</div>
-                    <h5 class="mt-2">Thank you</h5>
-                    <p class="small-muted">Thank you for the details — we will contact you shortly.</p>
-                    <div class="mt-3">
-                        <button type="button" class="btn btn-accent" wire:click="closeThanks">OK</button>
+    <!-- Thank-you Modal -->
+    @if($submitted)
+        <div class="modal-backdrop fade show"></div>
+        <div class="modal d-block contact-modal" tabindex="-1" role="dialog" style="display:block; z-index:200002;">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content rounded shadow-sm" style="max-width:480px;margin:auto;">
+                    <div class="modal-body text-center p-4">
+                        <div style="font-size:36px; color:var(--accent);">✓</div>
+                        <h5 class="mt-2">Thank you</h5>
+                        <p class="small-muted">Thank you for the details — we will contact you shortly.</p>
+                        <div class="mt-3">
+                            <button type="button" class="btn btn-accent" wire:click="closeThanks">OK</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-@endif
+    @endif
+
+</div>

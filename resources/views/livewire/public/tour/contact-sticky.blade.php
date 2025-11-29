@@ -24,23 +24,45 @@
                         <button type="button" class="btn-close" wire:click="close"></button>
                     </div>
                     <div class="modal-body">
+                        @if($errors->any())
+                            <div class="alert alert-danger small mb-3">Please fix the highlighted fields below.</div>
+                        @endif
                         <form wire:submit.prevent="promptConfirm">
-                            <div class="mb-2"><input type="text" class="form-control" placeholder="Your name" wire:model.defer="name"></div>
                             <div class="mb-2">
-                                <select class="form-select" wire:model.defer="destination_id">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Your name" wire:model.defer="name">
+                                @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            </div>
+                            <div class="mb-2">
+                                <select class="form-select @error('destination_id') is-invalid @enderror" wire:model.defer="destination_id">
                                     <option value="">Choose destination (optional)</option>
                                     @foreach($destinations as $d)
                                         <option value="{{ $d->id }}">{{ $d->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('destination_id') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                             </div>
-                            <div class="mb-2"><input type="number" min="1" class="form-control" placeholder="Number of guests" wire:model.defer="no_of_persons"></div>
+                            <div class="mb-2">
+                                <input type="number" min="1" class="form-control @error('no_of_persons') is-invalid @enderror" placeholder="Number of guests" wire:model.defer="no_of_persons">
+                                @error('no_of_persons') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            </div>
                             <div class="row g-2 mb-2">
-                                <div class="col-12"><input type="date" class="form-control" wire:model.defer="travel_date"></div>
+                                <div class="col-12">
+                                    <input type="date" class="form-control @error('travel_date') is-invalid @enderror" wire:model.defer="travel_date">
+                                    @error('travel_date') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                </div>
                             </div>
-                            <div class="mb-2"><input type="email" class="form-control" placeholder="Email (optional)" wire:model.defer="email"></div>
-                            <div class="mb-2"><input type="text" class="form-control" placeholder="Phone (optional)" wire:model.defer="phone"></div>
-                            <div class="mb-2"><textarea class="form-control" rows="3" placeholder="Message" wire:model.defer="message"></textarea></div>
+                            <div class="mb-2">
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email (optional)" wire:model.defer="email">
+                                @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            </div>
+                            <div class="mb-2">
+                                <input type="text" class="form-control @error('phone') is-invalid @enderror" placeholder="Phone (optional)" wire:model.defer="phone">
+                                @error('phone') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            </div>
+                            <div class="mb-2">
+                                <textarea class="form-control @error('message') is-invalid @enderror" rows="3" placeholder="Message" wire:model.defer="message"></textarea>
+                                @error('message') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            </div>
 
                             <div class="d-flex justify-content-end">
                                 <button type="button" class="btn btn-outline-secondary me-2" wire:click="close">Cancel</button>
