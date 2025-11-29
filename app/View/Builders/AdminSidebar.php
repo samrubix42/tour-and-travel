@@ -83,6 +83,22 @@ class AdminSidebar
                 ],
             ],
             (object)[
+                'title' => 'Enquiries',
+                'icon' => 'ti ti-mail',
+                'url' => '#',
+                'hasSubmenu' => true,
+                'submenu' => [
+                    (object)[
+                        'title' => 'Tour Enquiries',
+                        'url' => route('admin.enquire.tour.contact.list'),
+                    ],
+                    (object)[
+                        'title' => 'Hotel Enquiries',
+                        'url' => route('admin.enquire.hotel.contact.list'),
+                    ],
+                ],
+            ],
+            (object)[
                 'title' => 'Hotel',
                 'icon' => 'ti ti-building-hospital',
                 'url' => '#',

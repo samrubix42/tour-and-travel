@@ -8,6 +8,8 @@ use App\Livewire\Admin\Hotel\Category\HotelCategoryList;
 use App\Livewire\Admin\Hotel\Hotel\HotelList;
 use App\Livewire\Auth\AdminLogin;
 use App\Livewire\Admin\Dashboard\Dashboard;
+use App\Livewire\Admin\Enquires\Hotel as EnquiresHotel;
+use App\Livewire\Admin\Enquires\Tour as EnquiresTour;
 use App\Livewire\Admin\Experience\ExperinceList;
 use App\Livewire\Admin\Hotel\Hotel\AddHotel;
 use App\Livewire\Admin\Hotel\Hotel\UpdateHotel;
@@ -42,8 +44,12 @@ Route::get('hotel/{slug}', \App\Livewire\Public\Hotel\HotelView::class)->name('h
 
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::get('/', Dashboard::class)->name('dashboard');
-    //tour and travel routes
+    Route::prefix('enquire')->name('enquire.')->group(function () {
+        Route::get('tour', EnquiresTour::class)->name('tour.contact.list');
+        Route::get('hotel', EnquiresHotel::class)->name('hotel.contact.list');
+    });
     Route::prefix('tour')->name('tour.')->group(function () {
+
         Route::get('/category', CategoryList::class)->name('category.list');
         Route::get('/destination', DestinationList::class)->name('destination.list');
         Route::get('/experience', ExperinceList::class)->name('experience.list');
@@ -52,7 +58,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
         Route::get('/packages/create', AddTourPackage::class)->name('package.create');
         Route::get('/packages/{id}/edit', UpdateTourPackage::class)->name('package.edit');
     });
-    Route::get('page-list',PageList::class)->name('page.management');
+    Route::get('page-list', PageList::class)->name('page.management');
     Route::get('/pages/create', \App\Livewire\Admin\PageManagement\AddPageContent::class)->name('page.create');
     Route::get('/pages/{id}/edit', \App\Livewire\Admin\PageManagement\UpdatePageContent::class)->name('page.edit');
     //blog routes
@@ -70,7 +76,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
         Route::get('/create', AddHotel::class)->name('create');
         Route::get('/{id}/edit', UpdateHotel::class)->name('edit');
     });
-    Route::get('/banners',BannerManagement::class)->name('banners');
+    Route::get('/banners', BannerManagement::class)->name('banners');
 });
 
 Route::get('/login', AdminLogin::class)->name('login');
