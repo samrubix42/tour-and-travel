@@ -6,6 +6,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\ContactForHotel;
+use Livewire\Attributes\Title;
 
 class Hotel extends Component
 {
@@ -20,6 +21,7 @@ class Hotel extends Component
     public $confirmDeleteId = null;
     public $showDeleteConfirm = false;
 
+    #[Title('Hotel Enquiries')]
     #[Layout('components.layouts.admin')]
     public function render()
     {
