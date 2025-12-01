@@ -53,89 +53,95 @@
             <div class="position-absolute left-0px bottom-minus-50px d-none d-lg-inline-block" data-bottom-top="transform: translateY(-50px)" data-top-bottom="transform: translateY(50px)">
                 <img src="{{ asset('asset/image/demo-travel-agency-home-bg-01.png') }}" alt="" />
             </div>
+
             <div class="container background-position-right background-no-repeat sm-mb-10 xs-mb-15" style="background-image:url('{{ asset('asset/image/demo-travel-agency-home-bg.png') }}');">
                 <div class="row align-items-center position-relative mb-7">
-                    <div class="position-absolute left-0px top-0px h-100 w-130px border-end border-color-extra-medium-gray d-none d-md-inline-block" data-anime='{ "translateX": [-30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                    <div class="position-absolute left-0px top-0px h-100 w-130px border-end border-color-extra-medium-gray d-none d-md-inline-block">
                         <div class="vertical-title-center align-items-center justify-content-center">
-                            <div class="title fs-24 alt-font text-base-color fw-600 text-uppercase">Explore the world for yourself</div>
+                            <div class="title fs-24 alt-font text-base-color fw-600 text-uppercase">Explore the world</div>
                         </div>
                     </div>
+
                     <div class="col-lg-1 col-md-2 d-none d-md-inline-block">
                         <div class="divider-dot d-flex align-items-center w-100 h-200px"></div>
                     </div>
-                    <div class="col-lg-5 col-md-9 offset-md-1" data-anime='{ "el": "childs", "translateY": [30, 0], "opacity": [0,1], "duration": 800, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                        <h1 class="alt-font fw-600 text-dark-gray ls-minus-3px w-90 xl-w-100 mb-30px">Discover the world's leading travel agency.</h1>
-                        <p class="w-75 lg-w-100">Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever since.</p>
+
+                    <!-- LEFT CONTENT -->
+                    <div class="col-lg-5 col-md-9 offset-md-1">
+                        <h1 class="alt-font fw-600 text-dark-gray ls-minus-3px w-90 xl-w-100 mb-30px">
+                            Discover your next unforgettable journey.
+                        </h1>
+
+                        <p class="w-75 lg-w-100">
+                            From weekend getaways to international adventures, we bring you handpicked travel experiences designed for comfort, value, and excitement.
+                        </p>
+
                         <div class="d-inline-block mt-5px">
-                            <a href="demo-travel-agency-about.html" class="btn btn-large btn-round-edge btn-dark-gray btn-hover-animation btn-box-shadow me-25px">
-                                <span>
-                                    <span class="btn-text">About company</span><span class="btn-icon"><i class="feather icon-feather-feather"></i></span>
-                                </span>
+                            <a href="#" class="btn btn-large btn-round-edge btn-dark-gray btn-hover-animation btn-box-shadow me-25px">
+                                <span><span class="btn-text">About us</span><span class="btn-icon"><i class="feather icon-feather-feather"></i></span></span>
                             </a>
-                            <a href="demo-travel-agency-tours.html" class="btn btn-link-gradient expand btn-extra-large text-dark-gray text-dark-gray-hover ls-0px">Discover tour<span class="bg-dark-gray"></span></a>
+
+                            <a href="#" class="btn btn-link-gradient expand btn-extra-large text-dark-gray text-dark-gray-hover ls-0px">
+                                Explore tours<span class="bg-dark-gray"></span>
+                            </a>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-8 position-relative offset-lg-1 offset-md-4 ps-0 sm-ps-15px md-mt-50px" data-anime='{ "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
+
+                    <!-- RIGHT IMAGE -->
+                    <div class="col-lg-4 col-md-8 position-relative offset-lg-1 offset-md-4 ps-0 sm-ps-15px md-mt-50px">
                         <img src="{{ asset('asset/image/demo-travel-agency-home-01.jpg') }}" class="border-radius-6px md-w-100" alt="">
-                        <img class="position-absolute left-minus-120px top-80px sm-top-0px sm-w-160px sm-left-0px" src="{{ asset('asset/images/demo-travel-agency-home-02.png') }}" alt="" data-bottom-top="transform: translateY(50px)" data-top-bottom="transform: translateY(-50px)">
+                        <img class="position-absolute left-minus-120px top-80px sm-top-0px sm-w-160px sm-left-0px" src="{{ asset('asset/images/demo-travel-agency-home-02.png') }}" alt="">
                     </div>
                 </div>
-                <div class="row row-cols-1 row-cols-lg-4 row-cols-sm-2 justify-content-center" data-anime='{ "el": "childs", "rotateZ": [5, 0], "translateY": [30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                    <!-- start features box item -->
+
+                <!-- FEATURES -->
+                <div class="row row-cols-1 row-cols-lg-4 row-cols-sm-2 justify-content-center">
+
                     <div class="col icon-with-text-style-01 md-mb-30px">
-                        <div class="feature-box feature-box-left-icon-middle last-paragraph-no-margin">
-                            <div class="feature-box-icon">
-                                <i class="line-icon-Medal-2 icon-large text-base-color"></i>
-                            </div>
+                        <div class="feature-box feature-box-left-icon-middle">
+                            <div class="feature-box-icon"><i class="line-icon-Medal-2 icon-large text-base-color"></i></div>
                             <div class="feature-box-content">
-                                <span class="d-inline-block alt-font text-dark-gray fw-500 fs-22 lg-fs-20 ls-minus-05px">Superior service</span>
-                                <p class="lh-24">Lorem ipsum text</p>
+                                <span class="alt-font text-dark-gray fw-500 fs-22">Superior service</span>
+                                <p>Guidance and support at every step of your journey.</p>
                             </div>
                         </div>
                     </div>
-                    <!-- end features box item -->
-                    <!-- start features box item -->
+
                     <div class="col icon-with-text-style-01 md-mb-30px">
-                        <div class="feature-box feature-box-left-icon-middle last-paragraph-no-margin">
-                            <div class="feature-box-icon">
-                                <i class="line-icon-Globe icon-large text-base-color"></i>
-                            </div>
+                        <div class="feature-box feature-box-left-icon-middle">
+                            <div class="feature-box-icon"><i class="line-icon-Globe icon-large text-base-color"></i></div>
                             <div class="feature-box-content">
-                                <span class="d-inline-block alt-font text-dark-gray fw-500 fs-22 lg-fs-20 ls-minus-05px">Cheapest package</span>
-                                <p class="lh-24">Lorem ipsum text</p>
+                                <span class="alt-font text-dark-gray fw-500 fs-22">Best prices</span>
+                                <p>Affordable packages without compromising quality.</p>
                             </div>
                         </div>
                     </div>
-                    <!-- end features box item -->
-                    <!-- start features box item -->
+
                     <div class="col icon-with-text-style-01 xs-mb-30px">
-                        <div class="feature-box feature-box-left-icon-middle last-paragraph-no-margin">
-                            <div class="feature-box-icon">
-                                <i class="line-icon-Administrator icon-large text-base-color"></i>
-                            </div>
+                        <div class="feature-box feature-box-left-icon-middle">
+                            <div class="feature-box-icon"><i class="line-icon-Administrator icon-large text-base-color"></i></div>
                             <div class="feature-box-content">
-                                <span class="d-inline-block alt-font text-dark-gray fw-500 fs-22 lg-fs-20 ls-minus-05px">Greatest guides</span>
-                                <p class="lh-24">Lorem ipsum text</p>
+                                <span class="alt-font text-dark-gray fw-500 fs-22">Expert guides</span>
+                                <p>Local experts who make every trip more meaningful.</p>
                             </div>
                         </div>
                     </div>
-                    <!-- end features box item -->
-                    <!-- start features box item -->
+
                     <div class="col icon-with-text-style-01">
-                        <div class="feature-box feature-box-left-icon-middle last-paragraph-no-margin">
-                            <div class="feature-box-icon">
-                                <i class="line-icon-Police icon-large text-base-color"></i>
-                            </div>
+                        <div class="feature-box feature-box-left-icon-middle">
+                            <div class="feature-box-icon"><i class="line-icon-Police icon-large text-base-color"></i></div>
                             <div class="feature-box-content">
-                                <span class="d-inline-block alt-font text-dark-gray fw-500 fs-22 lg-fs-20 ls-minus-05px">Fully protected</span>
-                                <p class="lh-24">Lorem ipsum text</p>
+                                <span class="alt-font text-dark-gray fw-500 fs-22">Secure travel</span>
+                                <p>Safe, protected, and trusted travel experiences.</p>
                             </div>
                         </div>
                     </div>
-                    <!-- end features box item -->
+
                 </div>
             </div>
         </section>
+
+
         <!-- end section -->
         <section class="bg-very-light-gray background-position-center-bottom background-size-contain background-no-repeat pt-2 pb-6" style="background-image:url('{{ asset('asset/images/demo-travel-agency-home-bg-05.png') }}');">
             <div class="container">
@@ -151,24 +157,24 @@
                         <div class="swiper slider-four-slide magic-cursor swiper-number-navigation-style" data-slider-options='{ "slidesPerView": 1, "spaceBetween": 30, "loop": true, "pagination": { "el": ".swiper-pagination", "clickable": true }, "autoplay": { "delay": 4000, "disableOnInteraction": false }, "navigation": { "nextEl": ".slider-four-slide-next", "prevEl": ".slider-four-slide-prev" }, "keyboard": { "enabled": true, "onlyInViewport": true }, "breakpoints": { "1400": { "slidesPerView": 4 }, "1200": { "slidesPerView": 3 }, "992": { "slidesPerView": 3 }, "576": { "slidesPerView": 2 } }, "effect": "slide" }' data-swiper-number-navigation="true" data-swiper-show-progress="true">
                             <div class="swiper-wrapper pb-5 md-pb-6">
                                 @foreach($featuredDestinations ?? [] as $destination)
-                                    <div class="swiper-slide">
-                                        <div class="interactive-banner-style-01 text-center last-paragraph-no-margin mb-30px">
-                                            <figure class="m-0 position-relative hover-box border-radius-6px overflow-hidden" style="height:360px;">
-                                                <img src="{{ $destination->image ?? 'https://placehold.co/600x600' }}" alt="{{ $destination->name }}" style="width:100%;height:100%;object-fit:cover;">
-                                                <div class="position-absolute top-0px left-0px w-100 h-100 bg-gradient-gray-light-dark-transparent opacity-1"></div>
+                                <div class="swiper-slide">
+                                    <div class="interactive-banner-style-01 text-center last-paragraph-no-margin mb-30px">
+                                        <figure class="m-0 position-relative hover-box border-radius-6px overflow-hidden" style="height:360px;">
+                                            <img src="{{ $destination->image ?? 'https://placehold.co/600x600' }}" alt="{{ $destination->name }}" style="width:100%;height:100%;object-fit:cover;">
+                                            <div class="position-absolute top-0px left-0px w-100 h-100 bg-gradient-gray-light-dark-transparent opacity-1"></div>
 
-                                                <figcaption class="w-100 h-100 d-flex flex-column justify-content-end align-items-center p-30px">
-                                                    <div class="position-relative z-index-1">
-                                                        <a href="#" class="d-flex justify-content-center align-items-center mx-auto icon-box w-70px h-70px rounded-circle bg-white mb-50px box-shadow-quadruple-large">
-                                                            <i class="bi bi-arrow-right-short text-dark-gray icon-medium lh-0px"></i>
-                                                        </a>
-                                                        <a href="#" class="alt-font fs-22 fw-500 text-white d-block text-uppercase">{{ $destination->name }}</a>
-                                                    </div>
-                                                    <div class="box-overlay bg-dark-gray"></div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
+                                            <figcaption class="w-100 h-100 d-flex flex-column justify-content-end align-items-center p-30px">
+                                                <div class="position-relative z-index-1">
+                                                    <a href="#" class="d-flex justify-content-center align-items-center mx-auto icon-box w-70px h-70px rounded-circle bg-white mb-50px box-shadow-quadruple-large">
+                                                        <i class="bi bi-arrow-right-short text-dark-gray icon-medium lh-0px"></i>
+                                                    </a>
+                                                    <a href="#" class="alt-font fs-22 fw-500 text-white d-block text-uppercase">{{ $destination->name }}</a>
+                                                </div>
+                                                <div class="box-overlay bg-dark-gray"></div>
+                                            </figcaption>
+                                        </figure>
                                     </div>
+                                </div>
                                 @endforeach
                             </div>
                             <!-- start slider pagination -->
@@ -238,7 +244,7 @@
                                         <div class="bg-base-color ps-15px pe-15px fs-14 text-uppercase fw-500 d-inline-block text-white position-absolute right-0px top-0px">Customizable</div>
                                         <div class="fs-24 fw-700 text-dark-gray"><span class="text-uppercase d-block fs-14 lh-18 fw-500 text-medium-gray">Starting At</span>{{ $p->price ? '₹' . number_format($p->price,2) : '—' }}</div>
                                         <a href="{{ url('/tour/' . ($p->slug ?? $p->id)) }}" class="mt-10px fs-18 text-dark-gray fw-500 lh-26 d-block">{{ $p->title }}</a>
-                                   
+
                                     </div>
                                 </div>
                             </div>
@@ -246,11 +252,11 @@
                         </div>
 
                         <!-- PAGINATION (WITH INLINE COLORS) -->
-                       <div class="mt-2">
-                         <div class="swiper-pagination"
-                            style="margin-top: 15px;">
+                        <div class="mt-2">
+                            <div class="swiper-pagination"
+                                style="margin-top: 15px;">
+                            </div>
                         </div>
-                       </div>
 
                     </div>
                     @else
@@ -408,60 +414,43 @@
                         <div class="col-12">
                             <ul class="blog-modern blog-wrapper grid-loading grid grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-extra-large" data-anime='{ "el": "childs", "translateY": [30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
                                 <li class="grid-sizer"></li>
-                                <!-- start blog item -->
+                                @forelse($latestPosts ?? [] as $post)
                                 <li class="grid-item md-mb-20px">
                                     <div class="box-hover text-center">
                                         <figure class="mb-0 position-relative">
                                             <div class="blog-image position-relative overflow-hidden border-radius-6px">
-                                                <a href="demo-travel-agency-blog-single-modern.html"><img src="https://placehold.co/800x1015" alt="" /></a>
+                                                @php
+                                                    $img = $post->featured_image ?? 'https://placehold.co/800x1015';
+                                                @endphp
+                                                <a href="{{ url('/blog/' . ($post->slug ?? $post->id)) }}"><img src="{{ $img }}" alt="{{ $post->title }}" /></a>
                                             </div>
                                             <figcaption class="post-content-wrapper overflow-hidden border-radius-6px">
                                                 <div class="position-relative bg-dark-gray post-content p-30px z-index-2 lh-initial">
-                                                    <a href="demo-travel-agency-blog-single-modern.html" class="card-title mb-0 fs-20 lh-28 text-white d-inline-block">It takes a real designer to design for real women</a>
+                                                    <a href="{{ url('/blog/' . ($post->slug ?? $post->id)) }}" class="card-title mb-0 fs-20 lh-28 text-white d-inline-block">{{ $post->title }}</a>
                                                     <div class="box-overlay bg-dark-gray z-index-minus-1"></div>
                                                 </div>
-                                                <div class="fs-15 bg-white p-15px lg-ps-10px lg-pe-10px lh-initial"><span class="d-inline-block">By <a href="demo-travel-agency-blog.html">Rosald smith</a></span><span class="separator d-inline-block">|</span><a href="#">26 Nov 2023</a></div>
+                                                <div class="fs-15 bg-white p-15px lg-ps-10px lg-pe-10px lh-initial"><span class="d-inline-block">By <a href="#">{{ $post->author ?? 'Admin' }}</a></span><span class="separator d-inline-block">|</span><a href="#">{{ $post->created_at ? $post->created_at->format('d M Y') : '' }}</a></div>
                                             </figcaption>
                                         </figure>
                                     </div>
                                 </li>
-                                <!-- end blog item -->
-                                <!-- start blog item -->
+                                @empty
                                 <li class="grid-item md-mb-20px">
                                     <div class="box-hover text-center">
                                         <figure class="mb-0 position-relative">
                                             <div class="blog-image position-relative overflow-hidden border-radius-6px">
-                                                <a href="demo-travel-agency-blog-single-modern.html"><img src="https://placehold.co/800x1015" alt="" /></a>
+                                                <a href="#"><img src="https://placehold.co/800x1015" alt="" /></a>
                                             </div>
                                             <figcaption class="post-content-wrapper overflow-hidden border-radius-6px">
                                                 <div class="position-relative bg-dark-gray post-content p-30px z-index-2 lh-initial">
-                                                    <a href="demo-travel-agency-blog-single-modern.html" class="card-title mb-0 fs-20 lh-28 text-white d-inline-block">Experience breathtaking views and perspectives</a>
+                                                    <a href="#" class="card-title mb-0 fs-20 lh-28 text-white d-inline-block">No blog posts yet</a>
                                                     <div class="box-overlay bg-dark-gray z-index-minus-1"></div>
                                                 </div>
-                                                <div class="fs-15 bg-white p-15px lg-ps-10px lg-pe-10px lh-initial"><span class="d-inline-block">By <a href="demo-travel-agency-blog.html">Andy glamere</a></span><span class="separator d-inline-block">|</span><a href="#">22 Nov 2023</a></div>
                                             </figcaption>
                                         </figure>
                                     </div>
                                 </li>
-                                <!-- end blog item -->
-                                <!-- start blog item -->
-                                <li class="grid-item">
-                                    <div class="box-hover text-center">
-                                        <figure class="mb-0 position-relative">
-                                            <div class="blog-image position-relative overflow-hidden border-radius-6px">
-                                                <a href="demo-travel-agency-blog-single-modern.html"><img src="https://placehold.co/800x1015" alt="" /></a>
-                                            </div>
-                                            <figcaption class="post-content-wrapper overflow-hidden border-radius-6px">
-                                                <div class="position-relative bg-dark-gray post-content p-30px z-index-2 lh-initial">
-                                                    <a href="demo-travel-agency-blog-single-modern.html" class="card-title mb-0 fs-20 lh-28 text-white d-inline-block">Teamwork is essential for small teams to challenges</a>
-                                                    <div class="box-overlay bg-dark-gray z-index-minus-1"></div>
-                                                </div>
-                                                <div class="fs-15 bg-white p-15px lg-ps-10px lg-pe-10px lh-initial"><span class="d-inline-block">By <a href="demo-travel-agency-blog.html">Den viliamson</a></span><span class="separator d-inline-block">|</span><a href="#">18 Nov 2023</a></div>
-                                            </figcaption>
-                                        </figure>
-                                    </div>
-                                </li>
-                                <!-- end blog item -->
+                                @endforelse
                             </ul>
                         </div>
                     </div>

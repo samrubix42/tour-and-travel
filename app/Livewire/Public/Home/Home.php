@@ -27,11 +27,18 @@ class Home extends Component
             ->where('is_featured', true)
             ->get();
 
+        // latest blog posts
+        $latestPosts = \App\Models\Post::whereNotNull('created_at')
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+
         return view('livewire.public.home.home', [
             'categories' => $categories,
             'banners' => $banners,
             'categoryPackages' => $categoryPackages,
             'featuredDestinations' => $featuredDestinations,
+            'latestPosts' => $latestPosts,
         ]);
     }
 }
