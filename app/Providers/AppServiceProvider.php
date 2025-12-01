@@ -11,7 +11,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Helpers are autoloaded via Composer `autoload.files` (app/helpers.php)
     }
 
     /**

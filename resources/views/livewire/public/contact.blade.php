@@ -1,6 +1,6 @@
 <div>
     <section class="page-title-button-style cover-background position-relative ipad-top-space-margin top-space-padding md-pt-20px"
-        style="background-image: url('{{asset('asset/image/demo-travel-agency-about-title-bg.jpg')}}')">
+        style="background-image: url('{{ asset('asset/image/demo-travel-agency-about-title-bg.jpg') }}')">
         <div class="opacity-light bg-bay-of-many-blue"></div>
         <div class="container">
             <div class="row align-items-center justify-content-center extra-small-screen">
@@ -20,7 +20,7 @@
 
     <section class="bg-very-light-gray position-relative">
         <div class="h-110px position-absolute w-100 h-100 left-0px right-0px top-minus-70px"
-            style="background-image:url('asset/images/demo-travel-agency-home-bg-02.png')"></div>
+            style="background-image:url('{{ asset('asset/images/demo-travel-agency-home-bg-02.png') }}')"></div>
 
         <div class="container">
             <div class="row align-items-center mt-2">
@@ -31,20 +31,20 @@
 
                     <div class="mb-60px text-center text-sm-start">
                         <span class="d-block alt-font fs-22 fw-500 text-dark-gray mb-5px">Call us directly</span>
-                        <a href="tel:1800222000">1-800-222-000</a><br>
-                        <a href="tel:1800222002">1-800-222-002</a>
+                        <a href="tel:{{ setting('phone', '1-800-222-000') }}">{{ setting('phone', '1-800-222-000') }}</a><br>
+                        <a href="tel:{{ setting('phone_2', '1-800-222-002') }}">{{ setting('phone_2', '1-800-222-002') }}</a>
                     </div>
 
                     <div class="mb-60px text-center text-sm-start">
                         <span class="d-block alt-font fs-22 fw-500 text-dark-gray mb-5px">Keep in touch</span>
-                        <p>401 Broadway, 24th Floor,<br>Orchard View, London</p>
-                        <a href="#" target="_blank" class="btn btn-link-gradient">Location map</a>
+                        <p>{!! setting('address', '401 Broadway, 24th Floor,<br>Orchard View, London') !!}</p>
+                        <a href="{{ setting('map_link', '#') }}" target="_blank" class="btn btn-link-gradient">Location map</a>
                     </div>
 
                     <div class="text-center text-sm-start">
                         <span class="d-block alt-font fs-22 fw-500 text-dark-gray mb-5px">Need live support</span>
-                        <a href="mailto:info@yourdomain.com">info@yourdomain.com</a><br>
-                        <a href="mailto:hr@yourdomain.com">hr@yourdomain.com</a>
+                        <a href="mailto:{{ setting('email', 'info@yourdomain.com') }}">{{ setting('email', 'info@yourdomain.com') }}</a><br>
+                        <a href="mailto:{{ setting('email_hr', 'hr@yourdomain.com') }}">{{ setting('email_hr', 'hr@yourdomain.com') }}</a>
                     </div>
                 </div>
 
@@ -54,7 +54,7 @@
 
                         <!-- Side Image -->
                         <div class="col cover-background sm-h-550px xs-h-450px"
-                            style="background-image: url('{{asset('asset/image/demo-travel-agency-contact-01.jpg')}}')">
+                            style="background-image: url('{{ asset('asset/image/demo-travel-agency-contact-01.jpg') }}')">
                         </div>
 
                         <!-- Form -->
@@ -137,11 +137,11 @@
 
                 <div class="col-12 col-md-auto elements-social social-icon-style-04 text-center text-md-start">
                     <ul class="large-icon dark">
-                        <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-dribbble"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                        <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                        <li><a href="{{ setting('facebook', '#') }}"><i class="fa-brands fa-facebook-f"></i></a></li>
+                        <li><a href="{{ setting('dribbble', '#') }}"><i class="fa-brands fa-dribbble"></i></a></li>
+                        <li><a href="{{ setting('twitter', '#') }}"><i class="fa-brands fa-twitter"></i></a></li>
+                        <li><a href="{{ setting('instagram', '#') }}"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="{{ setting('linkedin', '#') }}"><i class="fa-brands fa-linkedin-in"></i></a></li>
                     </ul>
                 </div>
             </div>

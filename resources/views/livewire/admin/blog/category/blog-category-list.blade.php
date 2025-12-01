@@ -3,7 +3,7 @@
     <div class="card shadow-sm">
         <div class="card-header bg-white d-flex justify-content-between align-items-center">
             <div>
-                <h3 class="h4 mb-0">Blog Categories</h3>
+                <h1 class="h1 mb-0">Blog Categories</h1>
                 <p class="text-muted mb-0 small">Manage blog categories — add, edit, search, and delete.</p>
             </div>
             <button wire:click="create" class="btn btn-primary btn-md">

@@ -118,6 +118,13 @@ class AdminSidebar
                     ],
                 ],
             ],
+            (object)[
+                'title' => 'Settings',
+                'icon' => 'ti ti-settings',
+                'url' => route('admin.settings'),
+                'hasSubmenu' => false,
+                'submenu' => [],
+            ],
         ]);
         return $menu;
     }

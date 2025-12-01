@@ -14,6 +14,7 @@ use App\Livewire\Admin\Experience\ExperinceList;
 use App\Livewire\Admin\Hotel\Hotel\AddHotel;
 use App\Livewire\Admin\Hotel\Hotel\UpdateHotel;
 use App\Livewire\Admin\PageManagement\PageList;
+use App\Livewire\Admin\Setting;
 use App\Livewire\Public\About;
 use App\Livewire\Public\Blog\Blog;
 use App\Livewire\Public\Blog\BlogView;
@@ -69,6 +70,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
         Route::get('/posts/create', \App\Livewire\Admin\Blog\Post\AddPost::class)->name('post.create');
         Route::get('/posts/{id}/edit', \App\Livewire\Admin\Blog\Post\UpdatePost::class)->name('post.edit');
     });
+    Route::get('/settings', Setting::class)->name('settings');
     //hotel routes
     Route::prefix('hotel')->name('hotel.')->group(function () {
         Route::get('/category', HotelCategoryList::class)->name('category.list');

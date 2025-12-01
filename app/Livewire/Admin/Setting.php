@@ -4,24 +4,35 @@ namespace App\Livewire\Admin;
 
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use App\Models\Setting as SettingModel;
 use Illuminate\Support\Str;
 
 class Setting extends Component
 {
+    use WithFileUploads;
     public $key = '';
     public $value = '';
     public array $settings = [];
     public array $common = [
         'address' => '',
         'phone' => '',
+        'phone_2' => '',
         'location' => '',
+        'map_link' => '',
+        'email' => '',
+        'email_hr' => '',
         'instagram' => '',
         'facebook' => '',
         'twitter' => '',
         'linkedin' => '',
+        'dribbble' => '',
         'youtube' => '',
+        'logo' => '',
+        'favicon' => '',
     ];
+    public $logo;
+    public $favicon;
 
     public function mount(): void
     {
@@ -39,12 +50,28 @@ class Setting extends Component
 
     public function saveCommon(): void
     {
+        // handle logo upload
+        if ($this->logo) {
+            $path = $this->logo->store('settings', 'public');
+            $logoUrl = 'storage/' . $path;
+            SettingModel::updateOrCreate(['key' => 'logo'], ['value' => $logoUrl]);
+            $this->common['logo'] = $logoUrl;
+        }
+
+        // handle favicon upload
+        if ($this->favicon) {
+            $path = $this->favicon->store('settings', 'public');
+            $favUrl = 'storage/' . $path;
+            SettingModel::updateOrCreate(['key' => 'favicon'], ['value' => $favUrl]);
+            $this->common['favicon'] = $favUrl;
+        }
+
         foreach ($this->common as $k => $v) {
             SettingModel::updateOrCreate(['key' => $k], ['value' => $v]);
         }
 
         $this->loadSettings();
-        $this->dispatch('notify', ['type' => 'success', 'message' => 'Settings saved']);
+        $this->dispatch('success','Settings saved successfully.');
     }
 
     public function addSetting(): void
@@ -59,14 +86,14 @@ class Setting extends Component
         $this->key = '';
         $this->value = '';
         $this->loadSettings();
-        $this->dispatch('notify', ['type' => 'success', 'message' => 'Setting saved']);
+        $this->dispatch('success','Settings saved successfully.');
     }
 
     public function deleteSetting(string $key): void
     {
         SettingModel::where('key', $key)->delete();
         $this->loadSettings();
-        $this->dispatch('notify', ['type' => 'success', 'message' => 'Setting removed']);
+        $this->dispatch('success','Setting removed successfully.');
     }
     #[Layout('components.layouts.admin')]
     public function render()
