@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Setting as SettingModel;
@@ -96,6 +97,7 @@ class Setting extends Component
         $this->dispatch('success','Setting removed successfully.');
     }
     #[Layout('components.layouts.admin')]
+    #[Title('Settings')]
     public function render()
     {
         return view('livewire.admin.setting');

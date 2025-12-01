@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Tour;
 
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\TourPackage;
@@ -30,6 +31,7 @@ class TourPackageList extends Component
     }
 
     #[Layout('components.layouts.admin')]
+    #[Title('Tour Packages')]
     public function render()
     {
         $query = TourPackage::query();

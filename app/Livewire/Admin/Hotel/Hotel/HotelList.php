@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Hotel\Hotel;
 
 use App\Models\Hotel;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -21,6 +22,7 @@ class HotelList extends Component
     protected $queryString = ['search', 'perPage'];
 
     #[Layout('components.layouts.admin')]
+    #[Title('Hotels')]
     public function render()
     {
         $query = Hotel::with(['category', 'destination'])->orderBy('created_at', 'desc');

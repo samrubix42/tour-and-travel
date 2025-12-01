@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Category;
 
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
@@ -51,6 +52,7 @@ class CategoryList extends Component
     }
 
     #[Layout('components.layouts.admin')]
+    #[Title('Categories')]
     public function render()
     {
         $query = Category::query();

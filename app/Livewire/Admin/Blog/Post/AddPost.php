@@ -9,6 +9,7 @@ use App\Models\BlogCategory;
 use Illuminate\Support\Facades\Storage;
 use App\Services\ImageKitService;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 
 class AddPost extends Component
 {
@@ -26,6 +27,7 @@ class AddPost extends Component
     public $tags;
 
     #[Layout('components.layouts.admin')]
+    #[Title('Add Post')]
     public function render()
     {
         $categories = BlogCategory::where('status', 1)->get();

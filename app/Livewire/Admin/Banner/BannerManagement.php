@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Banner;
 use App\Services\ImageKitService;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 
@@ -147,6 +148,7 @@ class BannerManagement extends Component
     }
 
     #[Layout('components.layouts.admin')]
+    #[Title('Banners')]
     public function render()
     {
         return view('livewire.admin.banner.banner-management');

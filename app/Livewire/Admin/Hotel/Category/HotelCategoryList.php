@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\HotelCategory;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 
 class HotelCategoryList extends Component
 {
@@ -37,6 +38,7 @@ class HotelCategoryList extends Component
     }
 
     #[Layout('components.layouts.admin')]
+    #[Title('Hotel Categories')]
     public function render()
     {
         $query = HotelCategory::query();

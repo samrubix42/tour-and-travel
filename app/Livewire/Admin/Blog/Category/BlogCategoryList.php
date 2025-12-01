@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Blog\Category;
 
 
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\BlogCategory;
@@ -41,6 +42,7 @@ class BlogCategoryList extends Component
     }
 
     #[Layout('components.layouts.admin')]
+    #[Title('Blog Categories')]
     public function render()
     {
         $query = BlogCategory::query();

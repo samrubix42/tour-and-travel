@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Services\ImageKitService;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 
 class AddTourPackage extends Component
 {
@@ -266,6 +267,7 @@ class AddTourPackage extends Component
     }
 
     #[Layout('components.layouts.admin')]
+    #[Title('Add Tour Package')]
     public function render()
     {
         $allCategories = Category::all();

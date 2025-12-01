@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\PageManagement;
 use Livewire\Component;
 use App\Models\Page;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 
 class AddPageContent extends Component
 {
@@ -66,6 +67,7 @@ class AddPageContent extends Component
     }
 
     #[Layout('components.layouts.admin')]
+    #[Title('Add Page')]
     public function render()
     {
         return view('livewire.admin.page-management.add-page-content');

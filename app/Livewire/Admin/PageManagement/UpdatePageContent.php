@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\PageManagement;
 use Livewire\Component;
 use App\Models\Page;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 
 class UpdatePageContent extends Component
 {
@@ -88,6 +89,7 @@ class UpdatePageContent extends Component
     }
 
     #[Layout('components.layouts.admin')]
+    #[Title('Update Page')]
     public function render()
     {
         return view('livewire.admin.page-management.update-page-content');

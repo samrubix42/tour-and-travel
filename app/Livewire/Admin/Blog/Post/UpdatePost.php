@@ -9,6 +9,7 @@ use App\Models\BlogCategory;
 use Illuminate\Support\Facades\Storage;
 use App\Services\ImageKitService;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 
 class UpdatePost extends Component
 {
@@ -45,6 +46,7 @@ class UpdatePost extends Component
     }
 
     #[Layout('components.layouts.admin')]
+    #[Title('Update Post')]
     public function render()
     {
         $categories = BlogCategory::where('status',1)->get();

@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Blog\Post;
 
 use App\Models\Post;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Services\ImageKitService;
@@ -18,6 +19,7 @@ class PostList extends Component
     public $perPage = 10;
 
     #[Layout('components.layouts.admin')]
+    #[Title('Posts')]
     public function render()
     {
         $posts = Post::when($this->search, function ($q) {

@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Page;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 
 class PageList extends Component
 {
@@ -48,6 +49,7 @@ class PageList extends Component
     }
 
     #[Layout('components.layouts.admin')]
+    #[Title('Pages')]
     public function render()
     {
         $pages = Page::where('page_title', 'like', '%' . $this->search . '%')

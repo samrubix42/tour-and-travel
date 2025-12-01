@@ -7,6 +7,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Title;
 use App\Models\Experience;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -50,6 +51,7 @@ class ExperinceList extends Component
     }
 
     #[Layout('components.layouts.admin')]
+    #[Title('Experiences')]
     public function render()
     {
         $query = Experience::query();

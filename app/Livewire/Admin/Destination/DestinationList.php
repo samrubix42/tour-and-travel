@@ -11,6 +11,7 @@ use App\Services\ImageKitService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 
 class DestinationList extends Component
 {
@@ -60,6 +61,7 @@ class DestinationList extends Component
     }
 
     #[Layout('components.layouts.admin')]
+    #[Title('Destinations')]
     public function render()
     {
         $query = Destination::query();

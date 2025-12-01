@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Dashboard;
 
+
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use App\Models\Hotel;
@@ -25,10 +26,10 @@ use App\Models\TourPackageCategory;
 use App\Models\TourPackageDestination;
 use App\Models\TourPackageExperience;
 use App\Models\TourPackageGallery;
+use Livewire\Attributes\Title;
 
 class Dashboard extends Component
 {
-    #[Layout('components.layouts.admin')]
     public array $counts = [];
     public array $labels = [];
     public array $chartLabels = [];
@@ -93,12 +94,12 @@ class Dashboard extends Component
             'tour_contacts' => 'Tour Contacts',
         ];
 
-        $this->recentHotelContacts = ContactForHotel::orderBy('created_at','desc')->take(6)->get();
-        $this->recentTourContacts = ContactForTour::orderBy('created_at','desc')->take(6)->get();
-        $this->recentHotels = Hotel::orderBy('created_at','desc')->take(6)->get();
-        $this->recentTours = TourPackage::orderBy('created_at','desc')->take(6)->get();
-        $this->recentDestinations = Destination::orderBy('created_at','desc')->take(6)->get();
-        $this->recentPosts = Post::orderBy('created_at','desc')->take(6)->get();
+        $this->recentHotelContacts = ContactForHotel::orderBy('created_at', 'desc')->take(6)->get();
+        $this->recentTourContacts = ContactForTour::orderBy('created_at', 'desc')->take(6)->get();
+        $this->recentHotels = Hotel::orderBy('created_at', 'desc')->take(6)->get();
+        $this->recentTours = TourPackage::orderBy('created_at', 'desc')->take(6)->get();
+        $this->recentDestinations = Destination::orderBy('created_at', 'desc')->take(6)->get();
+        $this->recentPosts = Post::orderBy('created_at', 'desc')->take(6)->get();
 
         // Prepare simple last-6-month labels and datasets for a small line chart
         $months = [];
@@ -142,7 +143,8 @@ class Dashboard extends Component
             ],
         ];
     }
-
+    #[Layout('components.layouts.admin')]
+    #[Title('Dashboard')]
     public function render()
     {
         return view('livewire.admin.dashboard.dashboard', [

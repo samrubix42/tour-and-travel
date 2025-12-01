@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Enquires;
 
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\ContactForTour;
@@ -22,6 +23,7 @@ class Tour extends Component
     public $showDeleteConfirm = false;
 
     #[Layout('components.layouts.admin')]
+    #[Title('Tour Enquiries')]
     public function render()
     {
         $query = ContactForTour::query()->orderBy('created_at', 'desc');

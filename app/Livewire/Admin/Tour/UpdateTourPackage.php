@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Services\ImageKitService;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 
 class UpdateTourPackage extends Component
 {
@@ -392,6 +393,7 @@ class UpdateTourPackage extends Component
     }
 
     #[Layout('components.layouts.admin')]
+    #[Title('Update Tour Package')]
     public function render()
     {
         return view('livewire.admin.tour.update-tour-package', [
