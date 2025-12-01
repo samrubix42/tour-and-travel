@@ -5,7 +5,7 @@
         @media (max-width: 992px) { .destination-figure { max-height: 360px; } }
         @media (max-width: 576px) { .destination-figure { max-height: 260px; } }
     </style>
-        <section class="page-title-button-style cover-background position-relative ipad-top-space-margin top-space-padding md-pt-20px" style="background-image: url('https://placehold.co/1920x590')">
+        <section class="page-title-button-style cover-background position-relative ipad-top-space-margin top-space-padding md-pt-20px" style="background-image: url('asset/image/demo-travel-agency-destinations-title-bg.jpg')">
             <div class="opacity-light bg-bay-of-many-blue"></div>
             <div class="container">
                 <div class="row align-items-center justify-content-center extra-small-screen">

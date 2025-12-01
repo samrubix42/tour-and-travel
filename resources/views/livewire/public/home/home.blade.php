@@ -51,7 +51,7 @@
         <!-- start section -->
         <section class="extra-big-section background-position-center-bottom background-size-contain background-no-repeat position-relative pt-0" style="background-image:url('{{ asset('asset/images/demo-travel-agency-home-bg-02.png') }}');">
             <div class="position-absolute left-0px bottom-minus-50px d-none d-lg-inline-block" data-bottom-top="transform: translateY(-50px)" data-top-bottom="transform: translateY(50px)">
-                <img src="https://placehold.co/88x230" alt="" />
+                <img src="{{ asset('asset/image/demo-travel-agency-home-bg-01.png') }}" alt="" />
             </div>
             <div class="container background-position-right background-no-repeat sm-mb-10 xs-mb-15" style="background-image:url('{{ asset('asset/image/demo-travel-agency-home-bg.png') }}');">
                 <div class="row align-items-center position-relative mb-7">
@@ -262,7 +262,7 @@
             @endforeach
             <!-- end section -->
             <!-- start parallax style-1 -->
-            <section class="position-relative overlap-height" data-parallax-background-ratio="0.5" style="background-image: url('https://placehold.co/1920x1100');">
+            <section class="position-relative overlap-height" data-parallax-background-ratio="0.5" style="background-image: url('{{ asset('asset/image/demo-travel-agency-home-parallax.jpg') }}');">
                 <div class="opacity-extra-medium bg-gradient-gulf-blue-sepia-brown"></div>
                 <div class="container overlap-gap-section">
                     <div class="row justify-content-center align-items-center">
@@ -473,108 +473,4 @@
 
 
     </main>
-
-    @push('scripts')
-    <script>
-        jQuery(document).ready(function() {
-            jQuery('#travel-agency-slider').show().revolution({
-                sliderType: "standard",
-                /* options are 'auto', 'fullwidth' or 'fullscreen' */
-                sliderLayout: 'fullscreen',
-                /* sets the Slider's default timeline */
-                delay: 9000,
-                /* options that disable autoplay */
-                stopLoop: "off",
-                stopAfterLoops: 0,
-                stopAtSlide: 1,
-                navigation: {
-
-                    keyboardNavigation: 'on',
-                    keyboard_direction: 'horizontal',
-                    mouseScrollNavigation: 'off',
-                    mouseScrollReverse: 'reverse',
-                    onHoverStop: 'off',
-                    touch: {
-                        touchenabled: 'on',
-                        touchOnDesktop: "on",
-                        swipe_threshold: 75,
-                        swipe_min_touches: 1,
-                        swipe_direction: 'horizontal',
-                        drag_block_vertical: true
-                    },
-                    arrows: {
-
-                        enable: true,
-                        style: 'hesperiden',
-                        tmp: '',
-                        rtl: false,
-                        hide_onleave: false,
-                        hide_onmobile: true,
-                        hide_under: 0,
-                        hide_over: 9999,
-                        hide_delay: 200,
-                        hide_delay_mobile: 1200,
-
-                        left: {
-                            container: 'slider',
-                            h_align: 'left',
-                            v_align: 'center',
-                            h_offset: 30,
-                            v_offset: 0
-                        },
-
-                        right: {
-                            container: 'slider',
-                            h_align: 'right',
-                            v_align: 'center',
-                            h_offset: 30,
-                            v_offset: 0
-                        }
-
-                    }
-                },
-                responsiveLevels: [1240, 1024, 778, 480],
-                /* [DESKTOP, LAPTOP, TABLET, SMARTPHONE] */
-                gridwidth: [1190, 1024, 778, 480],
-                /* [DESKTOP, LAPTOP, TABLET, SMARTPHONE] */
-                gridheight: [900, 920, 700, 650],
-                /* Lazy Load options are "all", "smart", "single" and "none" */
-                lazyType: "smart",
-                spinner: "spinner0",
-                parallax: {
-                    type: "mouse",
-                    origo: "slidercenter",
-                    speed: 1000,
-                    speedbg: 1500,
-                    speedls: 1000,
-                    levels: [3, 5, 8, 10, 12, 15, 35, 40, 45, 50, -50, -45, -40, -35, -30, -25],
-                    ddd_shadow: "on",
-                    ddd_bgfreeze: "off",
-                    ddd_overflow: "hidden",
-                    ddd_layer_overflow: "visible",
-                    ddd_z_correction: 40,
-                    disable_onmobile: 'on'
-                },
-                shadow: 0,
-                shuffle: "off",
-                autoHeight: "on",
-                fullScreenAutoWidth: "off",
-                fullScreenAlignForce: "off",
-                fullScreenOffsetContainer: "",
-                fullScreenOffset: "",
-                disableProgressBar: "on",
-                hideThumbsOnMobile: "on",
-                hideSliderAtLimit: 0,
-                hideCaptionAtLimit: 0,
-                hideAllCaptionAtLilmit: 0,
-                debugMode: false,
-                fallbacks: {
-                    simplifyAll: "off",
-                    nextSlideOnWindowFocus: "off",
-                    disableFocusListener: false,
-                }
-            });
-        }); /*ready*/
-    </script>
-    @endpush
 </div>

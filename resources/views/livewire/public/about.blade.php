@@ -1,5 +1,5 @@
 <div>
-    <section class="page-title-button-style cover-background position-relative ipad-top-space-margin top-space-padding md-pt-20px" style="background-image: url('https://placehold.co/1920x590')">
+    <section class="page-title-button-style cover-background position-relative ipad-top-space-margin top-space-padding md-pt-20px"    style="background-image: url('{{asset('asset/image/demo-travel-agency-about-title-bg.jpg')}}')">
         <div class="opacity-light bg-bay-of-many-blue"></div>
         <div class="container">
             <div class="row align-items-center justify-content-center extra-small-screen">
@@ -21,7 +21,7 @@
                         <div class="atropos-scale">
                             <div class="atropos-rotate">
                                 <div class="atropos-inner">
-                                    <img data-atropos-offset="5" src="https://placehold.co/580x630" alt="">
+                                    <img data-atropos-offset="5" src="{{ asset('asset/image/demo-travel-agency-about-01.jpg') }}" alt="">
                                 </div>
                             </div>
                         </div>

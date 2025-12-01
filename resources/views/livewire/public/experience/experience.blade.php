@@ -1,5 +1,5 @@
 <div>
-    <section class="page-title-button-style cover-background position-relative ipad-top-space-margin top-space-padding md-pt-20px" style="background-image: url('https://placehold.co/1920x590')">
+    <section class="page-title-button-style cover-background position-relative ipad-top-space-margin top-space-padding md-pt-20px" style="background-image: url('asset/image/felix-rostig-UmV2wr-Vbq8-unsplash.jpg')">
         <div class="opacity-light bg-bay-of-many-blue"></div>
         <div class="container">
             <div class="row align-items-center justify-content-center extra-small-screen">
@@ -12,6 +12,7 @@
     </section>
 
     <section class="position-relative">
+        <div class="h-110px position-absolute w-100 h-100 left-0px right-0px top-minus-70px" style="background-image:url('asset/images/demo-travel-agency-about-bg-02.png')"></div>
         <div class="container">
             <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 justify-content-center mb-7 lg-mb-5 md-mb-10 sm-mb-0">
                 @foreach($experiences ?? collect() as $experience)
