@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title> {{ config('settings.brand_name', 'Panel') }} | {{ $title ?? 'Page Title' }} </title>
+    <title> {{ config('settings.brand_name', 'Panel') }} | {{ $title ?? (trim($__env->yieldContent('title')) ?: 'Page Title') }} </title>
 
     @php $tablerVersion = config('settings.tabler_version'); @endphp 
 
@@ -50,7 +50,10 @@
 
     <div class="page">
         <!-- Header -->
-        <x-admin.header :title="$title ?? 'Dashboard'" />
+        @php
+            $resolvedTitle = $title ?? (trim($__env->yieldContent('title')) ?: 'Dashboard');
+        @endphp
+        <x-admin.header :title="$resolvedTitle"/>
 
         <!-- Page Content -->
         <div class="page-wrapper">
