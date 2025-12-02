@@ -3,8 +3,10 @@
 namespace App\Livewire\Public\Blog;
 
 use Livewire\Component;
+use Livewire\Attributes\Title;
 use Livewire\WithPagination;
 use App\Models\Post;
+use App\Models\Page;
 
 class Blog extends Component
 {
@@ -16,6 +18,7 @@ class Blog extends Component
         'tag' => ['except' => ''],
     ];
 
+    #[Title('Blog - Latest Posts')]
     public function render()
     {
         $query = Post::with('category')->latest();
@@ -27,6 +30,8 @@ class Blog extends Component
 
         $posts = $query->paginate(9);
 
-        return view('livewire.public.blog.blog', compact('posts'));
+        $page = Page::where('slug', 'blog')->first();
+
+        return view('livewire.public.blog.blog', compact('posts', 'page'));
     }
 }

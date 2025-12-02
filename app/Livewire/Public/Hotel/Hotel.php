@@ -3,8 +3,10 @@
 namespace App\Livewire\Public\Hotel;
 
 use Livewire\Component;
+use Livewire\Attributes\Title;
 use Livewire\WithPagination;
 use App\Models\Hotel as HotelModel;
+use App\Models\Page;
 
 class Hotel extends Component
 {
@@ -19,6 +21,7 @@ class Hotel extends Component
     {
         $this->resetPage();
     }
+    #[Title('Hotels - Find & Book Hotels')]
     public function render()
     {
         $query = HotelModel::query()->where('status', 1);
@@ -31,6 +34,8 @@ class Hotel extends Component
 
         $hotels = $query->with('destination','category')->latest()->paginate($this->perPage);
 
-        return view('livewire.public.hotel.hotel', compact('hotels'));
+        $page = Page::where('slug', 'hotels')->first();
+
+        return view('livewire.public.hotel.hotel', compact('hotels', 'page'));
     }
 }

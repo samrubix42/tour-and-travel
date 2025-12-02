@@ -26,9 +26,17 @@ class BlogView extends Component
 
     public function render()
     {
+        $meta_title = $this->post->meta_title ?? $this->post->title;
+        $meta_description = $this->post->meta_description ?? null;
+        $meta_keywords = $this->post->meta_keywords ?? null;
+
         return view('livewire.public.blog.blog-view', [
             'post' => $this->post,
             'relatedPosts' => $this->relatedPosts,
+            'title' => $meta_title,
+            'meta_title' => $meta_title,
+            'meta_description' => $meta_description,
+            'meta_keywords' => $meta_keywords,
         ]);
     }
 }

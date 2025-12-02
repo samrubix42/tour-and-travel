@@ -4,6 +4,8 @@ namespace App\Livewire\Public;
 
 use App\Models\Contact as ModelsContact;
 use Livewire\Component;
+use Livewire\Attributes\Title;
+use App\Models\Page;
 
 class Contact extends Component
 {
@@ -30,8 +32,10 @@ class Contact extends Component
         $this->reset(['name','email','phone','message']);
         $this->success = true;
     }
+    #[Title('Contact Us')]
     public function render()
     {
-        return view('livewire.public.contact');
+        $page = Page::where('slug', 'contact')->first();
+        return view('livewire.public.contact', compact('page'));
     }
 }

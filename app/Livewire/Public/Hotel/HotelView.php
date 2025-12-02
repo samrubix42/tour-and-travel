@@ -17,6 +17,16 @@ class HotelView extends Component
     }
     public function render()
     {
-        return view('livewire.public.hotel.hotel-view', ['hotel' => $this->hotel]);
+        $meta_title = $this->hotel->meta_title ?? $this->hotel->name;
+        $meta_description = $this->hotel->meta_description ?? null;
+        $meta_keywords = $this->hotel->meta_keywords ?? null;
+
+        return view('livewire.public.hotel.hotel-view', [
+            'hotel' => $this->hotel,
+            'title' => $meta_title,
+            'meta_title' => $meta_title,
+            'meta_description' => $meta_description,
+            'meta_keywords' => $meta_keywords,
+        ]);
     }
 }

@@ -6,6 +6,12 @@
             $hero = asset('storage/' . $hotel->storage_path);
         }
     @endphp
+    @section('meta_tags')
+    <title>{{ $meta_title ?? ($hotel->meta_title ?? $hotel->name) }}</title>
+    <meta name="description" content="{{ $meta_description ?? ($hotel->meta_description ?? '') }}">
+    <meta name="keywords" content="{{ $meta_keywords ?? ($hotel->meta_keywords ?? '') }}">
+    @endsection
+
     <section class="one-fourth-screen sm-mb-50px bg-dark-gray" data-parallax-background-ratio="0.5" style="background-image: url('{{ $hero ?? 'https://placehold.co/1920x590' }}')"></section>
 
     <!-- TITLE BAR -->

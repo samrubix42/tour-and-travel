@@ -22,8 +22,16 @@ class TourView extends Component
     }
     public function render()
     {
+        $meta_title = $this->package->meta_title ?? $this->package->title;
+        $meta_description = $this->package->meta_description ?? null;
+        $meta_keywords = $this->package->meta_keywords ?? null;
+
         return view('livewire.public.tour.tour-view', [
             'package' => $this->package,
+            'title' => $meta_title,
+            'meta_title' => $meta_title,
+            'meta_description' => $meta_description,
+            'meta_keywords' => $meta_keywords,
         ]);
     }
 }

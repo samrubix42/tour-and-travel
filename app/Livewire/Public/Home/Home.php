@@ -3,9 +3,12 @@
 namespace App\Livewire\Public\Home;
 
 use Livewire\Component;
+use Livewire\Attributes\Title;
+use App\Models\Page;
 
 class Home extends Component
 {
+    #[Title('Home - Explore Tours & Hotels')]
     public function render()
     {
         $categories = \App\Models\Category::with(['destinations' => function($q) {
@@ -33,12 +36,15 @@ class Home extends Component
             ->take(3)
             ->get();
 
+        $page = Page::where('slug', 'home')->first();
+
         return view('livewire.public.home.home', [
             'categories' => $categories,
             'banners' => $banners,
             'categoryPackages' => $categoryPackages,
             'featuredDestinations' => $featuredDestinations,
             'latestPosts' => $latestPosts,
+            'page' => $page,
         ]);
     }
 }

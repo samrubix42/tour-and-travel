@@ -1,4 +1,10 @@
 <div>
+    @section('meta_tags')
+    <title>{{ $meta_title ?? ($post->meta_title ?? $post->title) }}</title>
+    <meta name="description" content="{{ $meta_description ?? ($post->meta_description ?? '') }}">
+    <meta name="keywords" content="{{ $meta_keywords ?? ($post->meta_keywords ?? '') }}">
+    @endsection
+
     <section class="one-fourth-screen sm-mb-50px bg-dark-gray" data-parallax-background-ratio="0.5" style="background-image: url({{ $post->featured_image ?? 'https://placehold.co/1920x1100' }})"></section>
     <!-- end section -->
     <!-- start section -->

@@ -69,7 +69,7 @@
                                </div>
                            </li>
                            <li class="nav-item">
-                               <a href="{{ route('about') }}" class="nav-link">About</a>
+                               <a href="{{ route('about') }}" class="nav-link">About Us</a>
                            </li>
                            <li class="nav-item">
                                <a href="{{ route('hotels') }}" class="nav-link">Hotels</a>

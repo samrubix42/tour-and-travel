@@ -1,4 +1,9 @@
 <div>
+    @section('meta_tags')
+    <title>{{ $page->meta_title ?? ($page->page_title ?? 'Destinations - Explore Destinations') }}</title>
+    <meta name="description" content="{{ $page->meta_description ?? '' }}">
+    <meta name="keywords" content="{{ $page->meta_keywords ?? '' }}">
+    @endsection
     <style>
         .destination-figure { aspect-ratio: 1/1; width: 100%; max-height: 420px; overflow: hidden; }
         .destination-figure img { width: 100%; height: 100%; object-fit: cover; display: block; }

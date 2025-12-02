@@ -1,4 +1,9 @@
 <div>
+    @section('meta_tags')
+    <title>{{ $page->meta_title ?? ($page->page_title ?? 'Hotels - Find & Book Hotels') }}</title>
+    <meta name="description" content="{{ $page->meta_description ?? '' }}">
+    <meta name="keywords" content="{{ $page->meta_keywords ?? '' }}">
+    @endsection
     <section class="page-title-button-style cover-background position-relative ipad-top-space-margin top-space-padding md-pt-20px" style="background-image: url('asset/image/sasha-kaunas-TAgGZWz6Qg8-unsplash.jpg')">
         <div class="opacity-light bg-bay-of-many-blue"></div>
         <div class="container">

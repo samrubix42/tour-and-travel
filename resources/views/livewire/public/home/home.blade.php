@@ -1,4 +1,9 @@
 <div>
+    @section('meta_tags')
+    <title>{{ $page->meta_title ?? ($page->page_title ?? 'Home - Explore Tours & Hotels') }}</title>
+    <meta name="description" content="{{ $page->meta_description ?? '' }}">
+    <meta name="keywords" content="{{ $page->meta_keywords ?? '' }}">
+    @endsection
 
     <main>
         <style>
