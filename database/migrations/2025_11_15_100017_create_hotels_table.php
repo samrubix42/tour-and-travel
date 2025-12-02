@@ -28,7 +28,6 @@ return new class extends Migration
             $table->tinyInteger('rating')->nullable();
             $table->longText('description')->nullable();
             $table->longText('long_description')->nullable();
-            $table->text('location')->nullable();
             $table->text('map_embed')->nullable();
             $table->string('image_url')->nullable();
             $table->string('storage_path')->nullable();

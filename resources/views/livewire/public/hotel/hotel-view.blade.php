@@ -137,34 +137,9 @@
                     <h4 class="alt-font fw-600 mt-4 mb-3">Location</h4>
                     <div class="row mb-40px">
                         <div class="col-md-6">
-                            @php
-                                $nearby = [];
-                                if (!empty($hotel->location)) {
-                                    // try JSON decode first
-                                    $decodedLoc = json_decode($hotel->location, true);
-                                    if (is_array($decodedLoc)) {
-                                        $nearby = $decodedLoc;
-                                    } else {
-                                        // split by newlines or commas
-                                        $lines = preg_split('/\r?\n/', trim($hotel->location));
-                                        if (count($lines) > 1) {
-                                            $nearby = array_filter(array_map('trim', $lines));
-                                        } else {
-                                            $parts = array_map('trim', explode(',', $hotel->location));
-                                            $nearby = array_filter($parts);
-                                        }
-                                    }
-                                }
-                            @endphp
-                            @if(!empty($nearby))
-                                <ul class="list-unstyled text-muted">
-                                    @foreach($nearby as $n)
-                                        <li>{{ $n }}</li>
-                                    @endforeach
-                                </ul>
-                            @else
+                        
                                 <p class="text-muted">{{ $hotel->address ?? 'Location details not available.' }}</p>
-                            @endif
+                       
                         </div>
                         <div class="col-md-6">
                             <div class="border-radius-6px overflow-hidden" style="min-height:160px;">

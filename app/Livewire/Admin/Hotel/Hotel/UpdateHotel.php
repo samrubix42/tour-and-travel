@@ -40,7 +40,6 @@ class UpdateHotel extends Component
     public $meta_description;
     public $meta_keywords;
     public $long_description;
-    public $location;
     public $map_embed;
 
     public $categories = [];
@@ -72,7 +71,6 @@ class UpdateHotel extends Component
             'rating' => 'nullable|numeric|min:0|max:5',
             'description' => 'nullable|string',
             'long_description' => 'nullable|string',
-            'location' => 'nullable|string',
             'map_embed' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
             'status' => 'boolean',
@@ -131,7 +129,6 @@ class UpdateHotel extends Component
         $this->meta_description = $hotel->meta_description;
         $this->meta_keywords = $hotel->meta_keywords;
         $this->long_description = $hotel->long_description;
-        $this->location = $hotel->location;
         $this->map_embed = $hotel->map_embed;
         // load existing galleries
         $this->existingGalleries = HotelGallery::where('hotel_id', $hotel->id)->get()->toArray();
@@ -181,7 +178,6 @@ class UpdateHotel extends Component
         $data['phone'] = $this->phone ?? null;
         $data['email'] = $this->email ?? null;
         $data['long_description'] = $this->long_description ?? null;
-        $data['location'] = $this->location ?? null;
         $data['map_embed'] = $this->map_embed ?? null;
         $data['meta_title'] = $this->meta_title ?? null;
         $data['meta_description'] = $this->meta_description ?? null;
