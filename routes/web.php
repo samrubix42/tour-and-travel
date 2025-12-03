@@ -29,6 +29,7 @@ use App\Livewire\Admin\Tour\TourPackageList;
 use App\Livewire\Admin\Tour\AddTourPackage;
 use App\Livewire\Admin\Tour\UpdateTourPackage;
 use App\Livewire\Public\Experience\Experience;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', Home::class)->name('home');
 Route::get('/about', About::class)->name('about');
@@ -41,6 +42,14 @@ Route::get('destination', Destination::class)->name('destination');
 Route::get('experience', Experience::class)->name('experience');
 Route::get('hotels', \App\Livewire\Public\Hotel\Hotel::class)->name('hotels');
 Route::get('hotel/{slug}', \App\Livewire\Public\Hotel\HotelView::class)->name('hotel.view');
+
+Route::get('clear-cache', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('config:cache');
+    Artisan::call('view:clear');
+    return "Cache Cleared!";
+});
 
 
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
