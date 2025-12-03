@@ -43,7 +43,7 @@
                     <div class="mb-60px text-center text-sm-start">
                         <span class="d-block alt-font fs-22 fw-500 text-dark-gray mb-5px">Keep in touch</span>
                         <p>{!! setting('address', '401 Broadway, 24th Floor,<br>Orchard View, London') !!}</p>
-                        <a href="{{ setting('map_link', '#') }}" target="_blank" class="btn btn-link-gradient">Location map</a>
+                        <p  target="_blank" class="btn btn-link-gradient">Location map</p>
                         <div style="margin-top: 20px;">
                             
                             <iframe
