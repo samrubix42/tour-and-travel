@@ -21,36 +21,7 @@
             </div>
         </div>
         <!-- end subscribe item -->
-        <!-- start instagram -->
-        <div class="row align-items-center justify-content-center mb-40px g-0 row-cols-3 row-cols-md-6 row-cols-sm-3 instagram-follow-api position-relative">
-            <div class="col instafeed-grid">
-                <figure class="border-radius-0px"><a href="https://www.instagram.com" target="_blank"><img src="https://placehold.co/600x600" class="insta-image" alt=""><span class="insta-icon"><i class="fa-brands fa-instagram"></i></span></a></figure>
-            </div>
-            <div class="col instafeed-grid">
-                <figure class="border-radius-0px"><a href="https://www.instagram.com" target="_blank"><img src="https://placehold.co/600x600" class="insta-image" alt=""><span class="insta-icon"><i class="fa-brands fa-instagram"></i></span></a></figure>
-            </div>
-            <div class="col instafeed-grid">
-                <figure class="border-radius-0px"><a href="https://www.instagram.com" target="_blank"><img src="https://placehold.co/600x600" class="insta-image" alt=""><span class="insta-icon"><i class="fa-brands fa-instagram"></i></span></a></figure>
-            </div>
-            <div class="col instafeed-grid">
-                <figure class="border-radius-0px"><a href="https://www.instagram.com" target="_blank"><img src="https://placehold.co/600x600" class="insta-image" alt=""><span class="insta-icon"><i class="fa-brands fa-instagram"></i></span></a></figure>
-            </div>
-            <div class="col instafeed-grid">
-                <figure class="border-radius-0px"><a href="https://www.instagram.com" target="_blank"><img src="https://placehold.co/600x600" class="insta-image" alt=""><span class="insta-icon"><i class="fa-brands fa-instagram"></i></span></a></figure>
-            </div>
-            <div class="col instafeed-grid">
-                <figure class="border-radius-0px"><a href="https://www.instagram.com" target="_blank"><img src="https://placehold.co/600x600" class="insta-image" alt=""><span class="insta-icon"><i class="fa-brands fa-instagram"></i></span></a></figure>
-            </div>
-            <div class="absolute-middle-center z-index-1 w-auto">
-                <a href="https://www.instagram.com" target="_blank" class="btn btn-medium btn-switch-text btn-white btn-round-edge fw-600 ls-0px left-icon btn-box-shadow instagram-button">
-                    <span>
-                        <span><i class="fa-brands fa-instagram text-base-color fs-20"></i></span>
-                        <span class="btn-double-text" data-text="crafto instagram">instagram</span>
-                    </span>
-                </a>
-            </div>
-        </div>
-        <!-- end instagram -->
+     
         <div class="row align-items-center">
             <div class="col-xl-3 col-sm-6 text-center text-sm-start last-paragraph-no-margin fs-15 text-dark-gray order-3 order-md-1">
                 <p>&COPY; Copyright 2025 <a href="{{route('home')}}" target="_blank" class="text-dark-gray text-dark-gray-hover text-decoration-line-bottom fw-600">TeerthYatraHoliday</a></p>

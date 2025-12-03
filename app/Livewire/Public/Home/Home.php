@@ -5,6 +5,7 @@ namespace App\Livewire\Public\Home;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 use App\Models\Page;
+use App\Models\Experience;
 
 class Home extends Component
 {
@@ -38,6 +39,8 @@ class Home extends Component
 
         $page = Page::where('slug', 'home')->first();
 
+        $experiences = Experience::where('status', true)->orderBy('name')->get();
+
         return view('livewire.public.home.home', [
             'categories' => $categories,
             'banners' => $banners,
@@ -45,6 +48,7 @@ class Home extends Component
             'featuredDestinations' => $featuredDestinations,
             'latestPosts' => $latestPosts,
             'page' => $page,
+            'experiences' => $experiences,
         ]);
     }
 }

@@ -289,27 +289,32 @@
             <!-- start section -->
             <section id="explore" class="cover-background overflow-visible" style="background-image: url('https://placehold.co/1920x780');">
                 <div class="container overlap-section">
-                    <div class="row row-cols-1 row-cols-xl-5 row-cols-md-5 row-cols-sm-3 bg-white border-radius-6px mx-0 ps-8 pe-8 lg-ps-3 lg-pe-3 pt-4 pb-4 sm-pt-8 sm-pb-8 xs-pt-15 xs-pb-40px align-items-center mb-7 xs-mb-50px justify-content-center" data-anime='{ "el": "childs", "translateX": [30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                        <div class="col text-center border-end border-color-extra-medium-gray sm-mb-40px xs-border-end-0">
-                            <img src="https://placehold.co/140x125" class="mb-10px w-70px d-block mx-auto" alt="" />
-                            <span class="alt-font fs-19 fw-600 text-dark-gray text-uppercase ls-minus-05px">Adventure</span>
+                    <div class="swiper slider-experiences bg-white border-radius-6px mx-0 ps-8 pe-8 lg-ps-3 lg-pe-3 pt-4 pb-4 sm-pt-8 sm-pb-8 xs-pt-15 xs-pb-40px" data-slider-options='{"spaceBetween":20,"loop":true,"autoplay":{"delay":3000,"disableOnInteraction":false},"pagination":{"el":".slider-experiences-pagination","clickable":true},"navigation":{"nextEl":".slider-experiences-next","prevEl":".slider-experiences-prev"},"breakpoints":{"1400":{"slidesPerView":5},"992":{"slidesPerView":4},"768":{"slidesPerView":3},"576":{"slidesPerView":2},"0":{"slidesPerView":1}}}'>
+                        <div class="swiper-wrapper align-items-center justify-content-center">
+                            @forelse($experiences ?? [] as $experience)
+                            <div class="swiper-slide text-center">
+                                <a href="{{ route('tour') }}?experience={{ $experience->slug ?? $experience->id }}" class="d-block text-decoration-none">
+                                    <div class="mb-10px d-block mx-auto" style="width:70px;height:70px;overflow:hidden;border-radius:8px;">
+                                        <img src="{{ $experience->image ?? 'https://placehold.co/140x125' }}" alt="{{ $experience->name ?? 'Experience' }}" style="width:100%;height:100%;object-fit:cover;" />
+                                    </div>
+                                    <span class="alt-font fs-19 fw-600 text-dark-gray text-uppercase ls-minus-05px d-block mt-2">{{ $experience->name }}</span>
+                                </a>
+                            </div>
+                            @empty
+                            <div class="swiper-slide text-center">
+                                <div class="mb-10px d-block mx-auto" style="width:70px;height:70px;overflow:hidden;border-radius:8px;">
+                                    <img src="https://placehold.co/140x125" alt="No experiences" style="width:100%;height:100%;object-fit:cover;" />
+                                </div>
+                                <span class="alt-font fs-19 fw-600 text-dark-gray text-uppercase ls-minus-05px d-block mt-2">No experiences</span>
+                            </div>
+                            @endforelse
                         </div>
-                        <div class="col text-center border-end border-color-extra-medium-gray sm-mb-40px xs-border-end-0">
-                            <img src="https://placehold.co/140x125" class="mb-10px w-70px d-block mx-auto" alt="" />
-                            <span class="alt-font fs-19 fw-600 text-dark-gray text-uppercase ls-minus-05px">Friendly</span>
+                        <div class="mt-2">
+                            <div class="swiper-pagination slider-experiences-pagination"></div>
+
                         </div>
-                        <div class="col text-center border-end sm-border-end-0 border-color-extra-medium-gray sm-mb-40px">
-                            <img src="https://placehold.co/140x125" class="mb-10px w-70px d-block mx-auto" alt="" />
-                            <span class="alt-font fs-19 fw-600 text-dark-gray text-uppercase ls-minus-05px">Popular</span>
-                        </div>
-                        <div class="col text-center border-end border-color-extra-medium-gray xs-border-end-0 xs-mb-40px">
-                            <img src="https://placehold.co/140x125" class="mb-10px w-70px d-block mx-auto" alt="" />
-                            <span class="alt-font fs-19 fw-600 text-dark-gray text-uppercase ls-minus-05px">Beaches</span>
-                        </div>
-                        <div class="col text-center">
-                            <img src="https://placehold.co/140x125" class="mb-10px w-70px d-block mx-auto" alt="" />
-                            <span class="alt-font fs-19 fw-600 text-dark-gray text-uppercase ls-minus-05px">Honeymoon</span>
-                        </div>
+                        <div class="swiper-button-prev slider-experiences-prev"><i class="bi bi-arrow-left-short icon-very-medium"></i></div>
+                        <div class="swiper-button-next slider-experiences-next"><i class="bi bi-arrow-right-short icon-very-medium"></i></div>
                     </div>
                 </div>
                 <div class="container">
@@ -425,7 +430,7 @@
                                         <figure class="mb-0 position-relative">
                                             <div class="blog-image position-relative overflow-hidden border-radius-6px">
                                                 @php
-                                                    $img = $post->featured_image ?? 'https://placehold.co/800x1015';
+                                                $img = $post->featured_image ?? 'https://placehold.co/800x1015';
                                                 @endphp
                                                 <a href="{{ url('/blog/' . ($post->slug ?? $post->id)) }}"><img src="{{ $img }}" alt="{{ $post->title }}" /></a>
                                             </div>
