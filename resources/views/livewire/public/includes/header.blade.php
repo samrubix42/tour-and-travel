@@ -90,18 +90,18 @@
                                    <div class="d-lg-flex mega-menu m-auto flex-column">
                                        <div class="row row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 mb-40px md-mb-25px xs-mb-15px">
                                            @foreach($religPackages->chunk(8) as $chunk)
-                                               @foreach($chunk as $pkg)
-                                                   <div class="col">
-                                                       <a href="{{ route('tour') }}?package={{ $pkg->slug ?? $pkg->id }}" class="text-decoration-none text-dark d-block py-2">
-                                                           <div class="d-flex align-items-center justify-content-between">
-                                                               <div>
-                                                                   <strong class="fs-14" style="font-size:14px;">{{ $pkg->title }}</strong>
-                                                               </div>
-                                                               <i class="fa-solid fa-angle-right text-muted small"></i>
-                                                           </div>
-                                                       </a>
+                                           @foreach($chunk as $pkg)
+                                           <div class="col">
+                                               <a href="{{ route('tour') }}?package={{ $pkg->slug ?? $pkg->id }}" class="text-decoration-none text-dark d-block py-2">
+                                                   <div class="d-flex align-items-center justify-content-between">
+                                                       <div>
+                                                           <strong class="fs-14" style="font-size:14px;">{{ $pkg->title }}</strong>
+                                                       </div>
+                                                       <i class="fa-solid fa-angle-right text-muted small"></i>
                                                    </div>
-                                               @endforeach
+                                               </a>
+                                           </div>
+                                           @endforeach
                                            @endforeach
                                        </div>
                                    </div>
@@ -132,8 +132,29 @@
                                    </div>
                                </div>
                            </li>
-                           <li class="nav-item">
-                               <a href="{{ route('blog') }}" class="nav-link">International Tours</a>
+                           <li class="nav-item dropdown submenu">
+                               <a href="{{ route('tour')}}" class="nav-link">International Tours</a>
+                               <i class="fa-solid fa-angle-down dropdown-toggle" id="navbarDropdownIntl" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                               <div class="dropdown-menu submenu-content" aria-labelledby="navbarDropdownIntl">
+                                   <div class="d-lg-flex mega-menu m-auto flex-column">
+                                       <div class="row row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 mb-40px md-mb-25px xs-mb-15px">
+                                           @foreach($internationalPackages->chunk(8) as $chunk)
+                                           @foreach($chunk as $pkg)
+                                           <div class="col">
+                                               <a href="{{ route('tour.view', ['slug' => $pkg->slug]) }}" class="text-decoration-none text-dark d-block py-2">
+                                                   <div class="d-flex align-items-center justify-content-between">
+                                                       <div>
+                                                           <strong class="fs-14" style="font-size:14px;">{{ $pkg->title }}</strong>
+                                                       </div>
+                                                       <i class="fa-solid fa-angle-right text-muted small"></i>
+                                                   </div>
+                                               </a>
+                                           </div>
+                                           @endforeach
+                                           @endforeach
+                                       </div>
+                                   </div>
+                               </div>
                            </li>
                            <li class="nav-item">
                                <a href="{{ route('hotels') }}" class="nav-link">Hotels</a>
@@ -141,18 +162,18 @@
                            <li class="nav-item">
                                <a href="{{ route('contact') }}" class="nav-link">Taxi</a>
                            </li>
-                           <li class="nav-item dropdown simple-dropdown">
+                           {{--<li class="nav-item dropdown simple-dropdown">
                                <a href="javascript:void(0);" class="nav-link">Pages</a>
                                <i class="fa-solid fa-angle-down dropdown-toggle" id="navbarDropdownMenuLink3" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink3">
                                    <li><a href="{{ route('about') }}">About Us</a></li>
-                                   <li><a href="{{ route('blog') }}">Blog</a></li>
-                               </ul>
-                           </li>
+                           <li><a href="{{ route('blog') }}">Blog</a></li>
+                       </ul>
+                       </li>--}}
 
-                           <li class="nav-item">
-                               <a href="{{ route('contact') }}" class="nav-link">Contact</a>
-                           </li>
+                       <li class="nav-item">
+                           <a href="{{ route('contact') }}" class="nav-link">Contact</a>
+                       </li>
 
                        </ul>
                    </div>
@@ -161,12 +182,14 @@
                    <div class="col-auto col-lg-2 text-end d-none d-sm-flex">
                        <div class="header-icon">
                            <div class="header-search-icon icon">
-                               <a href="#" class="search-form-icon header-search-form"><i class="feather icon-feather-phone"></i></a>
-                              
+                               <a href="tel:{{ setting('phone','') }}" class="search-form-icon header-search-form">
+                                   <i class="feather icon-feather-phone"></i>
+                               </a>
+
                            </div>
-             
+
                        </div>
-                    
+
                    </div>
                </div>
            </div>
