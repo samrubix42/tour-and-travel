@@ -45,7 +45,7 @@
                 <a href="https://www.instagram.com" target="_blank" class="btn btn-medium btn-switch-text btn-white btn-round-edge fw-600 ls-0px left-icon btn-box-shadow instagram-button">
                     <span>
                         <span><i class="fa-brands fa-instagram text-base-color fs-20"></i></span>
-                        <span class="btn-double-text" data-text="crafto instagram">crafto instagram</span>
+                        <span class="btn-double-text" data-text="crafto instagram">instagram</span>
                     </span>
                 </a>
             </div>
@@ -53,16 +53,15 @@
         <!-- end instagram -->
         <div class="row align-items-center">
             <div class="col-xl-3 col-sm-6 text-center text-sm-start last-paragraph-no-margin fs-15 text-dark-gray order-3 order-md-1">
-                <p>&COPY; Copyright 2025 <a href="index.html" target="_blank" class="text-dark-gray text-dark-gray-hover text-decoration-line-bottom fw-600">Crafto</a></p>
+                <p>&COPY; Copyright 2025 <a href="{{route('home')}}" target="_blank" class="text-dark-gray text-dark-gray-hover text-decoration-line-bottom fw-600">TeerthYatraHoliday</a></p>
             </div>
             <div class="col-xl-6 text-center lg-mt-10px sm-mt-0 sm-mb-15px order-1 order-xl-2 order-md-3">
                 <ul class="footer-navbar">
-                    <li class="nav-item"><a href="demo-travel-agency-about.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="demo-travel-agency-destinations.html" class="nav-link">Destinations</a></li>
-                    <li class="nav-item"><a href="demo-travel-agency-tours.html" class="nav-link">Tours</a></li>
-                    <li class="nav-item"><a href="demo-travel-agency-reviews.html" class="nav-link">Reviews</a></li>
-                    <li class="nav-item"><a href="demo-travel-agency-blog.html" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="demo-travel-agency-contact.html" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="{{route('about')}}" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="{{route('destination')}}" class="nav-link">Destinations</a></li>
+                    <li class="nav-item"><a href="{{route('tour')}}" class="nav-link">Tours</a></li>
+                    <li class="nav-item"><a href="{{route('blog')}}" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="{{route('contact')}}" class="nav-link">Contact</a></li>
                 </ul>
             </div>
             <div class="col-xl-3 col-sm-6 position-relative text-center text-sm-end elements-social social-text-style-08 order-2 order-xl-3 xs-mb-10px">

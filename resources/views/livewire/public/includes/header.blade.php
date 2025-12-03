@@ -4,7 +4,18 @@
            <div class="container-fluid">
                <div class="col-auto col-lg-2 me-lg-0 me-auto">
                    <a class="navbar-brand" href="{{ route('home') }}">
-                       <img src="{{asset('asset/images/logo-envato-white.svg')}}" alt="">
+                       <p class="teerth-title" style="color: white; font-size: 26px; font-weight: bold; margin: 10px;">
+                           TeerthYatraHoliday
+                       </p>
+
+                       <style>
+                           @media (max-width: 768px) {
+                               .teerth-title {
+                                   color: black !important;
+                                   font-size: 12px;
+                               }
+                           }
+                       </style>
                    </a>
                </div>
                <div class="col-auto col-xxl-6 col-lg-8 menu-order">
