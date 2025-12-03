@@ -15,6 +15,7 @@ class Destination extends Model
         'slug',
         'description',
         'image',
+        'is_hotel_featured',
         'status',
         'storage_path',
         'imagekit_file_id',

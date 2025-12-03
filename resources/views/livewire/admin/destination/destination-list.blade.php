@@ -45,6 +45,7 @@
                                 <th>Name</th>
                                 <th>Slug</th>
                                 <th class="text-center" style="width:120px;">Status</th>
+                                <th class="text-center" style="width:140px;">Hotel Featured</th>
                                 <th class="text-end" style="width:150px;">Actions</th>
                             </tr>
                         </thead>
@@ -70,6 +71,14 @@
                                             wire:click="toggleStatus({{ $d->id }})"
                                             wire:loading.attr="disabled"
                                             @if($d->status) checked @endif>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="form-check form-switch d-inline-block">
+                                        <input class="form-check-input" type="checkbox"
+                                            wire:click="toggleHotelFeatured({{ $d->id }})"
+                                            wire:loading.attr="disabled"
+                                            @if($d->is_hotel_featured) checked @endif>
                                     </div>
                                 </td>
                                 <td class="text-end">
@@ -195,6 +204,13 @@
                                     <input wire:model.defer="is_featured" type="checkbox" class="form-check-input"
                                         id="isFeaturedCheckbox" @if($is_featured) checked @endif>
                                     <label for="isFeaturedCheckbox" class="form-check-label">Featured</label>
+                                </div>
+
+                                {{-- Hotel Featured --}}
+                                <div class="form-check mb-3">
+                                    <input wire:model.defer="is_hotel_featured" type="checkbox" class="form-check-input"
+                                        id="isHotelFeaturedCheckbox" @if($is_hotel_featured) checked @endif>
+                                    <label for="isHotelFeaturedCheckbox" class="form-check-label">Hotel Featured</label>
                                 </div>
 
                             </div>

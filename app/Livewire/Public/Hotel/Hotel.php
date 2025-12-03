@@ -14,10 +14,16 @@ class Hotel extends Component
 
     public $perPage = 12;
     public $search = '';
+    public $destination = null;
 
-    protected $queryString = ['search'];
+    protected $queryString = ['search', 'destination'];
 
     public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingDestination()
     {
         $this->resetPage();
     }
@@ -29,6 +35,12 @@ class Hotel extends Component
             $query->where(function($q){
                 $q->where('name', 'like', '%'.$this->search.'%')
                   ->orWhere('address', 'like', '%'.$this->search.'%');
+            });
+        }
+
+        if (!empty($this->destination)) {
+            $query->whereHas('destination', function($q){
+                $q->where('slug', $this->destination);
             });
         }
 

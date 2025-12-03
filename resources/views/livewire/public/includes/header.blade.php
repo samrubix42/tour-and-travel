@@ -156,8 +156,29 @@
                                    </div>
                                </div>
                            </li>
-                           <li class="nav-item">
-                               <a href="{{ route('hotels') }}" class="nav-link">Hotels</a>
+                           <li class="nav-item dropdown submenu">
+                               <a href="{{ (\Illuminate\Support\Facades\Route::has('hotels') ? route('hotels') : url('/hotels')) }}" class="nav-link">Hotels</a>
+                               <i class="fa-solid fa-angle-down dropdown-toggle" id="navbarDropdownHotels" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                               <div class="dropdown-menu submenu-content" aria-labelledby="navbarDropdownHotels">
+                                   <div class="d-lg-flex mega-menu m-auto flex-column">
+                                       <div class="row row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 mb-40px md-mb-25px xs-mb-15px">
+                                           @foreach($hotelFeaturedDestinations->chunk(8) as $chunk)
+                                           @foreach($chunk as $dest)
+                                           <div class="col">
+                                               <a href="{{ (\Illuminate\Support\Facades\Route::has('hotels') ? route('hotels') : url('/hotels')) }}?destination={{ $dest->slug }}" class="text-decoration-none text-dark d-block py-2">
+                                                   <div class="d-flex align-items-center justify-content-between">
+                                                       <div>
+                                                           <strong class="fs-14" style="font-size:14px;">{{ $dest->name }}</strong>
+                                                       </div>
+                                                       <i class="fa-solid fa-angle-right text-muted small"></i>
+                                                   </div>
+                                               </a>
+                                           </div>
+                                           @endforeach
+                                           @endforeach
+                                       </div>
+                                   </div>
+                               </div>
                            </li>
                            <li class="nav-item">
                                <a href="{{ route('contact') }}" class="nav-link">Taxi</a>
@@ -182,7 +203,7 @@
                    <div class="col-auto col-lg-2 text-end d-none d-sm-flex">
                        <div class="header-icon">
                            <div class="header-search-icon icon">
-                               <a href="tel:{{ setting('phone','') }}" class="search-form-icon header-search-form">
+                               <a href="tel:{{ setting('phone','') }}">
                                    <i class="feather icon-feather-phone"></i>
                                </a>
 

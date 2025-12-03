@@ -14,6 +14,7 @@ class Header extends Component
     public $experiences;
     public $religPackages;
     public $internationalPackages;
+    public $hotelFeaturedDestinations;
 
     #[Computed]
     public function mount()
@@ -29,6 +30,12 @@ class Header extends Component
             $q->where('slug', 'international')
                 ->orWhereRaw('LOWER(name) LIKE ?', ['%international%']);
         })->where('status', true)->take(8)->get();
+        $this->hotelFeaturedDestinations = Destination::where('status', 1)
+            ->where(function($q){
+                $q->where('is_hotel_featured', 1)->orWhere('is_hotel_featured', true);
+            })
+            ->orderBy('name')
+            ->get();
     }
     public function render()
     {

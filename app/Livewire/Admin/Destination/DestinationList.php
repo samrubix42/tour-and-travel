@@ -31,11 +31,12 @@ class DestinationList extends Component
     public $description;
     public $status = true;
     public $is_featured = false;
+    public $is_hotel_featured = false;
 
-    public $image;            // ImageKit or local URL
-    public $storage_path;     // Local storage path
-    public $imagekit_file_id; // ImageKit fileId
-    public $imageFile;        // Livewire temporary upload
+    public $image;           
+    public $storage_path;     
+    public $imagekit_file_id; 
+    public $imageFile;        
     public $categoryIds = [];
 
     protected function rules()
@@ -50,6 +51,7 @@ class DestinationList extends Component
             'description' => 'nullable|string',
             'status' => 'boolean',
             'is_featured' => 'boolean',
+            'is_hotel_featured' => 'boolean',
             'categoryIds' => 'required|array|min:1',
             'categoryIds.*' => 'integer|exists:categories,id',
             'imageFile' => 'nullable|image|max:1024',
@@ -101,11 +103,12 @@ class DestinationList extends Component
         $this->description = $d->description;
         $this->status = $d->status;
         $this->is_featured = $d->is_featured;
+        $this->is_hotel_featured = $d->is_hotel_featured ?? false;
         $this->image = $d->image;
         $this->storage_path = $d->storage_path;
         $this->imagekit_file_id = $d->imagekit_file_id;
         $this->categoryIds = $d->categories()->pluck('categories.id')->toArray();
-
+        $this->is_hotel_featured = $d->is_hotel_featured;
         $this->showModal = true;
     }
 
@@ -120,6 +123,7 @@ class DestinationList extends Component
             'description' => $this->description,
             'status' => $this->status,
             'is_featured' => $this->is_featured,
+            'is_hotel_featured' => $this->is_hotel_featured,
         ];
 
         if ($this->imageFile) {
@@ -236,6 +240,14 @@ class DestinationList extends Component
        $this->dispatch('success', 'Destination status updated.');
     }
 
+    public function toggleHotelFeatured($id)
+    {
+        $d = Destination::findOrFail($id);
+        $d->is_hotel_featured = $d->is_hotel_featured ? 0 : 1;
+        $d->save();
+       $this->dispatch('success', 'Destination hotel-featured flag updated.');
+    }
+
     public function closeModal()
     {
         $this->showModal = false;
@@ -250,6 +262,7 @@ class DestinationList extends Component
         $this->description = null;
         $this->status = 1;
         $this->is_featured = false;
+        $this->is_hotel_featured = false;
         $this->image = null;
         $this->storage_path = null;
         $this->imagekit_file_id = null;
