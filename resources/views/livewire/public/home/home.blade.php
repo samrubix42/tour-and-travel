@@ -15,7 +15,7 @@
             }
 
             .swiper-pagination-bullet-active {
-                background: #d2a057 !important;
+                background: #e45b15 !important;
             }
         </style>
         <section class="p-0 full-screen md-h-600px sm-h-650px">
@@ -272,7 +272,7 @@
             @endforeach
             <!-- end section -->
             <!-- start parallax style-1 -->
-            <section class="position-relative overlap-height" data-parallax-background-ratio="0.5" style="background-image: url('{{ asset('asset/image/demo-travel-agency-home-parallax.jpg') }}');">
+            <section class="position-relative overlap-height" data-parallax-background-ratio="0.5" style="background-image: url('{{ asset('asset/image/char-dham-min-1.jpg') }}');">
                 <div class="opacity-extra-medium bg-gradient-gulf-blue-sepia-brown"></div>
                 <div class="container overlap-gap-section">
                     <div class="row justify-content-center align-items-center">

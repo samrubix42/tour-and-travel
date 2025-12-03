@@ -7,9 +7,6 @@
 /* variable */
 :root {     
     --base-color: #e45b15; 
-    --base-color-dark: #ab4410;
-    --base-color-darker: #7d2f0b;
-    --base-color-light: #ef7842;
     --light-gray: #E7E4DF;
     --red: #d03c3c;
     --very-light-gray:#F2EFEB;
@@ -83,10 +80,10 @@ header .navbar-brand img {
 }
 /* bg color */
 .bg-gradient-gulf-blue-sepia-brown {
-    background-image: linear-gradient(to right, var(--base-color-darker), var(--base-color-dark), var(--base-color), var(--base-color-light));
+    background-image: linear-gradient(to right, #33455B, #494954, #795244, #91563D, #97573B);
 }
 .bg-bay-of-many-blue {
-    background-color: var(--base-color-dark);
+    background-color: #363f6d;
 }
 .bg-gradient-gray-light-dark-transparent {
     background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(32, 35, 41, 1)), to(transparent));
