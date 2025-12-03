@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row mb-2 md-mb-4 overlap-section" data-anime='{ "el": "childs", "translateY": [-15, 0], "scale": [0.5, 1], "opacity": [0,1], "duration": 800, "delay": 300, "staggervalue": 300, "easing": "easeOutQuad" }'>
             <div class="col-12 text-center">
-                <img class="rounded-circle" style="height: 50%; margin-top:150px" src="{{ asset('asset/image/flat-vintage-travel-label-background_649064-3513-removebg-preview.png') }}" alt="" />
+                <img class="rounded-circle" src="{{ asset('asset/images/demo-travel-agency-home-16.png') }}" alt="" />
             </div>
         </div>
         <!-- start subscribe item -->
