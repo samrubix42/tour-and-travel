@@ -68,7 +68,7 @@ class PostList extends Component
 
         $post->delete();
 
-        session()->flash('message', 'Post deleted successfully.');
+        $this->dispatch('sucess', 'Post deleted successfully.');
         $this->resetPage();
     }
 }

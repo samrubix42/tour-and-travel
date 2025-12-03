@@ -83,7 +83,7 @@ class UpdatePageContent extends Component
             $page = Page::findOrFail($this->pageId);
             $page->update($data);
         }
-        session()->flash('message', 'Page updated successfully.');
+        $this->dispatch('sucess', 'Page updated successfully.');
         $this->dispatch('pageListUpdated');
         return redirect()->route('admin.page.management');
     }

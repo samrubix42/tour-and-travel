@@ -44,7 +44,7 @@ class PageList extends Component
             $this->deleteId = null;
             $this->confirmingDelete = false;
             $this->emit('pageListUpdated');
-            session()->flash('message', 'Page deleted successfully.');
+            $this->dispatch('sucess', 'Page deleted successfully.');
         }
     }
 

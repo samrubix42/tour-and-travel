@@ -109,7 +109,7 @@ class AddPost extends Component
 
         Post::create($data);
 
-        session()->flash('message', 'Post created successfully.');
+        $this->dispatch('sucess', 'Post created successfully.');
         return redirect()->route('admin.blog.post.list');
     }
 }

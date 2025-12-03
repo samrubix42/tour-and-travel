@@ -138,7 +138,7 @@ class UpdatePost extends Component
 
         $post->save();
 
-        session()->flash('message', 'Post updated successfully.');
+        $this->dispatch('sucess', 'Post updated successfully.');
         return redirect()->route('admin.blog.post.list');
     }
 }
