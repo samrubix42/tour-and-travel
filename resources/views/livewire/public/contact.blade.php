@@ -44,6 +44,18 @@
                         <span class="d-block alt-font fs-22 fw-500 text-dark-gray mb-5px">Keep in touch</span>
                         <p>{!! setting('address', '401 Broadway, 24th Floor,<br>Orchard View, London') !!}</p>
                         <a href="{{ setting('map_link', '#') }}" target="_blank" class="btn btn-link-gradient">Location map</a>
+                        <div style="margin-top: 20px;">
+                            
+                            <iframe
+                                src="{{ setting('map_link', 'https://www.google.com/maps') }}"
+                                width="100%"
+                                height="300"
+                                style="border:0; border-radius: 10px;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
                     </div>
 
                     <div class="text-center text-sm-start">
@@ -67,16 +79,16 @@
                             <h3 class="fw-600 alt-font text-dark-gray mb-25px">Let's get in touch.</h3>
 
                             @if ($success)
-                                <div class="alert alert-success" id="successMsg">
-                                    ✔ Message sent successfully!
-                                </div>
+                            <div class="alert alert-success" id="successMsg">
+                                ✔ Message sent successfully!
+                            </div>
 
-                                <script>
-                                    setTimeout(() => {
-                                        const msg = document.getElementById('successMsg');
-                                        if (msg) msg.style.display = 'none';
-                                    }, 3000);
-                                </script>
+                            <script>
+                                setTimeout(() => {
+                                    const msg = document.getElementById('successMsg');
+                                    if (msg) msg.style.display = 'none';
+                                }, 3000);
+                            </script>
                             @endif
 
                             <form wire:submit.prevent="submit">
