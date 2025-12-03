@@ -14,7 +14,7 @@
     <div class="card shadow-sm border-0 rounded-3 mb-3 p-3">
         <div class="input-icon">
             <span class="input-icon-addon"><i class="ti ti-search"></i></span>
-            <input type="text" class="form-control" wire:model.debounce.300ms="search" placeholder="Search pages...">
+            <input type="text" class="form-control" wire:model.debounce.live.300ms="search" placeholder="Search pages...">
         </div>
     </div>
 

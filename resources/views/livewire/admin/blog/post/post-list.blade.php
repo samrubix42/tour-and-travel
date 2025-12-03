@@ -10,7 +10,7 @@
         <div class="card-body">
             <div class="row mb-3">
                 <div class="col-md-6 d-flex gap-2">
-                    <input wire:model.debounce.300ms="search" class="form-control" placeholder="Search posts...">
+                    <input wire:model.debounce.live.300ms="search" class="form-control" placeholder="Search posts...">
                     <select wire:model="perPage" class="form-select" style="width:90px;">
                         <option value="5">5</option>
                         <option value="10">10</option>

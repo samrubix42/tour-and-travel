@@ -14,7 +14,7 @@
 
             <div class="row mb-3">
                 <div class="col-md-6 d-flex gap-2">
-                    <input wire:model.debounce.300ms="search" type="text" class="form-control" placeholder="Search hotels...">
+                    <input wire:model.debounce.live.300ms="search" type="text" class="form-control" placeholder="Search hotels...">
                     <select wire:model="perPage" class="form-select" style="width:70px;">
                         <option value="5">5</option>
                         <option value="10">10</option>
