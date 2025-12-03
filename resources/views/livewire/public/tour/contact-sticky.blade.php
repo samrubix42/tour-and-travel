@@ -1,6 +1,6 @@
 <div>
     <style>
-        :root{ --accent: #c19052; }
+        :root{ --accent: #e45b15; }
         .contact-sticky{ position: fixed !important; right: 20px !important; bottom: 20px !important; z-index: 99999 !important; visibility: visible !important; }
         .contact-button{ background: linear-gradient(180deg,var(--accent),#a56f3f); color:#fff; border-radius:50%; width:64px; height:64px; display:flex; align-items:center; justify-content:center; box-shadow:0 12px 36px rgba(0,0,0,0.18); border:0; cursor:pointer; }
         .contact-button:hover{ transform:translateY(-3px); }

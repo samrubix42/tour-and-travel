@@ -55,8 +55,8 @@
         <!-- end section -->
         <!-- start section -->
         <section class="extra-big-section background-position-center-bottom background-size-contain background-no-repeat position-relative pt-0" style="background-image:url('{{ asset('asset/images/demo-travel-agency-home-bg-02.png') }}');">
-            <div class="position-absolute left-0px bottom-minus-50px d-none d-lg-inline-block" data-bottom-top="transform: translateY(-50px)" data-top-bottom="transform: translateY(50px)">
-                <img src="{{ asset('asset/image/demo-travel-agency-home-bg-01.png') }}" alt="" />
+            <div class="position-absolute left-0px  bottom-minus-50px d-none d-lg-inline-block" data-bottom-top="transform: translateY(-50px)" data-top-bottom="transform: translateY(50px)">
+                <img src="{{ asset('asset/image/antique-brass-bell-with-ornate-decorations-cut-out-stock-png.png') }}" style="height: 150px; padding-right: 50px;"  alt="" />
             </div>
 
             <div class="container background-position-right background-no-repeat sm-mb-10 xs-mb-15" style="background-image:url('{{ asset('asset/image/demo-travel-agency-home-bg.png') }}');">
@@ -94,8 +94,7 @@
 
                     <!-- RIGHT IMAGE -->
                     <div class="col-lg-4 col-md-8 position-relative offset-lg-1 offset-md-4 ps-0 sm-ps-15px md-mt-50px">
-                        <img src="{{ asset('asset/image/demo-travel-agency-home-01.jpg') }}" class="border-radius-6px md-w-100" alt="">
-                        <img class="position-absolute left-minus-120px top-80px sm-top-0px sm-w-160px sm-left-0px" src="{{ asset('asset/images/demo-travel-agency-home-02.png') }}" alt="">
+                        <img src="{{ asset('asset/image/HD-wallpaper-thanjur-tem0le-beauty-temple-thumbnail.jpg') }}" class="border-radius-6px md-w-100" alt="">
                     </div>
                 </div>
 

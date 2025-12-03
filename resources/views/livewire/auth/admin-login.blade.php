@@ -6,7 +6,7 @@
                 <div class="text-center mb-4">
                     <div class="mx-auto mb-3" style="width:72px;height:72px;border-radius:12px;background:#f7f5f0;display:flex;align-items:center;justify-content:center;">
                         <img src="" alt="Logo" style="height:40px;" onerror="this.style.display='none'">
-                        <span style="color:#c19052;font-weight:700;font-size:20px;">T</span>
+                        <span style="color:#e45b15;font-weight:700;font-size:20px;">T</span>
                     </div>
                     <h3 class="fw-bold mb-1" style="letter-spacing:1px;color:#222;">Admin Login</h3>
                     <p class="text-muted mb-0 small">Sign in to your admin panel</p>
@@ -34,11 +34,11 @@
                             <input wire:model="remember" class="form-check-input" type="checkbox" id="remember">
                             <label class="form-check-label small" for="remember">Remember me</label>
                         </div>
-                        <a href="#" class="small" style="color:#c19052;">Forgot password?</a>
+                        <a href="#" class="small" style="color:#e45b15;">Forgot password?</a>
                     </div>
 
                     <div class="d-grid">
-                        <button type="submit" class="btn  btn-lg rounded-pill shadow-sm" style="background-color:#c19052; color:#fff; font-weight:600; letter-spacing:1px;">Sign in</button>
+                        <button type="submit" class="btn  btn-lg rounded-pill shadow-sm" style="background-color:#e45b15; color:#fff; font-weight:600; letter-spacing:1px;">Sign in</button>
                     </div>
                 </form>
             </div>
@@ -47,7 +47,7 @@
     </div>
 
     <style>
-        :root{ --accent: #c19052; }
+        :root{ --accent: #e45b15; }
         body{ background: linear-gradient(180deg,#fbfbfb,#f2f2f2); }
         .auth-page{ min-height:100vh; }
         .card{ border:0; border-radius:12px; }
