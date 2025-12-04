@@ -14,6 +14,11 @@ class ContactForTour extends Model
         'email',
         'phone',
         'message',
+        'check_in_date',
+        'check_out_date',
+        'no_of_adults',
+        'children',
+        'consent',
         'status',
         'ip',
     ];
