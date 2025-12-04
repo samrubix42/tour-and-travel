@@ -57,10 +57,9 @@
                             </td>
                             <td>
                                 <div class="fw-600">{{ $c->phone ?? '-' }}</div>
-                                <div class="small-muted">{{ $c->ip ?? '' }}</div>
                             </td>
-                            <td class="small-muted">{{ $c->no_of_persons ?? '-' }}</td>
-                            <td class="small-muted">{{ $c->travel_date ?? '-' }}</td>
+                            <td class="small-muted">{{ $c->no_of_adults ?? '-' }}</td>
+                            <td class="small-muted">{{ $c->check_in_date ?? '-' }} -- {{ $c->check_out_date ?? '-' }}</td>
                             <td class="small-muted">{{ $c->created_at->diffForHumans() }}<div class="small-muted">{{ $c->created_at->toDayDateTimeString() }}</div></td>
                             <td>
                                 @if(is_null($c->status) || $c->status === '' || $c->status === 'pending' || $c->status == 0)
@@ -137,11 +136,11 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <strong>Guests</strong>
-                                <div class="small-muted">{{ $selectedContact->no_of_persons ?? '-' }}</div>
+                                <div class="small-muted">{{ $selectedContact->no_of_adults ?? '-' }}</div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <strong>Travel Date</strong>
-                                <div class="small-muted">{{ $selectedContact->travel_date ?? '-' }}</div>
+                                <div class="small-muted">{{ $selectedContact->check_in_date ?? '-' }} -- {{ $selectedContact->check_out_date ?? '-' }}</div>
                             </div>
                         </div>
                         <hr />
