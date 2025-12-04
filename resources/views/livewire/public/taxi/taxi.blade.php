@@ -52,21 +52,21 @@
                     <div class="row row-cols-1 row-cols-md-3 g-3 justify-content-center">
                         <div class="col text-center">
                                     <div class="bg-white p-3 border-radius-6px box-shadow-small h-100 feature-card">
-                                        <div class="fs-28" style="color:var(--base-color);"><i class="feather icon-settings"></i></div>
+                                        <div class="fs-28" style="color:var(--base-color);"><i class="ti ti-settings"></i></div>
                                 <h6 class="alt-font fw-600 mt-2 mb-1">Well-maintained Vehicles</h6>
                                 <p class="small text-muted mb-0">Regularly serviced and sanitized cars for your safety.</p>
                             </div>
                         </div>
                         <div class="col text-center">
                             <div class="bg-white p-3 border-radius-6px box-shadow-small h-100 feature-card">
-                                <div class="fs-28" style="color:var(--base-color);"><i class="feather icon-user-check"></i></div>
+                                <div class="fs-28" style="color:var(--base-color);"><i class="ti ti-user"></i></div>
                                 <h6 class="alt-font fw-600 mt-2 mb-1">Professional Drivers</h6>
                                 <p class="small text-muted mb-0">Experienced and courteous drivers who know the routes.</p>
                             </div>
                         </div>
                         <div class="col text-center">
                             <div class="bg-white p-3 border-radius-6px box-shadow-small h-100 feature-card">
-                                <div class="fs-28" style="color:var(--base-color);"><i class="feather icon-calendar"></i></div>
+                                <div class="fs-28" style="color:var(--base-color);"><i class="ti ti-calendar"></i></div>
                                 <h6 class="alt-font fw-600 mt-2 mb-1">Flexible Booking</h6>
                                 <p class="small text-muted mb-0">Book instantly or schedule in advance — travel on your terms.</p>
                             </div>
@@ -92,8 +92,8 @@
                                 <p class="text-muted small mb-3">{{ \Illuminate\Support\Str::limit($car['description'] ?? '', 110) }}</p>
 
                                 <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <div class="small text-muted">
-                                        <i class="feather icon-users"></i> {{ $car['seats'] ?? '-' }} &nbsp; • &nbsp; {{ $car['transmission'] ?? '-' }} &nbsp; • &nbsp; Luggage: {{ $car['luggage'] ?? '-' }}
+                                        <div class="small text-muted">
+                                        <i class="ti ti-users"></i> {{ $car['seats'] ?? '-' }} &nbsp; • &nbsp; {{ $car['transmission'] ?? '-' }} &nbsp; • &nbsp; Luggage: {{ $car['luggage'] ?? '-' }}
                                     </div>
                                     <div>
                                         <button wire:click.prevent="openBooking('{{ $car['title'] }}')" class="btn btn-primary d-block d-md-inline-block" style="background:var(--base-color);border-color:var(--base-color);color:#fff;box-shadow:0 6px 18px rgba(0,0,0,0.08);min-width:120px;text-align:center;">Book Now</button>
@@ -109,73 +109,108 @@
                 @endforelse
             </div>
 
-            {{-- Booking Modal (simple overlay) --}}
+            {{-- Booking Modal (enhanced overlay) --}}
             @if($showBookingModal)
-                <div class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background:rgba(0,0,0,0.5); z-index:2100;">
-                    <div class="bg-white border-radius-8px p-4" style="width:95%; max-width:680px;">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="mb-0">Book: {{ $booking['car_model'] ?? '' }}</h5>
-                            <button wire:click="closeBooking" class="btn btn-sm btn-light">Close</button>
-                        </div>
-
-                        <form wire:submit.prevent="submitBooking">
-                            <div class="row g-2">
-                                <div class="col-md-6">
-                                    <label class="small">Name *</label>
-                                    <input type="text" wire:model.defer="booking.name" class="form-control form-control-sm" />
-                                    @error('booking.name') <div class="text-danger small">{{ $message }}</div>@enderror
+                <div class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background:rgba(0,0,0,0.55); z-index:2100;">
+                    <div class="bg-white border-radius-10px shadow-lg overflow-hidden" style="width:95%; max-width:720px;">
+                        <div class="d-flex align-items-center justify-content-between p-3" style="background:var(--base-color);">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3 bg-white border-radius-6px p-2" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,0.08)">
+                                    <i class="feather icon-truck" style="color:var(--base-color);"></i>
                                 </div>
-                                <div class="col-md-6">
-                                    <label class="small">Phone *</label>
-                                    <input type="text" wire:model.defer="booking.phone" class="form-control form-control-sm" />
-                                    @error('booking.phone') <div class="text-danger small">{{ $message }}</div>@enderror
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="small">Email</label>
-                                    <input type="email" wire:model.defer="booking.email" class="form-control form-control-sm" />
-                                    @error('booking.email') <div class="text-danger small">{{ $message }}</div>@enderror
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="small">Pickup date *</label>
-                                    <input type="date" wire:model.defer="booking.pickup_date" class="form-control form-control-sm" />
-                                    @error('booking.pickup_date') <div class="text-danger small">{{ $message }}</div>@enderror
-                                </div>
-
-                                
-                                <div class="col-md-6">
-                                    <label class="small">Pickup location *</label>
-                                    <input type="text" wire:model.defer="booking.pickup_location" class="form-control form-control-sm" />
-                                    @error('booking.pickup_location') <div class="text-danger small">{{ $message }}</div>@enderror
-                                </div>
-
-                                <div class="col-12">
-                                    <label class="small">Drop location</label>
-                                    <input type="text" wire:model.defer="booking.drop_location" class="form-control form-control-sm" />
-                                </div>
-
-                                <div class="col-12">
-                                    <label class="small">Message</label>
-                                    <textarea wire:model.defer="booking.message" class="form-control form-control-sm" rows="3"></textarea>
-                                </div>
-
-                                <div class="col-12 d-flex justify-content-end mt-2">
-                                    <button type="button" wire:click="closeBooking" class="btn btn-light btn-sm me-2">Cancel</button>
-                                    <button type="submit" class="btn btn-primary btn-sm" style="background:var(--base-color);border-color:var(--base-color);">Send booking</button>
+                                <div class="text-white">
+                                    <h6 class="mb-0 fw-600">Book: {{ $booking['car_model'] ?? '' }}</h6>
+                                    <small class="d-block opacity-85">Fill required details to confirm your request</small>
                                 </div>
                             </div>
-                        </form>
+                            <button wire:click="closeBooking" class="btn btn-sm" style="background:rgba(255,255,255,0.12);border:0;color:#fff;">Close</button>
+                        </div>
+
+                        <div class="p-4">
+                            <form wire:submit.prevent="submitBooking">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1">Name <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                                    <span class="input-group-text bg-white"><i class="ti ti-user"></i></span>
+                                            <input type="text" wire:model.defer="booking.name" placeholder="Full name e.g. John Doe" class="form-control form-control-sm @error('booking.name') is-invalid @enderror" />
+                                        </div>
+                                        @error('booking.name') <div class="invalid-feedback d-block small">{{ $message }}</div>@enderror
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="small mb-1">Phone <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-white">+91</span>
+                                            <input type="text" wire:model.defer="booking.phone" placeholder="10-digit mobile number" class="form-control form-control-sm @error('booking.phone') is-invalid @enderror" />
+                                        </div>
+                                        @error('booking.phone') <div class="invalid-feedback d-block small">{{ $message }}</div>@enderror
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="small mb-1">Email</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-white"><i class="ti ti-email"></i></span>
+                                            <input type="email" wire:model.defer="booking.email" placeholder="Optional" class="form-control form-control-sm @error('booking.email') is-invalid @enderror" />
+                                        </div>
+                                        @error('booking.email') <div class="invalid-feedback d-block small">{{ $message }}</div>@enderror
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="small mb-1">Pickup date <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-white"><i class="ti ti-calendar"></i></span>
+                                            <input type="date" wire:model.defer="booking.pickup_date" class="form-control form-control-sm @error('booking.pickup_date') is-invalid @enderror" />
+                                        </div>
+                                        @error('booking.pickup_date') <div class="invalid-feedback d-block small">{{ $message }}</div>@enderror
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="small mb-1">Pickup location <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-white"><i class="ti ti-map"></i></span>
+                                            <input type="text" wire:model.defer="booking.pickup_location" placeholder="Pickup address or landmark" class="form-control form-control-sm @error('booking.pickup_location') is-invalid @enderror" />
+                                        </div>
+                                        @error('booking.pickup_location') <div class="invalid-feedback d-block small">{{ $message }}</div>@enderror
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="small mb-1">Drop location</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-white"><i class="ti ti-map"></i></span>
+                                            <input type="text" wire:model.defer="booking.drop_location" placeholder="Destination (optional)" class="form-control form-control-sm" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="small mb-1">Message</label>
+                                        <textarea wire:model.defer="booking.message" placeholder="Any special requests (child seat, luggage help, etc.)" class="form-control form-control-sm" rows="3"></textarea>
+                                    </div>
+
+                                    <div class="col-12 d-flex justify-content-end mt-2">
+                                        <button type="button" wire:click="closeBooking" class="btn btn-light btn-sm me-2">Cancel</button>
+                                        <button type="submit" class="btn btn-sm" style="background:var(--base-color);color:#fff;border:0;min-width:140px;">Send booking</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             @endif
 
-            {{-- Thank you modal --}}
+            {{-- Thank you modal (styled) --}}
             @if($showThankYou)
-                <div class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background:rgba(0,0,0,0.5); z-index:2200;">
-                    <div class="bg-white border-radius-8px p-4 text-center" style="width:90%; max-width:480px;">
+                <div class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background:rgba(0,0,0,0.55); z-index:2200;">
+                    <div class="bg-white border-radius-8px p-4 text-center shadow-lg" style="width:90%; max-width:480px;">
+                        <div class="mb-3">
+                                    <div class="bg-success border-radius-50px d-inline-flex align-items-center justify-content-center" style="width:70px;height:70px;color:#fff;box-shadow:0 8px 30px rgba(0,0,0,0.08);">
+                                <i class="ti ti-check" style="font-size:28px;color:#fff;"></i>
+                            </div>
+                        </div>
                         <h4 class="mb-2" style="color:var(--base-color);">Thank you</h4>
                         <p class="small text-muted">Your booking request has been received. We will contact you shortly to confirm the details.</p>
                         <div class="mt-3">
-                            <button wire:click="closeThankYou" class="btn btn-primary" style="background:var(--base-color);border-color:var(--base-color);">Close</button>
+                            <button wire:click="closeThankYou" class="btn btn-sm" style="background:var(--base-color);color:#fff;border:0;min-width:120px;">Close</button>
                         </div>
                     </div>
                 </div>
