@@ -206,7 +206,6 @@
                                <a href="tel:{{ setting('phone','') }}">
                                    <i class="feather icon-feather-phone"></i>
                                </a>
-
                            </div>
 
                        </div>
