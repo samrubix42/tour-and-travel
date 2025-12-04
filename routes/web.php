@@ -9,6 +9,7 @@ use App\Livewire\Admin\Hotel\Hotel\HotelList;
 use App\Livewire\Auth\AdminLogin;
 use App\Livewire\Admin\Dashboard\Dashboard;
 use App\Livewire\Admin\Enquires\Hotel as EnquiresHotel;
+use App\Livewire\Admin\Enquires\Taxi as EnquiresTaxi;
 use App\Livewire\Admin\Enquires\Tour as EnquiresTour;
 use App\Livewire\Admin\Experience\ExperinceList;
 use App\Livewire\Admin\Hotel\Hotel\AddHotel;
@@ -58,6 +59,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::prefix('enquire')->name('enquire.')->group(function () {
         Route::get('tour', EnquiresTour::class)->name('tour.contact.list');
         Route::get('hotel', EnquiresHotel::class)->name('hotel.contact.list');
+        Route::get('taxi',EnquiresTaxi::class)->name('taxi.contact.list');
     });
     Route::prefix('tour')->name('tour.')->group(function () {
 

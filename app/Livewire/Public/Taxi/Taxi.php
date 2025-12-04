@@ -3,10 +3,24 @@
 namespace App\Livewire\Public\Taxi;
 
 use Livewire\Component;
+use App\Models\ContactForTaxi;
+use Illuminate\Support\Str;
 
 class Taxi extends Component
 {
     public $cars = [];
+    public $showBookingModal = false;
+    public $showThankYou = false;
+    public $booking = [
+        'name' => '',
+        'email' => '',
+        'phone' => '',
+        'pickup_date' => '',
+        'pickup_location' => '',
+        'drop_location' => '',
+        'car_model' => '',
+        'message' => '',
+    ];
 
     public function mount()
     {
@@ -73,5 +87,53 @@ class Taxi extends Component
         return view('livewire.public.taxi.taxi', [
             'cars' => $this->cars,
         ]);
+    }
+
+    public function openBooking($model)
+    {
+        $this->resetValidation();
+        $this->booking['car_model'] = Str::limit($model, 100);
+        $this->showBookingModal = true;
+    }
+
+    public function closeBooking()
+    {
+        $this->showBookingModal = false;
+    }
+
+    public function submitBooking()
+    {
+        $rules = [
+            'booking.name' => 'required|string|max:191',
+            'booking.email' => 'nullable|email|max:191',
+            'booking.phone' => 'required|string|max:50',
+            'booking.pickup_date' => 'required|date',
+            'booking.pickup_location' => 'required|string|max:255',
+            'booking.drop_location' => 'nullable|string|max:255',
+            'booking.car_model' => 'required|string|max:191',
+            'booking.message' => 'nullable|string',
+        ];
+
+        $this->validate($rules);
+
+        ContactForTaxi::create([
+            'name' => $this->booking['name'],
+            'email' => $this->booking['email'],
+            'phone' => $this->booking['phone'],
+            'pickup_date' => $this->booking['pickup_date'],
+            'pickup_location' => $this->booking['pickup_location'],
+            'drop_location' => $this->booking['drop_location'],
+            'car_model' => $this->booking['car_model'],
+            'message' => $this->booking['message'],
+        ]);
+
+        $this->showBookingModal = false;
+        $this->showThankYou = true;
+        $this->booking = array_fill_keys(array_keys($this->booking), '');
+    }
+
+    public function closeThankYou()
+    {
+        $this->showThankYou = false;
     }
 }

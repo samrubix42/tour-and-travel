@@ -96,7 +96,7 @@
                                         <i class="feather icon-users"></i> {{ $car['seats'] ?? '-' }} &nbsp; • &nbsp; {{ $car['transmission'] ?? '-' }} &nbsp; • &nbsp; Luggage: {{ $car['luggage'] ?? '-' }}
                                     </div>
                                     <div>
-                                        <a href="{{ route('contact') }}" class="btn btn-primary d-block d-md-inline-block" style="background:var(--base-color);border-color:var(--base-color);color:#fff;box-shadow:0 6px 18px rgba(0,0,0,0.08);min-width:120px;text-align:center;">Book Now</a>
+                                        <button wire:click.prevent="openBooking('{{ $car['title'] }}')" class="btn btn-primary d-block d-md-inline-block" style="background:var(--base-color);border-color:var(--base-color);color:#fff;box-shadow:0 6px 18px rgba(0,0,0,0.08);min-width:120px;text-align:center;">Book Now</button>
                                     </div>
                                 </div>
                             </div>
@@ -108,6 +108,78 @@
                     </div>
                 @endforelse
             </div>
+
+            {{-- Booking Modal (simple overlay) --}}
+            @if($showBookingModal)
+                <div class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background:rgba(0,0,0,0.5); z-index:2100;">
+                    <div class="bg-white border-radius-8px p-4" style="width:95%; max-width:680px;">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="mb-0">Book: {{ $booking['car_model'] ?? '' }}</h5>
+                            <button wire:click="closeBooking" class="btn btn-sm btn-light">Close</button>
+                        </div>
+
+                        <form wire:submit.prevent="submitBooking">
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <label class="small">Name *</label>
+                                    <input type="text" wire:model.defer="booking.name" class="form-control form-control-sm" />
+                                    @error('booking.name') <div class="text-danger small">{{ $message }}</div>@enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="small">Phone *</label>
+                                    <input type="text" wire:model.defer="booking.phone" class="form-control form-control-sm" />
+                                    @error('booking.phone') <div class="text-danger small">{{ $message }}</div>@enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="small">Email</label>
+                                    <input type="email" wire:model.defer="booking.email" class="form-control form-control-sm" />
+                                    @error('booking.email') <div class="text-danger small">{{ $message }}</div>@enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="small">Pickup date *</label>
+                                    <input type="date" wire:model.defer="booking.pickup_date" class="form-control form-control-sm" />
+                                    @error('booking.pickup_date') <div class="text-danger small">{{ $message }}</div>@enderror
+                                </div>
+
+                                
+                                <div class="col-md-6">
+                                    <label class="small">Pickup location *</label>
+                                    <input type="text" wire:model.defer="booking.pickup_location" class="form-control form-control-sm" />
+                                    @error('booking.pickup_location') <div class="text-danger small">{{ $message }}</div>@enderror
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="small">Drop location</label>
+                                    <input type="text" wire:model.defer="booking.drop_location" class="form-control form-control-sm" />
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="small">Message</label>
+                                    <textarea wire:model.defer="booking.message" class="form-control form-control-sm" rows="3"></textarea>
+                                </div>
+
+                                <div class="col-12 d-flex justify-content-end mt-2">
+                                    <button type="button" wire:click="closeBooking" class="btn btn-light btn-sm me-2">Cancel</button>
+                                    <button type="submit" class="btn btn-primary btn-sm" style="background:var(--base-color);border-color:var(--base-color);">Send booking</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            @endif
+
+            {{-- Thank you modal --}}
+            @if($showThankYou)
+                <div class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background:rgba(0,0,0,0.5); z-index:2200;">
+                    <div class="bg-white border-radius-8px p-4 text-center" style="width:90%; max-width:480px;">
+                        <h4 class="mb-2" style="color:var(--base-color);">Thank you</h4>
+                        <p class="small text-muted">Your booking request has been received. We will contact you shortly to confirm the details.</p>
+                        <div class="mt-3">
+                            <button wire:click="closeThankYou" class="btn btn-primary" style="background:var(--base-color);border-color:var(--base-color);">Close</button>
+                        </div>
+                    </div>
+                </div>
+            @endif
 
             <!-- Why choose us + FAQ -->
             <div class="row mt-5">
@@ -166,7 +238,6 @@
                 </div>
             </div>
 
-            <livewire:public.tour.contact-sticky />
         </div>
     </section>
 

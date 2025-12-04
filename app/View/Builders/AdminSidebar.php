@@ -96,6 +96,10 @@ class AdminSidebar
                         'title' => 'Hotel Enquiries',
                         'url' => route('admin.enquire.hotel.contact.list'),
                     ],
+                    (object)[
+                        'title' => 'Taxi Enquiries',
+                        'url' => route('admin.enquire.taxi.contact.list'),
+                    ],
                 ],
             ],
             (object)[
