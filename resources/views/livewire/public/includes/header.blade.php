@@ -181,7 +181,7 @@
                                </div>
                            </li>
                            <li class="nav-item">
-                               <a href="{{ route('contact') }}" class="nav-link">Taxi</a>
+                               <a href="{{ route('taxi') }}" class="nav-link">Taxi</a>
                            </li>
                            {{--<li class="nav-item dropdown simple-dropdown">
                                <a href="javascript:void(0);" class="nav-link">Pages</a>
