@@ -99,3 +99,7 @@ Route::get('logout', function () {
     Auth::logout();
     return redirect()->route('login');
 })->name('logout');
+
+// contact for tour submission
+use App\Http\Controllers\ContactForTourController;
+Route::post('/contact-for-tour', [ContactForTourController::class, 'store'])->name('contact_for_tour.store');

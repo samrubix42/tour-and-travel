@@ -55,6 +55,7 @@
                                     @endforeach
                                 </select>
                                 @error('destination_id') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
+                                <input type="hidden" wire:model.defer="tour_id">
                             </div>
 
                             <div class="row g-2">

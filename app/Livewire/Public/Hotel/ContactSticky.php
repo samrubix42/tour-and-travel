@@ -26,12 +26,12 @@ class ContactSticky extends Component
     {
         return [
             'name' => 'required|string|max:255',
-            'category_id' => 'nullable|exists:hotel_categories,id',
+            'category_id' => 'required|exists:hotel_categories,id',
             'no_of_persons' => 'nullable|string|max:50',
             'check_in' => 'nullable|date',
             'check_out' => 'nullable|date|after_or_equal:check_in',
             'email' => 'nullable|email|max:255',
-            'phone' => 'nullable|string|max:50',
+            'phone' => 'required|string|max:50',
             'message' => 'nullable|string|max:2000',
         ];
     }

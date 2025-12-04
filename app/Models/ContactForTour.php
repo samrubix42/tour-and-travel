@@ -9,8 +9,6 @@ class ContactForTour extends Model
     protected $fillable = [
         'name',
         'destination_id',
-        'no_of_persons',
-        'travel_date',
         'email',
         'phone',
         'message',
@@ -19,6 +17,7 @@ class ContactForTour extends Model
         'no_of_adults',
         'children',
         'consent',
+        'tour_id',
         'status',
         'ip',
     ];
