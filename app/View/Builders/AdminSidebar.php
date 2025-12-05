@@ -123,6 +123,13 @@ class AdminSidebar
                 ],
             ],
             (object)[
+                'title' => 'Contact',
+                'icon' => 'ti ti-mail',
+                'url' => route('admin.contact.list'),
+                'hasSubmenu' => false,
+                'submenu' => [],
+            ],
+            (object)[
                 'title' => 'Settings',
                 'icon' => 'ti ti-settings',
                 'url' => route('admin.settings'),

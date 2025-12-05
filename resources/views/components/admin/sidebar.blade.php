@@ -11,13 +11,10 @@
             <a href="{{ route('admin.dashboard') }}"
                 class="d-flex align-items-center justify-content-center gap-2 text-decoration-none">
 
-                <img src="{{ asset('assets/img/logo/admin_logo.png') }}"
-                    alt="sadfsadf"
-                    height="50"
+                <div class="d-flex align-items-center justify-content-center">
+                    <p class="text-white mt-4" style="font-weight: bold; font-size: 1.25rem;">TreethYatra</p>
 
-                    class="align-middle mt-4"
-                    style="margin-top: 4px;">
-
+                </div>
                 <span class="fw-bold fs-4 text-dark">
                     Admin Panel
                 </span>
@@ -27,7 +24,7 @@
 
         {{-- Sidebar menu --}}
         <div class="collapse navbar-collapse" :class="{ 'show': mobileMenu }">
-            <ul class="navbar-nav pt-lg-3">
+            <ul class="navbar-nav pt-lg-2">
 
                 @foreach (\App\View\Builders\AdminSidebar::menu(user: Auth::user())->get() as $menu)
                 <li class="nav-item mt-1" x-data="{ open: {{ request()->is($menu->url . '*') ? 'true' : 'false' }} }">

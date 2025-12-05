@@ -3,6 +3,7 @@
 use App\Livewire\Admin\Banner\BannerManagement;
 use App\Livewire\Admin\Blog\Category\BlogCategoryList;
 use App\Livewire\Admin\Category\CategoryList;
+use App\Livewire\Admin\Contact\ContactList;
 use App\Livewire\Admin\Destination\DestinationList;
 use App\Livewire\Admin\Hotel\Category\HotelCategoryList;
 use App\Livewire\Admin\Hotel\Hotel\HotelList;
@@ -83,6 +84,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
         Route::get('/posts/{id}/edit', \App\Livewire\Admin\Blog\Post\UpdatePost::class)->name('post.edit');
     });
     Route::get('/settings', Setting::class)->name('settings');
+    Route::get('/contact', ContactList::class)->name('contact.list');
     //hotel routes
     Route::prefix('hotel')->name('hotel.')->group(function () {
         Route::get('/category', HotelCategoryList::class)->name('category.list');
