@@ -6,13 +6,14 @@ use Livewire\Component;
 use Livewire\Attributes\Title;
 use App\Models\Page;
 use App\Models\Experience;
+use App\Models\Testimonial;
 
 class Home extends Component
 {
     #[Title('Home - Explore Tours & Hotels')]
     public function render()
     {
-        $categories = \App\Models\Category::with(['destinations' => function($q) {
+        $categories = \App\Models\Category::with(['destinations' => function ($q) {
             $q->where('status', true);
         }])->where('status', true)->get();
 
@@ -21,7 +22,7 @@ class Home extends Component
         // prepare featured packages per category to avoid querying in the view
         $categoryPackages = [];
         foreach ($categories as $category) {
-            $categoryPackages[$category->id] = \App\Models\TourPackage::whereHas('categories', function($q) use ($category) {
+            $categoryPackages[$category->id] = \App\Models\TourPackage::whereHas('categories', function ($q) use ($category) {
                 $q->where('categories.id', $category->id);
             })->where('is_featured', true)->get();
         }
@@ -37,6 +38,11 @@ class Home extends Component
             ->take(3)
             ->get();
 
+        $testimonials = Testimonial::orderBy('created_at', 'desc')
+            ->take(6)
+            ->get();
+
+
         $page = Page::where('slug', 'home')->first();
 
         $experiences = Experience::where('status', true)->orderBy('name')->get();
@@ -47,6 +53,8 @@ class Home extends Component
             'categoryPackages' => $categoryPackages,
             'featuredDestinations' => $featuredDestinations,
             'latestPosts' => $latestPosts,
+            'testimonials' => $testimonials,
+
             'page' => $page,
             'experiences' => $experiences,
         ]);
