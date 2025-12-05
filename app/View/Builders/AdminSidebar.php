@@ -123,6 +123,13 @@ class AdminSidebar
                 ],
             ],
             (object)[
+                'title' => 'Testimonials',
+                'icon' => 'ti ti-message-circle',
+                'url' => route('admin.testimonial.list'),
+                'hasSubmenu' => false,
+                'submenu' => [],
+            ],
+            (object)[
                 'title' => 'Contact',
                 'icon' => 'ti ti-mail',
                 'url' => route('admin.contact.list'),
