@@ -12,7 +12,7 @@
                 class="d-flex align-items-center justify-content-center gap-2 text-decoration-none">
 
                 <div class="d-flex align-items-center justify-content-center">
-                    <p class="text-white mt-4" style="font-weight: bold; font-size: 1.25rem;">TreethYatra</p>
+                    <p class="text-white mt-4" style="font-weight: bold; font-size: 1.25rem;">TeerthYatraHoliday</p>
 
                 </div>
                 <span class="fw-bold fs-4 text-dark">

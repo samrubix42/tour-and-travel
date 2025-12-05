@@ -42,7 +42,7 @@
                     </div>
                 </form>
             </div>
-            <div class="card-footer text-center small text-muted" style="background:transparent; border:0;">© {{ date('Y') }} Your Company</div>
+            <div class="card-footer text-center small text-muted" style="background:transparent; border:0;">© {{ date('Y') }} TeerthYatraHoliday</div>
         </div>
     </div>
 
