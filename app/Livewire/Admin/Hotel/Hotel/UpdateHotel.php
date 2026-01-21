@@ -271,4 +271,30 @@ class UpdateHotel extends Component
         $gallery->delete();
         $this->existingGalleries = HotelGallery::where('hotel_id', $this->hotelId)->get()->toArray();
     }
+
+    // Amenities helpers
+    public function addAmenity()
+    {
+        $this->amenities[] = '';
+        $this->dispatch('refreshInputs');
+    }
+
+    public function removeAmenity($index)
+    {
+        if (!isset($this->amenities[$index])) return;
+        array_splice($this->amenities, $index, 1);
+    }
+
+    // Facilities helpers
+    public function addFacility()
+    {
+        $this->facilities[] = '';
+        $this->dispatch('refreshInputs');
+    }
+
+    public function removeFacility($index)
+    {
+        if (!isset($this->facilities[$index])) return;
+        array_splice($this->facilities, $index, 1);
+    }
 }
