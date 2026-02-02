@@ -1,4 +1,4 @@
-<div>
+<div class="no-x-scroll">
     @section('meta_tags')
     <title>{{ $metaContent->meta_title}}</title>
     <meta name="description" content="{{ $metaContent->meta_description}}">
@@ -15,35 +15,43 @@
             </div>
         </div>
     </section>
+    <style>
+        /* Prevent unintended horizontal scroll on small screens for this page only */
+        .no-x-scroll {
+            width: 100%;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+
+        /* Ensure background and containers don't create overflow */
+        .no-x-scroll .page-title-button-style,
+        .no-x-scroll .container,
+        .no-x-scroll .row {
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Make sure images never exceed viewport width */
+        .no-x-scroll img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Extra defensive rules for very small screens */
+        @media (max-width: 575.98px) {
+            .no-x-scroll {
+                overflow-x: hidden;
+            }
+            .no-x-scroll .container {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+        }
+    </style>
     <!-- end page title -->
     <!-- start section -->
-    <!-- <section class="bg-very-light-gray position-relative">
-        <div class="h-110px position-absolute w-100 h-100 left-0px right-0px top-minus-70px" style="background-image:url('images/demo-travel-agency-home-bg-02.png')"></div>
-        <div class="container">
-            <div class="row row-cols-1 row-cols-xl-5 row-cols-md-5 row-cols-sm-3 justify-content-center align-items-center" data-anime='{ "el": "childs", "translateX": [30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                <div class="col text-center border-end border-color-transparent-dark-very-light sm-mb-40px xs-border-end-0">
-                    <img src="https://placehold.co/140x125" class="mb-10px w-70px d-block mx-auto" alt="" />
-                    <span class="alt-font fs-19 fw-600 text-dark-gray text-uppercase ls-minus-05px">Adventure</span>
-                </div>
-                <div class="col text-center border-end border-color-transparent-dark-very-light sm-mb-40px xs-border-end-0">
-                    <img src="https://placehold.co/140x125" class="mb-10px w-70px d-block mx-auto" alt="" />
-                    <span class="alt-font fs-19 fw-600 text-dark-gray text-uppercase ls-minus-05px">Friendly</span>
-                </div>
-                <div class="col text-center border-end sm-border-end-0 border-color-transparent-dark-very-light sm-mb-40px">
-                    <img src="https://placehold.co/140x125" class="mb-10px w-70px d-block mx-auto" alt="" />
-                    <span class="alt-font fs-19 fw-600 text-dark-gray text-uppercase ls-minus-05px sm-mb-40px xs-border-end-0">Popular</span>
-                </div>
-                <div class="col text-center border-end border-color-transparent-dark-very-light xs-mb-40px xs-border-end-0">
-                    <img src="https://placehold.co/140x125" class="mb-10px w-70px d-block mx-auto" alt="" />
-                    <span class="alt-font fs-19 fw-600 text-dark-gray text-uppercase ls-minus-05px">Beaches</span>
-                </div>
-                <div class="col text-center">
-                    <img src="https://placehold.co/140x125" class="mb-10px w-70px d-block mx-auto" alt="" />
-                    <span class="alt-font fs-19 fw-600 text-dark-gray text-uppercase ls-minus-05px">Honeymoon</span>
-                </div>
-            </div>
-        </div>
-    </section> -->
+
     <!-- end section -->
     <!-- start section -->
     <section class="pt-12 bg-very-light-gray overlap-height">

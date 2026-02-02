@@ -1,19 +1,52 @@
    <header style="width: 100%;">
        <!-- start navigation -->
-       <nav class="navbar navbar-expand-lg bg-transparent  border-radius-6px md-border-radius-0px">
+       <nav class="navbar navbar-expand-lg bg-white  border-radius-6px md-border-radius-0px">
            <div class="container-fluid">
-               <div class="col-auto col-lg-1 me-lg-0 me-auto">
-                   <a class="navbar-brand" href="{{ route('home') }}">
-                       <p class="teerth-title" style="color: white; font-size: 22px; font-weight: bold; margin: 10px;">
-                           TeerthYatraHoliday
-                       </p>
+               <div class="col-auto col-lg-2 me-lg-0 me-auto">
+                   <a href="{{ route('home') }}">
+                      <img src="{{setting('logo')}}" alt="" class="brand-logo">
 
                        <style>
+                           .brand-logo {
+                               height: 70px;
+                               max-height: 120px;
+                               width: auto;
+                               display: block;
+                               padding-top: 3px;
+                               padding-bottom: 3px;
+                           }
+                           @media (max-width: 992px) {
+                               .brand-logo {
+                                   height: 70px;
+                                   max-height: 100px;
+                                   padding-top: 3px;
+                                   padding-bottom: 3px;
+                               }
+                           }
                            @media (max-width: 768px) {
+                               .brand-logo {
+                                   height: 50px;
+                                   max-height: 80px;
+                                   padding-top: 3px;
+                                   padding-bottom: 3px;
+                               }
                                .teerth-title {
                                    color: black !important;
                                    font-size: 12px;
                                }
+                           }
+
+                           /* Header text color: gray */
+                           .navbar .nav-link {
+                               color: #35393c !important;
+                           }
+                           .navbar .nav-link:hover,
+                           .navbar .nav-link:focus {
+                               color: #2c3034 !important;
+                           }
+                           .navbar .header-icon i,
+                           .navbar .header-icon a {
+                               color: #373c41 !important;
                            }
                        </style>
                    </a>
