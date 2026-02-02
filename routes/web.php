@@ -33,8 +33,6 @@ use App\Livewire\Admin\Tour\UpdateTourPackage;
 use App\Livewire\Public\Experience\Experience;
 use App\Livewire\Public\Taxi\Taxi;
 use Illuminate\Support\Facades\Artisan;
-use App\Http\Controllers\ContactForTourController;
-
 
 Route::get('/', Home::class)->name('home');
 Route::get('/about', About::class)->name('about');
@@ -105,5 +103,3 @@ Route::get('logout', function () {
     return redirect()->route('login');
 })->name('logout');
 
-// contact for tour submission
-Route::post('/contact-for-tour', [ContactForTourController::class, 'store'])->name('contact_for_tour.store');
