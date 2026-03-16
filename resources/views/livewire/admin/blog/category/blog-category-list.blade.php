@@ -24,10 +24,6 @@
                 </div>
             </div>
 
-            @if (session()->has('message'))
-            <div class="alert alert-success">{{ session('message') }}</div>
-            @endif
-
             <div class="table-responsive">
                 <table class="table table-hover align-middle text-nowrap mb-0">
                     <thead class="table-light">
@@ -131,3 +127,4 @@
     </div>
     @endif
 </div>
+

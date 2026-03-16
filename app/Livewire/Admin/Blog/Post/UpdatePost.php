@@ -138,7 +138,7 @@ class UpdatePost extends Component
 
         $post->save();
 
-        $this->dispatch('sucess', 'Post updated successfully.');
+        $this->dispatch('success', 'Post updated successfully.');
         return redirect()->route('admin.blog.post.list');
     }
 }

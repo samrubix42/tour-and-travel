@@ -3,13 +3,6 @@
 
         <h2 class="page-title mb-3">Add Tour Package</h2>
 
-        @if (session()->has('message'))
-            <div class="alert alert-success alert-dismissible">
-                {{ session('message') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        @endif
-
         <form wire:submit.prevent="store"  class="card card-lg">
             <div class="card-body">
 
@@ -309,3 +302,4 @@
 
     </div>
 </div>
+

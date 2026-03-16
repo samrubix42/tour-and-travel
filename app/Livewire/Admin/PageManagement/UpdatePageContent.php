@@ -83,7 +83,7 @@ class UpdatePageContent extends Component
             $page = Page::findOrFail($this->pageId);
             $page->update($data);
         }
-        $this->dispatch('sucess', 'Page updated successfully.');
+        $this->dispatch('success', 'Page updated successfully.');
         $this->dispatch('pageListUpdated');
         return redirect()->route('admin.page.management');
     }
@@ -95,4 +95,3 @@ class UpdatePageContent extends Component
         return view('livewire.admin.page-management.update-page-content');
     }
 }
-

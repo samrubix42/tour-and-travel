@@ -31,9 +31,6 @@
             </div>
 
             {{-- Flash message --}}
-            @if (session()->has('message'))
-            <div class="alert alert-success">{{ session('message') }}</div>
-            @endif
 
             {{-- Table --}}
             <div class="card">

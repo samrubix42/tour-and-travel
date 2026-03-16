@@ -61,7 +61,7 @@ class AddPageContent extends Component
     {
         $data = $this->validate();
         Page::create($data);
-        $this->dispatch('sucess', 'Page created successfully.');
+        $this->dispatch('success', 'Page created successfully.');
         $this->dispatch('pageListUpdated');
         return redirect()->route('admin.page.management');
     }

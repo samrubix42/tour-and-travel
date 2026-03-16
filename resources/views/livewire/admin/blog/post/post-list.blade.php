@@ -20,10 +20,6 @@
                     </div>
                 </div>
 
-                @if(session()->has('message'))
-                <div class="alert alert-success">{{ session('message') }}</div>
-                @endif
-
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0">
                         <thead class="table-light">
@@ -100,3 +96,4 @@
     <div class="modal-backdrop fade show" wire:click="closeDeleteModal"></div>
     @endif
 </div>
+

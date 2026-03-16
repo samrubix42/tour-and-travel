@@ -98,7 +98,7 @@ class PostList extends Component
 
         $post->delete();
 
-        $this->dispatch('sucess', 'Post deleted successfully.');
+        $this->dispatch('success', 'Post deleted successfully.');
         $this->closeDeleteModal();
         $this->resetPage();
     }

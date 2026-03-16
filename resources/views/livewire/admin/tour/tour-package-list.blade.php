@@ -11,10 +11,6 @@
         </a>
     </div>
 
-    @if (session()->has('message'))
-        <div class="mb-4 text-green-600">{{ session('message') }}</div>
-    @endif
-
     <div class="mb-3">
         <input type="text" wire:model.debounce.live.300ms="search" placeholder="Search..." class="form-control" />
     </div>
@@ -101,3 +97,4 @@
 
     <div class="mt-3">{{ $packages->links() }}</div>
 </div>
+

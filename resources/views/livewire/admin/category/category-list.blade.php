@@ -32,9 +32,6 @@
             </div>
 
             <!-- Flash Message -->
-            @if (session()->has('message'))
-            <div class="alert alert-success">{{ session('message') }}</div>
-            @endif
 
 
             <!-- Table -->
