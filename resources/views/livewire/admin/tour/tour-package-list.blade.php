@@ -82,7 +82,7 @@
 
                         <td class="text-end">
                             <a href="{{ route('admin.tour.package.edit', $p->id) }}" class="btn btn-sm btn-primary me-2">Edit</a>
-                            <button wire:click="delete({{ $p->id }})" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this package?')">Delete</button>
+                            <button type="button" wire:click="confirmDelete({{ $p->id }})" class="btn btn-sm btn-outline-danger">Delete</button>
                         </td>
                     </tr>
                     @empty
@@ -96,5 +96,33 @@
     </div>
 
     <div class="mt-3">{{ $packages->links() }}</div>
-</div>
 
+    @if($showDeleteModal)
+    <div class="modal modal-blur fade show d-block" tabindex="-1" role="dialog" aria-modal="true" wire:keydown.escape="closeDeleteModal">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-status bg-danger"></div>
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Tour Package</h5>
+                    <button type="button" class="btn-close" aria-label="Close" wire:click="closeDeleteModal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-0">
+                        Are you sure you want to delete
+                        <strong>{{ $deletePackageTitle }}</strong>?
+                        This action cannot be undone.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link link-secondary me-auto" wire:click="closeDeleteModal">Cancel</button>
+                    <button type="button" class="btn btn-danger" wire:click="deletePackage" wire:loading.attr="disabled" wire:target="deletePackage">
+                        <span wire:loading.remove wire:target="deletePackage">Delete Package</span>
+                        <span wire:loading wire:target="deletePackage">Deleting...</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade show" wire:click="closeDeleteModal"></div>
+    @endif
+</div>

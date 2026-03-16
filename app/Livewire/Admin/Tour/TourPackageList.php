@@ -18,16 +18,41 @@ class TourPackageList extends Component
     public $perPage = 10;
     public $filter_status = 'all';
     public $filter_featured = 'all';
+    public $showDeleteModal = false;
+    public $deletePackageId = null;
+    public $deletePackageTitle = '';
 
     protected $queryString = [];
 
-    public function delete($id)
+    public function confirmDelete(int $id): void
     {
         $package = TourPackage::find($id);
+        if (!$package) {
+            return;
+        }
+
+        $this->deletePackageId = $package->id;
+        $this->deletePackageTitle = $package->title;
+        $this->showDeleteModal = true;
+    }
+
+    public function closeDeleteModal(): void
+    {
+        $this->showDeleteModal = false;
+        $this->deletePackageId = null;
+        $this->deletePackageTitle = '';
+    }
+
+    public function deletePackage(): void
+    {
+        $package = TourPackage::find($this->deletePackageId);
         if ($package) {
             $package->delete();
-           $this->dispatch('success', 'Tour package deleted.');
+            $this->dispatch('success', 'Tour package deleted.');
         }
+
+        $this->closeDeleteModal();
+        $this->resetPage();
     }
 
     #[Layout('components.layouts.admin')]
