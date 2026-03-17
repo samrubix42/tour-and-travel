@@ -28,7 +28,7 @@ class UpdateTourPackage extends Component
     public $description;
     public $price;
     public $is_featured = false;
-    public $featuredImage; 
+    public $featuredImage;
     public $currentFeaturedUrl;
     public $currentFeaturedStoragePath;
     public $currentFeaturedImagekitFileId;
@@ -38,8 +38,8 @@ class UpdateTourPackage extends Component
     public $experience_ids = [];
 
     /** @var \Livewire\TemporaryUploadedFile[] */
-    public $images = []; 
-    public $galleries = []; 
+    public $images = [];
+    public $galleries = [];
 
     public $itineraryDays = [];
     public $includes = [];
@@ -131,9 +131,8 @@ class UpdateTourPackage extends Component
 
     public function updatedTitle($value)
     {
-        if (!$this->slug) {
-            $this->slug = Str::slug($value);
-        }
+
+        $this->slug = Str::slug($value);
     }
 
     public function addItineraryDay()
@@ -273,8 +272,8 @@ class UpdateTourPackage extends Component
             'itinerary' => $itineraryJson,
             'description' => $this->description,
             'price' => $this->price,
-            'includes' => empty($this->includes) ? null : json_encode(array_values(array_filter($this->includes, fn($v)=>trim($v) !== ''))),
-            'optional' => empty($this->optional) ? null : json_encode(array_values(array_filter($this->optional, fn($v)=>trim($v) !== ''))),
+            'includes' => empty($this->includes) ? null : json_encode(array_values(array_filter($this->includes, fn($v) => trim($v) !== ''))),
+            'optional' => empty($this->optional) ? null : json_encode(array_values(array_filter($this->optional, fn($v) => trim($v) !== ''))),
             'is_featured' => (bool)$this->is_featured,
         ]);
 
@@ -304,7 +303,7 @@ class UpdateTourPackage extends Component
                         ]);
 
                         if ($i === 0 && !$package->featured_image) {
-                            $package->update([ 'featured_image' => $url, 'imagekit_file_id' => $fileId ]);
+                            $package->update(['featured_image' => $url, 'imagekit_file_id' => $fileId]);
                         }
 
                         continue;
@@ -323,7 +322,7 @@ class UpdateTourPackage extends Component
                 ]);
 
                 if ($i === 0 && !$package->featured_image) {
-                    $package->update([ 'featured_image' => $url, 'storage_path' => $path ]);
+                    $package->update(['featured_image' => $url, 'storage_path' => $path]);
                 }
             }
         }
@@ -388,7 +387,7 @@ class UpdateTourPackage extends Component
         $this->galleries = TourPackageGallery::where('tour_package_id', $this->packageId)->get();
         $this->images = [];
 
-       $this->dispatch('success', 'Tour package updated successfully!');
+        $this->dispatch('success', 'Tour package updated successfully!');
         return redirect()->route('admin.tour.package.list');
     }
 
