@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/techldjy/tour.smartadvagency.com/
+    - export DEPLOYPATH=/home4/teertbqn/public_html/
     - /bin/cp -R * $DEPLOYPATH 
