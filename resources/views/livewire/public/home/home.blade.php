@@ -82,11 +82,11 @@
                         </p>
 
                         <div class="d-inline-block mt-5px">
-                            <a href="#" class="btn btn-large btn-round-edge btn-dark-gray btn-hover-animation btn-box-shadow me-25px">
+                            <a href="{{ route('about') }}" class="btn btn-large btn-round-edge btn-dark-gray btn-hover-animation btn-box-shadow me-25px">
                                 <span><span class="btn-text">About us</span><span class="btn-icon"><i class="feather icon-feather-feather"></i></span></span>
                             </a>
 
-                            <a href="#" class="btn btn-link-gradient expand btn-extra-large text-dark-gray text-dark-gray-hover ls-0px">
+                            <a href="{{ route('tour') }}" class="btn btn-link-gradient expand btn-extra-large text-dark-gray text-dark-gray-hover ls-0px">
                                 Explore tours<span class="bg-dark-gray"></span>
                             </a>
                         </div>
@@ -169,10 +169,10 @@
 
                                             <figcaption class="w-100 h-100 d-flex flex-column justify-content-end align-items-center p-30px">
                                                 <div class="position-relative z-index-1">
-                                                    <a href="#" class="d-flex justify-content-center align-items-center mx-auto icon-box w-70px h-70px rounded-circle bg-white mb-50px box-shadow-quadruple-large">
+                                                    <a href="{{ route('tour',['slug' => $destination->slug]) }}" class="d-flex justify-content-center align-items-center mx-auto icon-box w-70px h-70px rounded-circle bg-white mb-50px box-shadow-quadruple-large">
                                                         <i class="bi bi-arrow-right-short text-dark-gray icon-medium lh-0px"></i>
                                                     </a>
-                                                    <a href="#" class="alt-font fs-22 fw-500 text-white d-block text-uppercase">{{ $destination->name }}</a>
+                                                    <a href="{{ route('tour',['slug' => $destination->slug]) }}" class="alt-font fs-22 fw-500 text-white d-block text-uppercase">{{ $destination->name }}</a>
                                                 </div>
                                                 <div class="box-overlay bg-dark-gray"></div>
                                             </figcaption>
