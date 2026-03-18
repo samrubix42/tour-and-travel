@@ -16,6 +16,7 @@ class TourPackage extends Model
         'meta_keywords',
         'slug',
         'featured_image',
+        'banner_image',
         'storage_path',
         'imagekit_file_id',
         'is_featured',

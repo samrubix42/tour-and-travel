@@ -29,9 +29,11 @@ class UpdateTourPackage extends Component
     public $price;
     public $is_featured = false;
     public $featuredImage;
+    public $bannerImage;
     public $currentFeaturedUrl;
     public $currentFeaturedStoragePath;
     public $currentFeaturedImagekitFileId;
+    public $currentBannerUrl;
 
     public $category_ids = [];
     public $destination_ids = [];
@@ -65,6 +67,7 @@ class UpdateTourPackage extends Component
             'images' => 'nullable|array',
             'images.*' => 'image|max:5120', // 5MB
             'featuredImage' => 'nullable|image|max:5120',
+            'bannerImage' => 'nullable|image|max:5120',
             'includes' => 'nullable|array',
             'includes.*' => 'nullable|string|max:255',
             'optional' => 'nullable|array',
@@ -113,6 +116,7 @@ class UpdateTourPackage extends Component
         $this->currentFeaturedUrl = $package->featured_image;
         $this->currentFeaturedStoragePath = $package->storage_path;
         $this->currentFeaturedImagekitFileId = $package->imagekit_file_id;
+        $this->currentBannerUrl = $package->banner_image;
 
         if ($package->includes) {
             $decoded = @json_decode($package->includes, true);
@@ -380,6 +384,35 @@ class UpdateTourPackage extends Component
                 $this->currentFeaturedUrl = $url;
                 $this->currentFeaturedStoragePath = $path;
                 $this->currentFeaturedImagekitFileId = null;
+            }
+        }
+
+        // Handle banner image replacement (if user uploaded one)
+        if ($this->bannerImage) {
+            $useImageKit = env('IMAGEKIT_PRIVATE_KEY') && env('IMAGEKIT_URL_ENDPOINT');
+            try {
+                if ($useImageKit) {
+                    $ik = new ImageKitService();
+                    $upload = $ik->uploadToFolder($this->bannerImage->getRealPath(), $this->bannerImage->getClientOriginalName(), '/tour_packages');
+                    $data = is_array($upload) ? $upload : json_decode(json_encode($upload), true);
+                    $url = $data['result']['url'] ?? $data['result']['filePath'] ?? null;
+
+                    $package->update([
+                        'banner_image' => $url,
+                    ]);
+
+                    $this->currentBannerUrl = $url;
+                } else {
+                    throw new \Exception('no imagekit');
+                }
+            } catch (\Exception $e) {
+                $path = $this->bannerImage->store('tour_packages', 'public');
+                $url = Storage::url($path);
+                $package->update([
+                    'banner_image' => $url,
+                ]);
+
+                $this->currentBannerUrl = $url;
             }
         }
 

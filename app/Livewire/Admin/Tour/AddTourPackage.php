@@ -29,6 +29,7 @@ class AddTourPackage extends Component
     public $price;
     public $is_featured = false;
     public $featuredImage;
+    public $bannerImage;
 
     public $category_ids = [];
     public $destination_ids = [];
@@ -59,6 +60,7 @@ class AddTourPackage extends Component
         'images' => 'nullable|array',
         'images.*' => 'image|max:5120', // 5MB each
         'featuredImage' => 'nullable|image|max:5120',
+        'bannerImage' => 'nullable|image|max:5120',
         'includes' => 'nullable|array',
         'includes.*' => 'nullable|string|max:255',
         'optional' => 'nullable|array',
@@ -196,6 +198,32 @@ class AddTourPackage extends Component
                 ]);
             }
         }
+
+        // Handle banner image (if provided)
+        if ($package && $this->bannerImage) {
+            $useImageKit = env('IMAGEKIT_PRIVATE_KEY') && env('IMAGEKIT_URL_ENDPOINT');
+            try {
+                if ($useImageKit) {
+                    $ik = new ImageKitService();
+                    $upload = $ik->uploadToFolder($this->bannerImage->getRealPath(), $this->bannerImage->getClientOriginalName(), '/tour_packages');
+                    $data = is_array($upload) ? $upload : json_decode(json_encode($upload), true);
+                    $url = $data['result']['url'] ?? $data['result']['filePath'] ?? null;
+
+                    $package->update([
+                        'banner_image' => $url,
+                    ]);
+                } else {
+                    throw new \Exception('no imagekit');
+                }
+            } catch (\Exception $e) {
+                $path = $this->bannerImage->store('tour_packages', 'public');
+                $url = Storage::url($path);
+                $package->update([
+                    'banner_image' => $url,
+                ]);
+            }
+        }
+
         if ($package) {
             if (!empty($this->category_ids)) {
                 $package->categories()->sync($this->category_ids);
